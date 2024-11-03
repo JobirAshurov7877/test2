@@ -1,0 +1,40 @@
+{
+  "name": "varpet-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.5",
+    "@reduxjs/toolkit": "^2.3.0",
+    "@splidejs/react-splide": "^0.7.12",
+    "@splidejs/splide": "^4.1.4",
+    "axios": "^1.7.7",
+    "formik": "^2.4.6",
+    "next": "15.0.1",
+    "next-intl": "^3.23.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.3.0",
+    "react-redux": "^9.1.2",
+    "react-toastify": "^10.0.6",
+    "sass": "^1.80.5",
+    "styled-components": "^6.1.13",
+    "valtio": "^2.1.1",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.1",
+    "typescript": "^5"
+  }
+}

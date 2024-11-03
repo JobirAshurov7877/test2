@@ -1,0 +1,30 @@
+@import "../fonts/fonts.scss";
+@import "../../styles/fontSizes.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Mardoto", sans-serif;
+  max-width: 2560px;
+  margin: 0 auto;
+  background-color: #f9f9fa;
+  .pac-container {
+    border-radius: 10px;
+    box-shadow: 0 0 10px #e2dfdf;
+    border: 1px solid #ccc;
+  }
+}
+
+ul li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

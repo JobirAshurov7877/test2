@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "Mardoto";
+  src: url("./mardoto/Mardoto-Black.ttf") format("truetype");
+  font-weight: 900; /* Typically 'black' or 'bold' */
+  font-style: normal; /* Usually 'normal' for regular font */
+}
+@font-face {
+  font-family: "Mardoto";
+  src: url("./mardoto/Mardoto-Bold.ttf") format("truetype");
+  font-weight: 800; /* Typically 'black' or 'bold' */
+  font-style: normal; /* Usually 'normal' for regular font */
+}
+@font-face {
+  font-family: "Mardoto";
+  src: url("./mardoto/Mardoto-Medium.ttf") format("truetype");
+  font-weight: 500; /* Medium weight */
+  font-style: normal; /* Normal style */
+}
+
+@font-face {
+  font-family: "Mardoto";
+  src: url("./mardoto/Mardoto-Regular.ttf") format("truetype");
+  font-weight: 400; /* Light weight */
+}
+
+@font-face {
+  font-family: "Mardoto";
+
+  src: url("./mardoto/Mardoto-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Montserratarm";
+  src: url("./montserrat/Montserratarm-Medium.otf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./montserrat/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./montserrat/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 300;
+}
