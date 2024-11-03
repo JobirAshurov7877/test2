@@ -8,9 +8,8 @@ import { MyColors } from "@/styles/color";
 import { useTranslations } from "next-intl";
 import { NavigationLink } from "@/components";
 import Image from "next/image";
-import { BlogTopArticles } from "@/interfaces/blog.interface";
 interface TopArticlesProps {
-  topArticles: BlogTopArticles[];
+  topArticles: any[];
 }
 const TopArticles: React.FC<TopArticlesProps> = ({ topArticles }) => {
   const t = useTranslations();

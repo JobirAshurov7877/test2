@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BlogFilteredArticles } from "@/interfaces/blog.interface";
+
 import { api } from "@/services/axios";
 import { useLocale } from "next-intl";
 
 interface BlogFilteredArticlesState {
-  filteredArticles: BlogFilteredArticles[];
-  filteredArticlesAfterSearch: BlogFilteredArticles[];
+  filteredArticles: any[];
+  filteredArticlesAfterSearch: any[];
   loading: boolean;
   error: string | null;
 }
@@ -25,10 +25,7 @@ const blogFilteredArticlesSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    fetchBlogFilteredArticlesSuccess(
-      state,
-      action: PayloadAction<BlogFilteredArticles[]>
-    ) {
+    fetchBlogFilteredArticlesSuccess(state, action: PayloadAction<any[]>) {
       state.loading = false;
       state.filteredArticles = action.payload;
       state.filteredArticlesAfterSearch = action.payload;

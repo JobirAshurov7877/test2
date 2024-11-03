@@ -1,17 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import {
-  BlogTopArticles,
-  BlogCategories,
-  LatestArticle,
-} from "@/interfaces/blog.interface"; // Import the Blog interfaces
+import { BlogCategories } from "@/interfaces/blog.interface"; // Import the Blog interfaces
 import { api } from "@/services/axios";
 import { useLocale } from "next-intl";
 
 interface BlogState {
-  topArticles: BlogTopArticles[];
+  topArticles: any[];
   categories: BlogCategories[];
-  latestArticle: LatestArticle | null;
+  latestArticle: any | null;
   loading: boolean;
   error: string | null;
 }
@@ -35,9 +31,9 @@ const blogSlice = createSlice({
     fetchBlogSuccess(
       state,
       action: PayloadAction<{
-        topArticles: BlogTopArticles[];
+        topArticles: any[];
         categories: BlogCategories[];
-        latestArticle: LatestArticle;
+        latestArticle: any;
       }>
     ) {
       state.loading = false;
