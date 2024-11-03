@@ -14,15 +14,10 @@ export interface BlogCategory {
   articles: Articles[];
 }
 
-
 export interface BlogPagination {
   last_page: number;
   current_page: number;
 }
-
-export interface BlogFilteredArticles extends Articles {}
-export interface LatestArticle extends Articles {}
-export interface BlogTopArticles extends Articles {}
 
 export interface BlogCategories {
   id: number;
