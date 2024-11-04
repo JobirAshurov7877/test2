@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { SubService } from "@/interfaces/subservice.interface";
 import { api } from "@/services/axios";
-import { useLocale } from "next-intl";
 
 interface PricingState {
   data: SubService[] | null; // Array of SubService instead of single SubService
@@ -19,18 +18,15 @@ const initialState: PricingState = {
 const createFetchSubServiceData = () =>
   createAsyncThunk(
     "subservice/fetchSubServiceData",
-    async (itemIds: string[], { rejectWithValue }) => {
-      const currentLanguage = useLocale();
+    async (
+      { itemIds, lang }: { itemIds: string[]; lang: string },
+      { rejectWithValue }
+    ) => {
       try {
         const responses = await Promise.all(
-          itemIds.map((itemId) =>
-            api.get(`/api/service/${currentLanguage}/${itemId}`)
-          )
+          itemIds.map((itemId) => api.get(`/api/service/${lang}/${itemId}`))
         );
-
-        // Extract data from responses
         const data = responses.map((response) => response.data);
-
         return data;
       } catch (error: any) {
         return rejectWithValue(error.message);
@@ -44,9 +40,7 @@ export const fetchPricingData = createFetchSubServiceData();
 const pricingState = createSlice({
   name: "pricing",
   initialState,
-  reducers: {
-    // Add reducers if needed
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchPricingData.pending, (state) => {
@@ -56,7 +50,6 @@ const pricingState = createSlice({
       .addCase(
         fetchPricingData.fulfilled,
         (state, action: PayloadAction<SubService[]>) => {
-          // Updated to handle array of SubService
           state.loading = false;
           state.data = action.payload;
         }
@@ -69,6 +62,4 @@ const pricingState = createSlice({
 });
 
 export default pricingState.reducer;
-
-// Export thunk creator function if needed externally
 export { createFetchSubServiceData };

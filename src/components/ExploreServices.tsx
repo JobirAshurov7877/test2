@@ -20,16 +20,10 @@ const ExploreServices = () => {
             )}
           </p>
           <Buttons>
-            <a
-              href="https://apps.apple.com/am/app/varpet/id1414315442"
-              target="blank"
-            >
+            <a href="https://varpet.onelink.me/px3l/jc3yinnx" target="blank">
               <Image src={IOS} alt="play store" />
             </a>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.varpet.app&pli=1"
-              target="blank"
-            >
+            <a href="https://varpet.onelink.me/px3l/jc3yinnx" target="blank">
               <Image src={ANDROID} alt="google play" />
             </a>
           </Buttons>

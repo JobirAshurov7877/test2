@@ -5,30 +5,21 @@ import { proportions } from "@/styles/proportions";
 import ServicesHeader from "@/widgets/services/ServicesHeader";
 import Categories from "@/widgets/services/Categories";
 import SubServices from "@/widgets/services/SubServices";
-import { useState } from "react";
 
-const Services = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-
+export default function Services() {
   return (
-    <>
-      <Container>
-        <ServicesHeader />
-        <Box>
-          <Categories />
-          <SubServices />
-        </Box>
-        <ButtonContainer
-         
-        >
-          <FaArrowUp />
-        </ButtonContainer>
-      </Container>
-    </>
+    <Container>
+      <ServicesHeader />
+      <Box>
+        <Categories />
+        <SubServices />
+      </Box>
+      <ButtonContainer>
+        <FaArrowUp />
+      </ButtonContainer>
+    </Container>
   );
-};
-
-export default Services;
+}
 
 const Container = styled.main`
   width: 100%;

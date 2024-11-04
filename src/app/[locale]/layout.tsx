@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import "./globals.scss";
 import { Footer, Header } from "@/components";
 import { ReduxProvider } from "@/components/ReduxProvider";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,6 +26,12 @@ export default async function RootLayout({
   }
   setRequestLocale(locale);
   const messages = await getMessages();
+
+  try {
+    await getMessages();
+  } catch (error) {
+    notFound();
+  }
 
   return (
     <ReduxProvider>

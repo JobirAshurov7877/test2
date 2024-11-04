@@ -62,17 +62,17 @@ export default function Header({ language: currentLang }: HeaderProps) {
   };
   const currentLanguage = languages.find((lang) => lang.code === currentLang);
 
-  // const detectOS = (): string => {
-  //   const userAgent = navigator.userAgent || navigator.vendor;
-  //   if (/android/i.test(userAgent)) {
-  //     return "Android";
-  //   }
-  //   if (/iPad|iPhone|iPod/.test(userAgent)) {
-  //     return "iOS";
-  //   }
-  //   return "Unknown";
-  // };
-  // const os = detectOS();
+  const detectOS = (): string => {
+    const userAgent = navigator.userAgent || navigator.vendor;
+    if (/android/i.test(userAgent)) {
+      return "Android";
+    }
+    if (/iPad|iPhone|iPod/.test(userAgent)) {
+      return "iOS";
+    }
+    return "Unknown";
+  };
+  const os = detectOS();
   return (
     <Container>
       <Box $isOpen={isMobileNavOpen || isLanguageOpen}>
@@ -155,11 +155,11 @@ export default function Header({ language: currentLang }: HeaderProps) {
               </li>
               <Line />
             </ul>
-            {/* <Store>
+            <Store>
               {os === "iOS" && (
                 <div>
                   <a
-                    href="https://apps.apple.com/am/app/varpet/id1414315442"
+                    href="https://varpet.onelink.me/px3l/jc3yinnx"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -170,7 +170,7 @@ export default function Header({ language: currentLang }: HeaderProps) {
               {os === "Android" && (
                 <GooglePlayIcon>
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.varpet.app&pli=1"
+                    href="https://varpet.onelink.me/px3l/jc3yinnx"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -179,7 +179,7 @@ export default function Header({ language: currentLang }: HeaderProps) {
                 </GooglePlayIcon>
               )}
               {os === "Unknown" && <></>}
-            </Store> */}
+            </Store>
           </MobileNav>
         </MobileNavContainer>
       </Box>

@@ -1,0 +1,30 @@
+.container {
+  cursor: pointer;
+
+  input {
+    display: none;
+  }
+
+  svg {
+    overflow: visible;
+    width: 25px;
+    height: 25px;
+  }
+
+  .path {
+    fill: none;
+    stroke: black;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+    stroke-dasharray: 241 9999999;
+    stroke-dashoffset: 0;
+  }
+
+  input:checked ~ svg .path {
+    stroke: #0078db;
+    stroke-dasharray: 70.5096664428711 9999999;
+    stroke-dashoffset: -262.2723388671875;
+  }
+}

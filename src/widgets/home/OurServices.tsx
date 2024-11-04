@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { MyColors } from "@/styles/color";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { GoArrowUpRight } from "react-icons/go";
 import { proportions } from "@/styles/proportions";
 import styled from "styled-components";
@@ -51,7 +52,23 @@ export default function OurServices() {
           </MyButton>
         </Desc>
         <Carousel>
-          <SplideContainer ref={splideRef}>
+          <SplideContainer
+            options={{
+              type: "slide",
+              gap: proportions.divMargin.desktop,
+              perPage: 3,
+              arrows: false,
+              pagination: false,
+              breakpoints: {
+                1473: { perPage: 2 },
+                1150: { perPage: 1 },
+                853: { perPage: 2 },
+                800: { gap: proportions.divMargin.tablet },
+                600: { perPage: 1 },
+              },
+            }}
+            ref={splideRef}
+          >
             {categories &&
               categories.map((category) => (
                 <SplideItem key={category.id}>
@@ -73,7 +90,9 @@ export default function OurServices() {
                         : category.description}
                     </p>
                     <MyButton $variant="secondary">
-                      <NavigationLink href={`/services/${category.slug}`}>
+                      <NavigationLink
+                        href={`/services/service/${category?.id}/${category?.slug}`}
+                      >
                         {t("Learn more")}
                       </NavigationLink>
                       <GoArrowUpRight />
@@ -184,31 +203,14 @@ const Carousel = styled.div`
   }
 `;
 
-const SplideContainer = styled.div`
-  width: 100%;
-  overflow: auto;
-  position: relative;
-  display: flex;
-  gap: 20px;
-  scroll-snap-type: x mandatory;
-  &::-webkit-scrollbar-width {
-    display: none;
-  }
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-const SplideItem = styled.div`
-  position: relative;
-  min-width: 300px;
-  cursor: pointer;
-  scroll-snap-align: start;
+const SplideContainer = styled(Splide)``;
+const SplideItem = styled(SplideSlide)`
   overflow: hidden;
-  border-radius: 16px 16px 0 0;
+  position: relative;
+  cursor: pointer;
 
   &:hover .overlay {
     top: 20%;
-    overflow: hidden;
 
     .opacity-paragraph {
       opacity: 1;

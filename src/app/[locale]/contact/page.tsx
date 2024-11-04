@@ -18,6 +18,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import useHubSpotFormService from "@/components/HubSpotFormService";
 import { useTranslations } from "next-intl";
 import { ExploreServices } from "@/components";
+import Image from "next/image";
 
 const Contact = () => {
   const t = useTranslations();
@@ -304,16 +305,16 @@ const Contact = () => {
                     {t("Customer app")}
                     <div>
                       <a
-                        href="https://apps.apple.com/am/app/varpet/id1414315442"
+                        href="https://varpet.onelink.me/px3l/jc3yinnx"
                         target="blank"
                       >
-                        <img src={IOS} alt="" />
+                        <Image src={IOS} alt="app store" />
                       </a>
                       <a
-                        href="https://play.google.com/store/apps/details?id=com.varpet.app&pli=1"
+                        href="https://varpet.onelink.me/px3l/jc3yinnx"
                         target="blank"
                       >
-                        <img src={ANDROID} alt="" />
+                        <Image src={ANDROID} alt="google play" />
                       </a>
                     </div>
                   </DownloadButtons>
@@ -322,16 +323,16 @@ const Contact = () => {
                     {t("Master app")}
                     <div>
                       <a
-                        href="https://apps.apple.com/am/app/varpet-partner/id1441873914"
+                        href="https://varpet.onelink.me/px3l/jc3yinnx"
                         target="blank"
                       >
-                        <img src={IOS} alt="" />
+                        <Image src={IOS} alt="" />
                       </a>
                       <a
-                        href="https://play.google.com/store/apps/details?id=com.varpet.master&pcampaignid=web_share"
+                        href="https://varpet.onelink.me/px3l/jc3yinnx"
                         target="blank"
                       >
-                        <img src={ANDROID} alt="" />
+                        <Image src={ANDROID} alt="" />
                       </a>
                     </div>
                   </DownloadButtons>

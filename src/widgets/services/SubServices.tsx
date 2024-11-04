@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MyButton } from "@/ui";
@@ -47,9 +48,7 @@ const SubServices: React.FC = () => {
     itemId: number
   ) => {
     const categoryQuery = encodeURIComponent(JSON.stringify(categories));
-    router.push(
-      `/${currentLanguage}/services/service/${itemId}/${slug}?categories=${categoryQuery}`
-    );
+    router.push(`/${currentLanguage}/services/service/${itemId}/${slug}`);
 
     // const router = useRouter();
     // const { query } = router;

@@ -5,3 +5,5 @@ export { default as HomeHeaderText } from "./HomeHeaderText";
 export { default as WeGuarantee } from "./WeGuarantee";
 export { default as ExploreServices } from "./ExploreServices";
 export { default as NavigationLink } from "./NavigationLink";
+export { default as Guide } from "./Guide";
+export { default as VerificationModal } from "./VerificationModal";

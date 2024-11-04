@@ -35,10 +35,7 @@ const AppDownload = () => {
             >
               <Image src={AppStore} alt="app store" />
             </a>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.varpet.app&pli=1"
-              target="blank"
-            >
+            <a href="https://varpet.onelink.me/px3l/jc3yinnx" target="blank">
               <Image src={GoogleStore} alt="google play" />
             </a>
           </div>

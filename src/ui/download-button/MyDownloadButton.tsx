@@ -2,10 +2,7 @@ import "./MyDownloadButton.scss";
 
 const MyDownloadButton = () => {
   return (
-    <a
-      href="https://play.google.com/store/apps/details?id=com.varpet.app&pli=1"
-      target="blank"
-    >
+    <a href="https://varpet.onelink.me/px3l/jc3yinnx" target="blank">
       <button className="download-btn pixel-corners">
         <div className="button-content">
           <div className="svg-container">
