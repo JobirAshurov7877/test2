@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { MyColors } from "@/styles/color";
-import { useSnapshot } from "valtio";
 import { useTranslations } from "next-intl";
 
 interface VerificationProps {

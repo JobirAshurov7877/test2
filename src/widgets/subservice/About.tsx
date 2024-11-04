@@ -1,6 +1,5 @@
 import { proportions } from "@/styles/proportions";
 import styled from "styled-components";
-import { useSnapshot } from "valtio";
 import AboutOne from "@/assets/home/about-one.png";
 import AboutTwo from "@/assets/home/about-two.png";
 import AboutThree from "@/assets/home/about-three.png";

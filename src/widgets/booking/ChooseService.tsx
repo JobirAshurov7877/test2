@@ -19,7 +19,6 @@ import { useSelector } from "react-redux";
 import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 import { useDispatch } from "react-redux";
-import { useSnapshot } from "valtio";
 import { fetchServiceRootData } from "@/store/rootWithServicesSlice";
 import { setFormDataItem } from "@/valtio-store/bookStore";
 import { useLocale, useTranslations } from "next-intl";

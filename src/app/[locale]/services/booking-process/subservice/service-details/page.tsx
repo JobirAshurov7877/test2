@@ -14,7 +14,6 @@ import { store } from "@/valtio-store/store";
 import { proportions } from "@/styles/proportions";
 import { useEffect, useState } from "react";
 import { MyColors } from "@/styles/color";
-import { useSnapshot } from "valtio";
 import { setFormDataItem } from "@/valtio-store/bookStore";
 import { userFormDataStore } from "@/valtio-store/bookStore";
 import { useRouter } from "next/navigation";

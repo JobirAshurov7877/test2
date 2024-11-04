@@ -3,7 +3,6 @@ import { MyButton } from "@/ui";
 import styled from "styled-components";
 import PageNotFoundImg from "@/assets/page-not-found.svg";
 import { proportions } from "@/styles/proportions";
-import { useSnapshot } from "valtio";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";

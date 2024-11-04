@@ -2,8 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import { FiCheck } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
-
-import { useSnapshot } from "valtio";
 import { MyColors } from "@/styles/color";
 import { store } from "@/valtio-store/store";
 import { useTranslations } from "next-intl";

@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
 import styled from "styled-components";
-import { useSnapshot } from "valtio";
 import { imagesAPI } from "../../../env";
 import Image from "next/image";
 

@@ -22,7 +22,6 @@ import {
 } from "@/styles/booking-service";
 import BookingDetails from "./BookingDetails";
 import { MyColors } from "@/styles/color";
-import { useSnapshot } from "valtio";
 import { fetchSubServiceData } from "@/store/subServiceSlice";
 import { setFormDataItem } from "@/valtio-store/bookStore";
 import { store } from "@/valtio-store/store";

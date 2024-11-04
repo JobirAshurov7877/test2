@@ -2,8 +2,7 @@ import { proportions } from "@/styles/proportions";
 import Logo from "@/assets/BigLogo.svg";
 import { FiCheck } from "react-icons/fi";
 import styled from "styled-components";
-import { useSnapshot } from "valtio";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 // import { userFormDataStore } from "@/valtio-store/bookStore";
 
