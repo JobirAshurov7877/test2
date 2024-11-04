@@ -9,7 +9,6 @@ import ExploreServices from "@/components/ExploreServices";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useDispatch } from "react-redux";
-import { useSnapshot } from "valtio";
 import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 import { fetchServiceRootData } from "@/store/rootWithServicesSlice";
 import MyLoadingContainer from "@/components/MyLoadingContainer";
