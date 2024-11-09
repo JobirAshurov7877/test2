@@ -139,19 +139,23 @@ export default function Header({ language: currentLang }: HeaderProps) {
             <ul>
               <Line />
               <li>
-                <Link href={`/about`}>{t("About")}</Link>
+                <NavigationLink href={`/about`}>{t("About")}</NavigationLink>
               </li>
               <Line />
               <li>
-                <Link href={`/services`}>{t("Services")}</Link>
+                <NavigationLink href={`/services`}>
+                  {t("Services")}
+                </NavigationLink>
               </li>
               <Line />
               <li>
-                <Link href={`/blog`}>{t("Blog")}</Link>
+                <NavigationLink href={`/blog`}>{t("Blog")}</NavigationLink>
               </li>
               <Line />
               <li>
-                <Link href={`/contact`}>{t("Contact")}</Link>
+                <NavigationLink href={`/contact`}>
+                  {t("Contact")}
+                </NavigationLink>
               </li>
               <Line />
             </ul>
