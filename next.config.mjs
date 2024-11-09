@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["api.varpet.com", "new.varpet.com"], // Add your allowed domains here
+    domains: ["api.varpet.com", "new.varpet.com", "varpet.com"],
   },
 };
 
