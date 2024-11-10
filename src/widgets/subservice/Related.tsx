@@ -41,7 +41,7 @@ const Related: React.FC<RelatedProps> = ({
       `/${currentLanguage}/services/${serviceId}/subservice/${itemId}/${slug}`
     );
   };
-
+  console.log(serviceId);
   useEffect(() => {
     if (serviceId) {
       (dispatch as ThunkDispatch<RootState, unknown, UnknownAction>)(

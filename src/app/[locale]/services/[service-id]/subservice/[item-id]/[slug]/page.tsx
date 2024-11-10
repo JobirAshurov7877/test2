@@ -16,7 +16,7 @@ import SubServiceAbout from "@/widgets/subservice/About";
 import Related from "@/widgets/subservice/Related";
 
 const SubService: React.FC = () => {
-  const params = useParams<{ "item-id": string }>();
+  const params = useParams<{ "item-id": string; "service-id": string }>();
   const currentLanguage = useLocale();
   console.log(params);
   const { data: subServiceData, loading } = useSelector(
@@ -35,7 +35,6 @@ const SubService: React.FC = () => {
       );
     }
   }, [dispatch, currentLanguage, params["item-id"]]);
-  console.log(subServiceData);
 
   if (loading || !subServiceData) {
     return (
@@ -56,7 +55,7 @@ const SubService: React.FC = () => {
         <ExploreServices />
         <Related
           currentSubServiceId={subServiceData?.id}
-          serviceId={params["item-id"]}
+          serviceId={params["service-id"]}
         />
       </Container>
     </>
