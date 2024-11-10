@@ -42,7 +42,7 @@ const Pricing = () => {
 
   useEffect(() => {
     if (params["ids"]) {
-      const decodedIds = JSON.parse(atob(params["ids"]));
+      const decodedIds = JSON?.parse(atob(params["ids"]));
       dispatch(
         fetchPricingData({ itemIds: decodedIds, lang: currentLanguage })
       );

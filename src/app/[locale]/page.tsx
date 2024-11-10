@@ -28,7 +28,7 @@ export const metadata = async ({
       description: t(
         "Varpet - Where you can find the appropriate qualification specialists for each job"
       ),
-      url: `https://new.varpet.com/`,
+      url: `https://varpet.com/`,
       type: "website",
     },
     twitter: {

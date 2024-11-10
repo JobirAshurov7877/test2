@@ -62,17 +62,10 @@ export default function Header({ language: currentLang }: HeaderProps) {
   };
   const currentLanguage = languages.find((lang) => lang.code === currentLang);
 
-  const detectOS = (): string => {
-    const userAgent = navigator.userAgent || navigator.vendor;
-    if (/android/i.test(userAgent)) {
-      return "Android";
-    }
-    if (/iPad|iPhone|iPod/.test(userAgent)) {
-      return "iOS";
-    }
-    return "Unknown";
+  const handleNavigate = (url: string) => {
+    router.push(`/${url}`);
   };
-  const os = detectOS();
+
   return (
     <Container>
       <Box $isOpen={isMobileNavOpen || isLanguageOpen}>
@@ -84,15 +77,17 @@ export default function Header({ language: currentLang }: HeaderProps) {
         <Nav>
           <Ul>
             <Li>
-              <NavigationLink href={`/about`}>{t("About")}</NavigationLink>
+              <span onClick={() => handleNavigate("about")}>{t("About")}</span>
             </Li>
             <Li>
-              <NavigationLink href={`/services`}>
+              <span onClick={() => handleNavigate("services")}>
                 {t("Services")}
-              </NavigationLink>
+              </span>
             </Li>
             <Li>
-              <NavigationLink href={`/blog`}>{t("Blog")}</NavigationLink>
+              <NavigationLink href={`/blog`} prefetch={false}>
+                {t("Blog")}
+              </NavigationLink>
             </Li>
             <Li>
               <NavigationLink href={`/contact`}>{t("Contact")}</NavigationLink>
@@ -138,21 +133,23 @@ export default function Header({ language: currentLang }: HeaderProps) {
           <MobileNav>
             <ul>
               <Line />
-              <li>
-                <NavigationLink href={`/about`}>{t("About")}</NavigationLink>
+              <li onClick={toggleMobileNav}>
+                <NavigationLink prefetch href={`/about`}>
+                  {t("About")}
+                </NavigationLink>
               </li>
               <Line />
-              <li>
-                <NavigationLink href={`/services`}>
+              <li onClick={toggleMobileNav}>
+                <NavigationLink prefetch href={`/services`}>
                   {t("Services")}
                 </NavigationLink>
               </li>
               <Line />
-              <li>
+              <li onClick={toggleMobileNav}>
                 <NavigationLink href={`/blog`}>{t("Blog")}</NavigationLink>
               </li>
               <Line />
-              <li>
+              <li onClick={toggleMobileNav}>
                 <NavigationLink href={`/contact`}>
                   {t("Contact")}
                 </NavigationLink>
@@ -160,29 +157,24 @@ export default function Header({ language: currentLang }: HeaderProps) {
               <Line />
             </ul>
             <Store>
-              {os === "iOS" && (
-                <div>
-                  <a
-                    href="https://varpet.onelink.me/px3l/jc3yinnx"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image src={AppStore} alt="App Store" />
-                  </a>
-                </div>
-              )}
-              {os === "Android" && (
-                <GooglePlayIcon>
-                  <a
-                    href="https://varpet.onelink.me/px3l/jc3yinnx"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image src={GooglePlay} alt="Google Play" />
-                  </a>
-                </GooglePlayIcon>
-              )}
-              {os === "Unknown" && <></>}
+              <div>
+                <a
+                  href="https://varpet.onelink.me/px3l/jc3yinnx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image src={AppStore} alt="App Store" />
+                </a>
+              </div>
+              <GooglePlayIcon>
+                <a
+                  href="https://varpet.onelink.me/px3l/jc3yinnx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image src={GooglePlay} alt="Google Play" />
+                </a>
+              </GooglePlayIcon>
             </Store>
           </MobileNav>
         </MobileNavContainer>
