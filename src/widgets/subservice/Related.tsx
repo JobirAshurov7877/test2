@@ -45,10 +45,14 @@ const Related: React.FC<RelatedProps> = ({
   useEffect(() => {
     if (serviceId) {
       (dispatch as ThunkDispatch<RootState, unknown, UnknownAction>)(
-        fetchServiceRootData(serviceId)
+        fetchServiceRootData({
+          rootId: serviceId,
+          lang: currentLanguage,
+        })
       );
     }
   }, [dispatch, currentLanguage, serviceId]);
+  console.log(category);
 
   return (
     <Container>

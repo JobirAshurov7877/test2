@@ -38,14 +38,22 @@ const Pricing = () => {
     (state: RootState) => state.pricingData
   );
 
-  console.log(params["ids"]);
+  console.log(params);
 
   useEffect(() => {
     if (params["ids"]) {
-      const decodedIds = JSON?.parse(atob(params["ids"]));
-      dispatch(
-        fetchPricingData({ itemIds: decodedIds, lang: currentLanguage })
-      );
+      try {
+        // Decode the URL-encoded parameter
+        const decodedParam = decodeURIComponent(params["ids"]);
+        // Now decode the base64 string
+        const decodedIds = JSON.parse(atob(decodedParam));
+        dispatch(
+          fetchPricingData({ itemIds: decodedIds, lang: currentLanguage })
+        );
+      } catch (error) {
+        console.error("Failed to decode base64 string:", error);
+        // Handle the error, maybe show a fallback message
+      }
     }
   }, [params["ids"], dispatch, pathname, currentLanguage]);
 
