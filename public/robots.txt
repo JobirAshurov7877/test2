@@ -1,0 +1,26 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /login/
+Disallow: /logout/
+Disallow: /reset-password/
+Disallow: /dashboard/   # Example of private or admin area
+
+# Allow public pages
+Allow: /services
+Allow: /blog
+Allow: /about
+Allow: /contact
+Allow: /press
+Allow: /blog/
+Allow: /services/
+Allow: /services/:serviceId/subservice/:itemId/:slug
+Allow: /services/service/:itemId/:slug
+
+# Allow specific dynamic routes
+Allow: /blog/:slug
+Allow: /services/:serviceId/subservice/:itemId/:slug
+Allow: /services/service/:itemId/:slug
+
+# Other general directives
+Sitemap: https://varpet.com/sitemap.xml 

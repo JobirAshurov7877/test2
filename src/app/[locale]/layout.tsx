@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/src/assets/BigLogo.svg",
+    icon: "./BigLogo.svg",
   },
 };
 
