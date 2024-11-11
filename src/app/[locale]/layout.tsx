@@ -1,12 +1,12 @@
+// layout.tsx
 import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+// Yangi client component
 import "./globals.scss";
-import { Footer, Header } from "@/components";
-import { ReduxProvider } from "@/components/ReduxProvider";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+import ClientRootLayout from "@/components/ClientRootLayout";
 
 export const metadata: Metadata = {
   title: "Varpet - When everything is ok",
@@ -44,17 +44,8 @@ export default async function RootLayout({
   }
 
   return (
-    <ReduxProvider>
-      <NextIntlClientProvider messages={messages}>
-        <html lang={locale}>
-          <head></head>
-          <body>
-            <Header language={locale} />
-            {children}
-            <Footer />
-          </body>
-        </html>
-      </NextIntlClientProvider>
-    </ReduxProvider>
+    <ClientRootLayout messages={messages} locale={locale}>
+      {children}
+    </ClientRootLayout>
   );
 }

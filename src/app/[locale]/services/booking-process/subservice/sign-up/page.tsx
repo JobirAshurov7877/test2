@@ -528,7 +528,7 @@ const PhoneMail = () => {
                             : { display: "none" }
                         }
                         type="submit"
-                        disabled={!phoneValue.recipient}
+                        // disabled={!phoneValue.recipient}
                         onClick={
                           verifiedUser.code && verifiedUser.userId
                             ? handleRegister

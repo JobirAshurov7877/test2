@@ -13,6 +13,10 @@ const nextConfig = {
       "localhost:3000",
     ],
   },
+  compiler: {
+    styledComponents: true,
+  },
+  
 };
 
 export default withNextIntl(nextConfig);
