@@ -1,12 +1,13 @@
-// layout.tsx
 import type { Metadata } from "next";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-// Yangi client component
 import "./globals.scss";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import ClientRootLayout from "@/components/ClientRootLayout";
+
+// Define the possible locales explicitly
+type Locale = "en" | "ru" | "es" | "hy";
 
 export const metadata: Metadata = {
   title: "Varpet - When everything is ok",
@@ -14,7 +15,6 @@ export const metadata: Metadata = {
     "Varpet - Where you can find the appropriate qualification specialists for each job",
   keywords: "home, services, articles",
   openGraph: {
-    title: "Varpet - When everything is ok",
     url: "https://varpet.com/",
     type: "website",
   },
@@ -28,17 +28,17 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: Locale }; // Explicitly type 'locale' as one of the allowed values
 }>) {
-  const { locale } = await params;
-  if (!routing.locales.includes(locale as any)) {
+  const { locale } = params;
+  if (!routing.locales.includes(locale)) {
     notFound();
   }
-  setRequestLocale(locale);
-  const messages = await getMessages();
+  console.log(params);
 
+  let messages;
   try {
-    await getMessages();
+    messages = await getMessages();
   } catch (error) {
     notFound();
   }

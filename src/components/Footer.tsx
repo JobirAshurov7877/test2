@@ -102,12 +102,12 @@ export default function Footer() {
             <ul>
               <li>
                 <NavigationLink href={`/privacy-policy`}>
-                  {t("Privacy Policy")}
+                  {t("Privacy_policy")}
                 </NavigationLink>
               </li>
               <li>
                 <NavigationLink href={`/join-the-program`}>
-                  {t("Terms and Conditions")}
+                  {t("Join_the_program")}
                 </NavigationLink>
               </li>
               <li>
@@ -162,7 +162,7 @@ export default function Footer() {
             {t("Subscribe to site updates, be the first to know all the news")}
           </h2>
           <p>
-            © 2024 — {t("Varpet. All rights reserved. Powered by")}{" "}
+            © 2024 — {t("All_rights_reserved")}{" "}
             <a href="https://www.addevice.io/" target="blank">
               Addevice
             </a>

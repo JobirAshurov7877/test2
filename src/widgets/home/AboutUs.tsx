@@ -15,11 +15,7 @@ export default function AboutUs() {
       <Box>
         <Title>
           <h3>{t("About us")}</h3>
-          <p>
-            {t(
-              "We provide reliable, high-quality, affordable services, which are carried out thanks to masters with years of experience and knowledge. Make managing your home or business space improvements easier than ever. Discover a new standard of relief from everyday worries with our platform."
-            )}
-          </p>
+          <p>{t("home_about_us_desc")}</p>
         </Title>
         <AboutImages>
           <Imagew>

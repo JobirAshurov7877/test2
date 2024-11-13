@@ -12,8 +12,8 @@ const Subscribe = () => {
     <Container>
       <Box>
         <Title>
-          {t("Get the latest")} <span>Varpet</span>
-          {t("articles delivered to your inbox.")}
+          {t("Get the latest")} <span>Varpet</span>{" "}
+          {t("articles delivered to your inbox")}
         </Title>
         <SubscribeContainer>
           <MyInput

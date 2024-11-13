@@ -29,33 +29,25 @@ export default function WeGuarantee() {
       id: 1,
       image: TimeSaving,
       title: t("Time Saving"),
-      description: t(
-        "By choosing any of our services, you will save your valuable time. Our efficient processes and experienced team ensure that you get the results you need without any delays, allowing you to focus on what really matters."
-      ),
+      description: t("time_saving_desc"),
     },
     {
       id: 2,
       image: Trained,
       title: t("Trained Professionals"),
-      description: t(
-        "Our team consists of highly qualified and experienced professionals who are masters in their respective fields. Armed with years of experience and knowledge, our specialists are able to effectively solve any problem that the client receives."
-      ),
+      description: t("trained_professionals"),
     },
     {
       id: 3,
       image: Customized,
       title: t("Customized Solutions"),
-      description: t(
-        "We understand that every customer has unique needs and preferences. That's why we offer customized solutions specifically for your needs. We are sure that your consultation with the master will get the desired result."
-      ),
+      description: t("Customized_desc"),
     },
     {
       id: 4,
       image: Spotless,
       title: t("Spotless Results"),
-      description: t(
-        "Our commitment to excellence means we guarantee a flawless result. From start to finish, we pay meticulous attention to every detail. Our goal is to show the client a result that exceeds his expectations."
-      ),
+      description: t("Spotless_desc"),
     },
   ];
 
@@ -226,7 +218,7 @@ const Item = styled.div`
 const GuaranteeImage = styled.div`
   img {
     width: 100%;
-    height: 100%; 
+    height: 100%;
     object-fit: contain;
   }
 `;

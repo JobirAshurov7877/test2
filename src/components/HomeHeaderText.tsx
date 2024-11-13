@@ -8,7 +8,6 @@ export default function HomeHeaderText() {
   const t = useTranslations();
   const newIndex = Math.floor(Math.random() * 3);
   const [randomIndex, setRandomIndex] = useState<number>(newIndex);
-  // Update randomIndex when language changes
   useEffect(() => {
     setRandomIndex(newIndex);
   }, []);
@@ -20,9 +19,7 @@ export default function HomeHeaderText() {
             <span>{t("Professional")} </span>
             {t("plumbing services available")}
           </Title>
-          <Paragraph>
-            {t("If_you_are_facing")}
-          </Paragraph>
+          <Paragraph>{t("If_you_are_facing")}</Paragraph>
         </div>
       )}
       {randomIndex === 1 && (
@@ -31,11 +28,7 @@ export default function HomeHeaderText() {
             <span>{t("Electricity")} </span>
             {t("is safe with us")}
           </Title>
-          <Paragraph>
-            {t(
-              "Are flickering lights, faulty outlets, or electrical problems causing headaches in your home or workplace? Wait no more, Varpet App is here to provide superior electrical services that secure your property from any fluctuations."
-            )}
-          </Paragraph>
+          <Paragraph>{t("hero_description_1")}</Paragraph>
         </div>
       )}
       {randomIndex === 2 && (
@@ -44,11 +37,7 @@ export default function HomeHeaderText() {
             <span>{t("Having")} </span>
             {t("a sparkling clean home is not difficult")}
           </Title>
-          <Paragraph>
-            {t(
-              "Tired of spending your weekends mopping floors and tidying shelves? Our caring cleaners are ready to go the extra mile to neatly and carefully clean living spaces or offices, leaving no corner untouched."
-            )}
-          </Paragraph>
+          <Paragraph>{t("hero_description_2")}</Paragraph>
         </div>
       )}
     </>

@@ -27,22 +27,12 @@ export default function DownloadOurApp() {
               <span> Varpet </span>
               {t("app and order services more easily")}
             </h3>
-            <p>
-              {t(
-                "To use the services, register the desired order with just a few taps from your smartphone, familiarize yourself with the pre-approved prices in the application, consult with the master and make a decision. Get started today."
-              )}
-            </p>
+            <p>{t("download_description")}</p>
             <Buttons>
-              <a
-                href="https://varpet.onelink.me/px3l/jc3yinnx"
-                target="blank"
-              >
+              <a href="https://varpet.onelink.me/px3l/jc3yinnx" target="blank">
                 <Image src={IOS} alt="play store" />
               </a>
-              <a
-                href="https://varpet.onelink.me/px3l/jc3yinnx"
-                target="blank"
-              >
+              <a href="https://varpet.onelink.me/px3l/jc3yinnx" target="blank">
                 <Image src={ANDROID} alt="google play" />
               </a>
             </Buttons>

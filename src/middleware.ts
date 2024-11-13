@@ -1,23 +1,23 @@
-// middleware.ts
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
 export default async function middleware(req: any) {
-  // Foydalanuvchi brauzerining tilini olish
+  // Vercel geolokatsiya xizmati orqali mamlakat kodini olish
+  const countryCode = req.geo?.country || "unknown";
+  console.log("Country Code:", countryCode);
+
   const acceptLanguage = req.headers.get("accept-language") || "";
   const userLocale = acceptLanguage.split(",")[0].split("-")[0];
   const supportedLocales = routing.locales;
 
-  // Foydalanuvchi tili qo‘llab-quvvatlanayotgan tillar ichida bor-yo‘qligini tekshirish
+  // Mamlakat kodi asosida tilni aniqlash (ba'zi davlatlarda mos til tanlanadi)
   const locale = supportedLocales.includes(userLocale)
     ? userLocale
     : routing.defaultLocale;
-
-  // URL yo'nalishini yangilash
   const url = req.nextUrl.clone();
   url.pathname = `/${locale}${url.pathname === "/" ? "" : url.pathname}`;
 
-  return createMiddleware(routing)(req); // Standart routingni davom ettiradi
+  return createMiddleware(routing)(req);
 }
 
 export const config = {

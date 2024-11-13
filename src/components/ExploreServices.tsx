@@ -14,11 +14,7 @@ const ExploreServices = () => {
       <Box>
         <Desc>
           <h3>{t("Are you ready to achieve perfection?")}</h3>
-          <p>
-            {t(
-              "We provide you with the best experience of masters in various fields. Whether you need a helping hand with household chores, or you need regular security system checks, home appliance repair and installation, we have created a platform where everything is simple and accessible."
-            )}
-          </p>
+          <p>{t("hire_an_expert")}</p>
           <Buttons>
             <a href="https://varpet.onelink.me/px3l/jc3yinnx" target="blank">
               <Image src={IOS} alt="play store" />

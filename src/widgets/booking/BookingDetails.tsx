@@ -20,6 +20,7 @@ const BookingDetails = () => {
               href="https://play.google.com/store/apps/details?id=com.varpet.app&pli=1"
               target="blank"
             >
+              {" "}
               Varpet app{" "}
             </a>
             {translations(

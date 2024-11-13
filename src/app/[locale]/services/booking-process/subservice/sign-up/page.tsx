@@ -285,7 +285,6 @@ const PhoneMail = () => {
       }
     }
   };
-  console.log(userFormDataStore.ServiceSummary);
   useEffect(() => {
     if (
       !userFormDataStore.ServiceSummary ||
@@ -455,7 +454,7 @@ const PhoneMail = () => {
                               as={EmailInput}
                               name="email"
                               placeholder="example@gmail.com"
-                              type="text"
+                              type="email"
                               value={emailValue}
                               onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>
@@ -528,7 +527,7 @@ const PhoneMail = () => {
                             : { display: "none" }
                         }
                         type="submit"
-                        // disabled={!phoneValue.recipient}
+                        disabled={!phoneValue.recipient && !errors.email}
                         onClick={
                           verifiedUser.code && verifiedUser.userId
                             ? handleRegister

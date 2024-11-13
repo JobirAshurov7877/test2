@@ -92,7 +92,7 @@ const StepForm = () => {
       </StepFormContainer>
       <StepFormText>
         <span id="step-services" className="hide">
-          {translations("Services")}
+          {translations("Service")}
         </span>
         <span id="step-details" className="hide">
           {translations("Details")}

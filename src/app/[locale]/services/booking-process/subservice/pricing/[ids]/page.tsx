@@ -38,8 +38,6 @@ const Pricing = () => {
     (state: RootState) => state.pricingData
   );
 
-  console.log(params);
-
   useEffect(() => {
     if (params["ids"]) {
       try {

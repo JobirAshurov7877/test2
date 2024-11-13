@@ -6,42 +6,35 @@ import Header from "@/widgets/home/Header";
 import OurServices from "@/widgets/home/OurServices";
 import SubServiceAbout from "@/widgets/home/Partners";
 import TopArticles from "@/widgets/home/TopArticles";
-import type { Metadata } from "next";
 
-export const metadata = async ({
+export async function generateMetadata({
   params,
 }: {
   params: { locale: string };
-}): Promise<Metadata> => {
-  console.log(params);
-  const messages = await import(`../../../messages/${"en"}.json`);
+}) {
+  const { locale } = params;
+  const messages = await import(`../../../messages/${locale}.json`);
   const t = (key: string) => messages[key];
-
   return {
-    title: t("Varpet - When everything is ok"),
-    description: t(
-      "Varpet - Where you can find the appropriate qualification specialists for each job"
-    ),
+    title: t("Home_meta_title"),
+    description: t("home_meta_description"),
     keywords: "home, services, articles",
     openGraph: {
-      title: t("Varpet - When everything is ok"),
-      description: t(
-        "Varpet - Where you can find the appropriate qualification specialists for each job"
-      ),
-      url: `https://varpet.com/`,
+      title: t("Home_meta_title"),
+      description: t("home_meta_description"),
+      url: `https://new.varpet.com/`,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: t("Varpet - When everything is ok"),
-      description: t(
-        "Varpet - Where you can find the appropriate qualification specialists for each job"
-      ),
+      title: t("Home_meta_title"),
+      description: t("home_meta_description"),
     },
   };
-};
+}
 
-export default function Home() {
+export default function Home({ params }: { params?: { locale: string } }) {
+  console.log(params);
   return (
     <>
       <Header />

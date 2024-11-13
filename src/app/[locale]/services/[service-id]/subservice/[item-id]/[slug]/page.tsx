@@ -18,7 +18,7 @@ import Related from "@/widgets/subservice/Related";
 const SubService: React.FC = () => {
   const params = useParams<{ "item-id": string; "service-id": string }>();
   const currentLanguage = useLocale();
-  console.log(params);
+
   const { data: subServiceData, loading } = useSelector(
     (state: RootState) => state.subservice
   );

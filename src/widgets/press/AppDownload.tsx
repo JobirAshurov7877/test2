@@ -1,3 +1,4 @@
+"use client";
 import styled from "styled-components";
 import backgroundImg from "@/assets/press/app_download.png";
 import { proportions } from "@/styles/proportions";

@@ -66,9 +66,7 @@ const ServiceDetails = () => {
             <Form>
               <p>{translations("Describe the problem")}</p>
               <TextArea
-                placeholder={translations(
-                  "Describe the problem you're experiencing..."
-                )}
+                placeholder={translations("Describe_the_problem_placeholder")}
                 rows={6}
                 value={desc}
                 onChange={handleDescChange}

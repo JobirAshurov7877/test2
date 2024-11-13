@@ -34,7 +34,7 @@ const TopArticles = () => {
       <Box>
         <Title>
           <div></div>
-          <h3>{t("Blog")}</h3>
+          <h3>{t("Navbar.Blog")}</h3>
           <ViewMoreButtonContainer>
             <NavigationLink href="/blog">
               <MyButton $variant="borderLess">

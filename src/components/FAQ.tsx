@@ -17,45 +17,31 @@ const FAQ = () => {
   const faqs = [
     {
       question: t("How to register as a master?"),
-      answer: t(
-        "To register as a master, you need to download the Varpet partner application, complete the required steps, specify the services provided and confirm. After passing the inspection with us, the page will be activated and the master will be notified. You can contact us for questions and detailed information."
-      ),
+      answer: t("How_to_register_as_a_master"),
     },
     {
       question: t("What to do if we don't find our preferred service?"),
-      answer: t(
-        "If you do not find any service, you can specify the visit subsection of the given department and write what you need in the comment, you can also call our office during working hours and register the order with the help of our employee."
-      ),
+      answer: t("preferred service"),
     },
     {
       question: t("Why do masters sometimes charge more than app prices?"),
-      answer: t(
-        "It can happen if the master has done additional work to fulfill the given order. It is also possible that the master does not know the rules of the application, in such cases, the master is warned and in case of repetition, he is left out of the platform. In order to avoid such unwanted problems, please provide as much detail as possible about the existing problems and requirements during the phone call."
-      ),
+      answer: t("more_than_app_prices"),
     },
     {
       question: t("How to find out about vacancies?"),
-      answer: t(
-        "Registering on the platform does not have any restrictions. You can register in the section of your choice, accept orders, track your progress and set high scores."
-      ),
+      answer: t("about_vacancies_desc"),
     },
     {
       question: t("After how many days does master registration take place?"),
-      answer: t(
-        "If all the instructions are done correctly, the activation of the Master will take place within a week."
-      ),
+      answer: t("registration_take_place"),
     },
     {
       question: t("Can we register an order if we are not in the country?"),
-      answer: t(
-        "Yes, you can register an order for your family members or loved ones from anywhere in the country. From the application or website, you specify the address where the master should come, you can also write an additional phone number in the comment field."
-      ),
+      answer: t("not_in_the_country_desc"),
     },
     {
       question: t("It is possible to register more than one order?"),
-      answer: t(
-        "Yes, it is possible to include several services in one order, but it will be effective if they are from the same field. You can register several separate orders from different sectors, in which case the specialists of these departments will call you or the number you specified."
-      ),
+      answer: t("more_than_one_order_desc"),
     },
   ];
 

@@ -41,11 +41,7 @@ export default function OurServices() {
       <Box>
         <Desc>
           <h3>{t("Our services")}</h3>
-          <p>
-            {t(
-              "Our team is dedicated to delivering top-quality work, ensuring every job is done right and to your satisfaction. From beginning to end, we focus on your needs and aim to exceed your expectations. Let us show you just how good great service can be. Your happiness is our priority!"
-            )}
-          </p>
+          <p>{t("home_our_team_desc")}</p>
           <MyButton>
             <NavigationLink href="/services">{t("View all")}</NavigationLink>
             <GoArrowUpRight />

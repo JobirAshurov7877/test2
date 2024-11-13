@@ -1,3 +1,4 @@
+"use client";
 import styled from "styled-components";
 import { proportions } from "@/styles/proportions";
 import Mission from "@/assets/press/mission.svg";

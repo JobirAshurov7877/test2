@@ -25,8 +25,7 @@ export default function Header({ language: currentLang }: HeaderProps) {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const languageDropdownRef = useRef(null);
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  console.log(isPending);
+  const [_isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const params = useParams();
   useEffect(() => {
