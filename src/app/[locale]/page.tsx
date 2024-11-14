@@ -6,13 +6,13 @@ import Header from "@/widgets/home/Header";
 import OurServices from "@/widgets/home/OurServices";
 import SubServiceAbout from "@/widgets/home/Partners";
 import TopArticles from "@/widgets/home/TopArticles";
+import { Metadata } from "next";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: string };
-}) {
-  const { locale } = params;
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   const messages = await import(`../../../messages/${locale}.json`);
   const t = (key: string) => messages[key];
   return {
@@ -33,8 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default function Home({ params }: { params?: { locale: string } }) {
-  console.log(params);
+export default function Home() {
   return (
     <>
       <Header />
