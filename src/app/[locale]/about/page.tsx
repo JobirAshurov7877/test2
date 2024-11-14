@@ -1,16 +1,17 @@
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import AboutUsClient from "./page.Client";
 
-type Params = {
-  params: {
-    locale: any;
-  };
+type Props = {
+  params: Promise<{ locale: string }>;
 };
-
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const { locale } = await params;
   const messages = await import(`../../../../messages/${locale}.json`);
   const t = (key: string) => messages[key];
+  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: t("About us"),
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: t("home_meta_description"),
       url: `https://new.varpet.com/`,
       type: "website",
+      images: previousImages,
     },
     twitter: {
       card: "summary_large_image",
