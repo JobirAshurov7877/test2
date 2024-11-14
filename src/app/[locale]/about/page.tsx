@@ -1,12 +1,18 @@
+import { Metadata } from "next";
 import AboutUsClient from "./page.Client";
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: string };
-}) {
+
+type Params = {
+  params: {
+    locale: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale } = params;
   const messages = await import(`../../../../messages/${locale}.json`);
   const t = (key: string) => messages[key];
+
   return {
     title: t("About us"),
     description: t("home_meta_description"),
@@ -26,11 +32,7 @@ export async function generateMetadata({
 }
 
 const AboutUs = () => {
-  return (
-    <>
-      <AboutUsClient />
-    </>
-  );
+  return <AboutUsClient />;
 };
 
 export default AboutUs;
