@@ -33,12 +33,4 @@ const AboutUs = () => {
   );
 };
 
-const AboutUs = () => {
-  return (
-    <>
-      <AboutUsClient />
-    </>
-  );
-};
-
 export default AboutUs;
