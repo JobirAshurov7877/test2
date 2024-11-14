@@ -3,9 +3,8 @@ import AboutUsClient from "./page.Client";
 
 type Params = {
   params: {
-    locale: string;
+    locale: any;
   };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
