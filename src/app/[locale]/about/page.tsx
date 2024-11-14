@@ -8,7 +8,7 @@ type Params = {
 };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { locale } = params;
+  const { locale } = await params;
   const messages = await import(`../../../../messages/${locale}.json`);
   const t = (key: string) => messages[key];
 
