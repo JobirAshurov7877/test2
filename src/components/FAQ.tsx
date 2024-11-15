@@ -21,7 +21,7 @@ const FAQ = () => {
     },
     {
       question: t("What to do if we don't find our preferred service?"),
-      answer: t("preferred service"),
+      answer: t("preferred_service"),
     },
     {
       question: t("Why do masters sometimes charge more than app prices?"),

@@ -16,11 +16,7 @@ const SubServicesHeader = () => {
         <Desc>
           <div>
             <h3>{t("Press")}</h3>
-            <p>
-              {t(
-                "Welcome to Varpet’s press kit. Here you'll find essential information about who we are, what we do, and why we matter in the industry."
-              )}
-            </p>
+            <p>{t("press_desc")}</p>
             <MyButton>
               <a href="https://varpet.com/downloads/varpet_fact_sheet.pdf">
                 {t("Get it now")}

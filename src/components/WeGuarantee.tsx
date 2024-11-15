@@ -28,7 +28,7 @@ export default function WeGuarantee() {
     {
       id: 1,
       image: TimeSaving,
-      title: t("Time Saving"),
+      title: t("Saving time"),
       description: t("time_saving_desc"),
     },
     {

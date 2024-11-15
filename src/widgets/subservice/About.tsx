@@ -18,13 +18,7 @@ const SubServiceAbout: React.FC<MySevice> = ({ service }) => {
       <Box>
         <Title>
           <h3>{translations("About the service")}</h3>
-          <p>
-            {service
-              ? service
-              : translations(
-                  "We are currently working on providing detailed information about this service. Please contact us for more information or if you have any questions."
-                )}
-          </p>
+          <p>{service ? service : translations("sub_service_about_desc")}</p>
         </Title>
         <AboutImages>
           <Imagewrap>

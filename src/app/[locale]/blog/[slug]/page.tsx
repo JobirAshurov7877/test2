@@ -16,15 +16,10 @@ import { useLocale } from "next-intl";
 
 const BlogSinglePage = ({ params }: any) => {
   const currentLanguage = useLocale();
-  const router = useRouter();
   const [article, setArticle] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  console.log(params.slug);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
         const response = await api.get(
           `/api/blog/article/${currentLanguage}/${params.slug}`
         );
@@ -32,14 +27,10 @@ const BlogSinglePage = ({ params }: any) => {
         console.log(response.data);
       } catch (error) {
         console.error("Error fetching article data:", error);
-      } finally {
-        setLoading(false);
       }
     };
-
     fetchData();
   }, [currentLanguage, params.slug]);
-  console.log(article);
 
   return (
     <>

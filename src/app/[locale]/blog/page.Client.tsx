@@ -1,14 +1,9 @@
 "use client";
-import AllArticles from "@/widgets/blog/AllArticles";
-import Categories from "@/widgets/blog/Categories";
-import Header from "@/widgets/blog/Header";
-import Subscribe from "@/widgets/blog/Subscribe";
-import TopArticles from "@/widgets/blog/TopArticles";
+import dynamic from "next/dynamic";
 import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 import { fetchArticles, resetArticles } from "@/store/articlesSlice";
@@ -16,6 +11,12 @@ import { fetchBlog } from "@/store/blogSlice";
 import { fetchArticlesByCategory } from "@/store/blogCategorySlice";
 import { useSnapshot } from "valtio";
 import { blogCategoryStore } from "@/valtio-store/blogCategoryStore";
+
+const AllArticles = dynamic(() => import("@/widgets/blog/AllArticles"));
+const Categories = dynamic(() => import("@/widgets/blog/Categories"));
+const Header = dynamic(() => import("@/widgets/blog/Header"));
+const Subscribe = dynamic(() => import("@/widgets/blog/Subscribe"));
+const TopArticles = dynamic(() => import("@/widgets/blog/TopArticles"));
 
 export default function BlogClient() {
   const currentLanguage = useLocale();
@@ -64,6 +65,7 @@ export default function BlogClient() {
         });
     }
   }, [dispatch, location.pathname, currentLanguage, blogCategoryId]);
+
   const loadMoreArticles = () => {
     if (currentPage < pagination.last_page) {
       setLoadingMore(true);
@@ -77,6 +79,7 @@ export default function BlogClient() {
   const isLoadMoreDisabled = () => {
     return currentPage === pagination.last_page;
   };
+
   return (
     <Container>
       <Header latestArticle={latestArticle} />
@@ -97,9 +100,9 @@ export default function BlogClient() {
         category_name={categoryArticles.category_name}
       />
       <TopArticles topArticles={topArticles} />
-
       <Subscribe />
     </Container>
   );
 }
+
 const Container = styled.main``;

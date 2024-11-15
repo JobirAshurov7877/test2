@@ -4,7 +4,7 @@ import { routing } from "./i18n/routing";
 export default async function middleware(req: any) {
   // Vercel geolokatsiya xizmati orqali mamlakat kodini olish
   const countryCode = req.geo?.country || "unknown";
-  console.log("Country Code:", countryCode);
+  console.log("Country code:", countryCode);
 
   const acceptLanguage = req.headers.get("accept-language") || "";
   const userLocale = acceptLanguage.split(",")[0].split("-")[0];
@@ -21,5 +21,5 @@ export default async function middleware(req: any) {
 }
 
 export const config = {
-  matcher: ["/", "/(ru|en|es|hy)/:path*"],
+  matcher: ["/", "/(en|ru|es|hy)/:path*"],
 };

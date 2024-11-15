@@ -31,7 +31,7 @@ export default function Footer() {
     "Varpet - footer",
     "ab26fa1b-4fda-4dba-b6c0-35bae630b096",
     t("Subscribed successfully!"),
-    t("Failed to subscribe. Please try again"),
+    t("Failed_to_subscribe"),
     true
   );
   const formik = useFormik({
@@ -76,23 +76,19 @@ export default function Footer() {
             <h6>{t("Pages")}</h6>
             <ul>
               <li>
-                <NavigationLink href={"/about"}>
-                  {t("Navbar.About")}
-                </NavigationLink>
+                <NavigationLink href={"/about"}>{t("About")}</NavigationLink>
               </li>
               <li>
                 <NavigationLink href={"/services"}>
-                  {t("Navbar.Services")}
+                  {t("Services")}
                 </NavigationLink>
               </li>
               <li>
-                <NavigationLink href={"/blog"}>
-                  {t("Navbar.Blog")}
-                </NavigationLink>
+                <NavigationLink href={"/blog"}>{t("Blog")}</NavigationLink>
               </li>
               <li>
                 <NavigationLink href={"/contact"}>
-                  {t("Navbar.Contact")}{" "}
+                  {t("Contact")}{" "}
                 </NavigationLink>
               </li>
             </ul>

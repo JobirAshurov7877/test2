@@ -19,16 +19,8 @@ const AppDownload = () => {
         </Imagew>
         <Desc>
           <h3>{t("Download the app")}</h3>
-          <p>
-            {t(
-              "Varpet is a solution for many of your ordinary problems. Users of this platform can easily find specialists to solve any specific issue."
-            )}
-          </p>
-          <p>
-            {t(
-              "To use the services, you need to DOWNLOAD the Varpet app, which is available on Google Play and App Store. Prices for all services in Varpet are fixed"
-            )}
-          </p>
+          <p>{t("app_download_desc_1")}</p>
+          <p>{t("app_download_desc_2")}</p>
           <div>
             <a
               href="https://apps.apple.com/am/app/varpet/id1414315442"

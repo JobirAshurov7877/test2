@@ -44,7 +44,7 @@ const BookingError = () => {
               <Title>
                 <h3>{translations("Failed")}!</h3>
                 <Image src={error} alt="error" />
-                <p>{translations("Your booking has not been made ...")}</p>
+                <p>{translations("Your_booking")}</p>
               </Title>
             </SuccessContainer>
           </div>

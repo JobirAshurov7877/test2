@@ -62,7 +62,7 @@ const Contact = () => {
     "Varpet - contact",
     "f407359f-2bc6-47e5-8fa3-d0f4f2b921ee",
     t("Your message has been sent!"),
-    t("Failed to submit form . Please try again"),
+    "Failed to submit form . Please try again",
     true
   );
 

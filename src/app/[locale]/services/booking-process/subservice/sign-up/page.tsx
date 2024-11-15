@@ -262,9 +262,7 @@ const PhoneMail = () => {
         }
       } else {
         setLoading(false);
-        setVerifyError(
-          translations("Oops! That wasn’t the right code. Please try again")
-        );
+        setVerifyError(translations("Oops"));
       }
     } else {
       if (response.data === 200) {
@@ -527,7 +525,9 @@ const PhoneMail = () => {
                             : { display: "none" }
                         }
                         type="submit"
-                        disabled={!phoneValue.recipient && !errors.email}
+                        disabled={
+                          !errors.email && phoneValue.recipient.length < 10
+                        }
                         onClick={
                           verifiedUser.code && verifiedUser.userId
                             ? handleRegister

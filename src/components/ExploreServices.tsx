@@ -13,7 +13,7 @@ const ExploreServices = () => {
     <Container>
       <Box>
         <Desc>
-          <h3>{t("Are you ready to achieve perfection?")}</h3>
+          <h3>{t("Are you ready to achieve perfection")}</h3>
           <p>{t("hire_an_expert")}</p>
           <Buttons>
             <a href="https://varpet.onelink.me/px3l/jc3yinnx" target="blank">

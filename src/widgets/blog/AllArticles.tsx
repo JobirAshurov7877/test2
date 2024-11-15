@@ -13,6 +13,7 @@ import Image from "next/image";
 import { Articles, BlogPagination } from "@/interfaces/blog.interface";
 import { useSnapshot } from "valtio";
 import { blogCategoryStore } from "@/valtio-store/blogCategoryStore";
+import ValidImage from "@/components/ValidImage";
 interface ArticlesProps {
   articles: Articles[];
   pagination: BlogPagination;
@@ -60,7 +61,7 @@ const AllArticles: React.FC<ArticlesProps> = ({
                   <NavigationLink href={`/blog/${article.slug}`}>
                     <div>
                       <Imagew>
-                        <Image
+                        <ValidImage
                           src={article.image}
                           alt={article.image_title}
                           width={1000}

@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { MyColors } from "@/styles/color";
 import { proportions } from "@/styles/proportions";
 import Image from "next/image";
-import Link from "next/link";
 import languages from "@/data/languages";
 import { MyDownloadButton, MyHamburger } from "@/ui";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -20,7 +19,7 @@ interface HeaderProps {
   language: string;
 }
 export default function Header({ language: currentLang }: HeaderProps) {
-  const t = useTranslations("Navbar");
+  const t = useTranslations("");
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const languageDropdownRef = useRef(null);
@@ -69,7 +68,7 @@ export default function Header({ language: currentLang }: HeaderProps) {
     <Container>
       <Box $isOpen={isMobileNavOpen || isLanguageOpen}>
         <LogoContainer>
-          <NavigationLink href={`/`}>
+          <NavigationLink href={`/`} prefetch={false}>
             <Image src={Logo} alt="varpet-logo" priority />
           </NavigationLink>
         </LogoContainer>
@@ -79,12 +78,12 @@ export default function Header({ language: currentLang }: HeaderProps) {
               <span onClick={() => handleNavigate("about")}>{t("About")}</span>
             </Li>
             <Li>
-              <span onClick={() => handleNavigate("services")}>
+              <NavigationLink href={`/services`} prefetch={true}>
                 {t("Services")}
-              </span>
+              </NavigationLink>
             </Li>
             <Li>
-              <NavigationLink href={`/blog`} prefetch={false}>
+              <NavigationLink href={`/blog`} prefetch={true}>
                 {t("Blog")}
               </NavigationLink>
             </Li>

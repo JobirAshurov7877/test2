@@ -21,30 +21,22 @@ const SubServiceGuide = () => {
     {
       id: 1,
       title: translations("Choose the service you want to get"),
-      desc: translations(
-        "Select the specific service you need from the options. This will help us tailor our offerings to best meet your requirements and ensure you receive the most relevant assistance"
-      ),
+      desc: translations("guide_desc_1"),
     },
     {
       id: 2,
       title: translations("Share photos, videos and add a message"),
-      desc: translations(
-        "Upload photos and videos, and include a personalized message to describe the issue better. This will help us understand your concern more clearly through both visual and written content"
-      ),
+      desc: translations("guide_desc_2"),
     },
     {
       id: 3,
       title: translations("Pick date and location for service"),
-      desc: translations(
-        "Select the preferred date and location for your service. This ensures that we can accommodate your schedule and provide service at the most convenient place for you"
-      ),
+      desc: translations("guide_desc_3"),
     },
     {
       id: 4,
       title: translations("Finish booking by paying for the service"),
-      desc: translations(
-        "Complete your booking by making a payment for the service. This final step secures your appointment and ensures that everything is set for your chosen date and location"
-      ),
+      desc: translations("guide_desc_4"),
     },
   ];
 
@@ -58,11 +50,7 @@ const SubServiceGuide = () => {
       <Box>
         <Desc>
           <h3>{translations("How It Works")}</h3>
-          <p>
-            {translations(
-              "Using our app is simple and straightforward. Here are the steps you need to follow to get started and make the most out of its features:"
-            )}
-          </p>
+          <p>{translations("guide_desc")}</p>
           <Nav>
             {guides.map((guide, index) => (
               <Page

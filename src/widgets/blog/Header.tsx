@@ -5,11 +5,11 @@ import { MyButton } from "@/ui";
 import { moveBlue, moveOrange } from "@/animations/circleAnimations";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
 import { MyColors } from "@/styles/color";
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import FormattedDate from "@/components/FormattedDate";
 import { NavigationLink } from "@/components";
 import Image from "next/image";
+import ValidImage from "@/components/ValidImage";
 
 const Header = ({ latestArticle }: any) => {
   const t = useTranslations();
@@ -38,10 +38,9 @@ const Header = ({ latestArticle }: any) => {
           <CircleOrange />
         </Desc>
         <ImageW>
-          <Image
+          <ValidImage
             src={latestArticle?.image}
             alt={latestArticle?.image_title}
-            loading="lazy"
             fill
           />
         </ImageW>

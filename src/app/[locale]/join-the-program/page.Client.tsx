@@ -26,7 +26,7 @@ const JoinTheProgramClient = () => {
   return (
     <>
       <Head>
-        <title>{t("Join the program")}</title>
+        <title>{t("Join_the_program")}</title>
         <meta
           name="description"
           content="This is the footer page for Varpet."

@@ -23,28 +23,34 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
-  children,
-  params,
-}: Readonly<{
-  children: React.ReactNode;
-  params: { locale: Locale }; // Explicitly type 'locale' as one of the allowed values
-}>) {
-  const { locale } = params;
+async function fetchLocaleData(locale: Locale) {
   if (!routing.locales.includes(locale)) {
     notFound();
   }
-  console.log(params);
-
-  let messages;
   try {
-    messages = await getMessages();
+    const messages = await getMessages({ locale });
+    return { locale, messages };
   } catch (error) {
+    console.error("Failed to load messages:", error);
     notFound();
+  }
+}
+
+export default async function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { locale: Locale };
+}) {
+  const localeData = await fetchLocaleData(params.locale);
+
+  if (!localeData) {
+    return notFound();
   }
 
   return (
-    <ClientRootLayout messages={messages} locale={locale}>
+    <ClientRootLayout messages={localeData.messages} locale={localeData.locale}>
       {children}
     </ClientRootLayout>
   );

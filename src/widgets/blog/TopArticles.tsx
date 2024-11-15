@@ -8,6 +8,7 @@ import { MyColors } from "@/styles/color";
 import { useTranslations } from "next-intl";
 import { NavigationLink } from "@/components";
 import Image from "next/image";
+import ValidImage from "@/components/ValidImage";
 interface TopArticlesProps {
   topArticles: any[];
 }
@@ -24,7 +25,7 @@ const TopArticles: React.FC<TopArticlesProps> = ({ topArticles }) => {
               <div>
                 <Imagew className="image">
                   {topArticles && (
-                    <Image
+                    <ValidImage
                       src={topArticles[0]?.image}
                       alt={topArticles[0]?.image_title}
                       width={1000}
@@ -56,7 +57,7 @@ const TopArticles: React.FC<TopArticlesProps> = ({ topArticles }) => {
             <Article>
               <NavigationLink href={`/blog/${topArticles[1]?.slug}`}>
                 <Imagew>
-                  <Image
+                  <ValidImage
                     src={topArticles[1]?.image}
                     alt={topArticles[1]?.image_title}
                     width={1000}
@@ -89,7 +90,7 @@ const TopArticles: React.FC<TopArticlesProps> = ({ topArticles }) => {
             <Article>
               <NavigationLink href={`/blog/${topArticles[2]?.slug}`}>
                 <Imagew>
-                  <Image
+                  <ValidImage
                     src={topArticles[2]?.image}
                     alt={topArticles[2]?.image_title}
                     width={1000}

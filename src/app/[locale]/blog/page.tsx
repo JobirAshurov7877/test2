@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import BlogClient from "./page.Client";
+import dynamic from "next/dynamic";
+
 type Props = {
   params: Promise<{ locale: string }>;
 };
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-
+const BlogClient = dynamic(() => import("./page.Client"));
 export default function Blog() {
   return <BlogClient />;
 }

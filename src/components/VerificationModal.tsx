@@ -100,7 +100,7 @@ const VerificationModal: React.FC<VerificationProps> = ({
           <p>
             {translations("We have sent a verification code to this number")}{" "}
             <br />+{phoneValue.recipient}.{" "}
-            {translations("Please enter the code to proceed.")}
+            {translations("Please enter the code to proceed")}
           </p>
           <VerifyInputContainer>
             <VerificationInput

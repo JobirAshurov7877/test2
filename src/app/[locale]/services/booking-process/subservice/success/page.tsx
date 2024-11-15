@@ -60,7 +60,7 @@ const BookingSuccess = () => {
                 </div>
                 <p>
                   {translations(
-                    "Download Varpet app to track the progress in real-time and get notifications about it."
+                    "Download Varpet app to track the progress in real-time and get notifications about it"
                   )}
                 </p>
               </div>

@@ -26,9 +26,7 @@ export default function OurServices() {
         const response = await api.get(
           `/api/roots-with-direct-subs/${currentLanguage}`
         );
-
         setCategories(response.data);
-        console.log(response.data);
       } catch (error: any) {
         console.error(error);
       }
@@ -71,7 +69,8 @@ export default function OurServices() {
                   <Imagew>
                     <Image
                       src={imagesAPI + category.image}
-                      fill
+                      width={1000}
+                      height={1000}
                       alt="category"
                     />
                   </Imagew>
@@ -80,9 +79,7 @@ export default function OurServices() {
                     <h6>{category.title}</h6>
                     <p className="opacity-paragraph">
                       {category.description === "."
-                        ? t(
-                            "We are currently working on providing detailed information about this service. Please contact us for more information or if you have any questions."
-                          )
+                        ? t("sub_service_about_desc")
                         : category.description}
                     </p>
                     <MyButton $variant="secondary">

@@ -38,9 +38,7 @@ const SubServicesHeader: React.FC<CategoryProps> = ({ service }) => {
           <h1>{service.title}</h1>
           <p>
             {service.description === "."
-              ? t(
-                  "We are currently working on providing detailed information about this service. Please contact us for more information or if you have any questions."
-                )
+              ? t("sub_service_about_desc")
               : service.description}
           </p>
           <MyButton onClick={handleBook}>

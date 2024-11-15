@@ -11,6 +11,7 @@ import { NavigationLink } from "@/components";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { api } from "@/services/axios";
+import ValidImage from "@/components/ValidImage";
 
 const TopArticles = () => {
   const [topArticles, setTopArticles] = useState<any>([]);
@@ -33,8 +34,7 @@ const TopArticles = () => {
     <Container>
       <Box>
         <Title>
-          <div></div>
-          <h3>{t("Navbar.Blog")}</h3>
+          <h3>{t("Blog")}</h3>
           <ViewMoreButtonContainer>
             <NavigationLink href="/blog">
               <MyButton $variant="borderLess">
@@ -49,12 +49,16 @@ const TopArticles = () => {
             <NavigationLink href={`/blog/${topArticles[0]?.slug}`}>
               <div>
                 <Imagew className="image">
-                  <Image
-                    src={topArticles[0]?.image}
-                    alt={topArticles[0]?.image_title}
-                    width={300}
-                    height={300}
-                  />
+                  {topArticles[0]?.image ? (
+                    <Image
+                      src={topArticles[0].image}
+                      alt={topArticles[0].image_title || "Article image"}
+                      width={300}
+                      height={300}
+                    />
+                  ) : (
+                    <p>No image available</p> // Optional placeholder text
+                  )}
                 </Imagew>
                 <Categories>
                   {topArticles[0]?.categories.map((category: any) => (
@@ -80,9 +84,12 @@ const TopArticles = () => {
             <Article>
               <NavigationLink href={`/blog/${topArticles[1]?.slug}`}>
                 <Imagew>
-                  <Image
-                    src={topArticles[1]?.image}
-                    alt={topArticles[1]?.image_title}
+                  <ValidImage
+                    src={topArticles[0]?.image}
+                    alt={
+                      topArticles[0]?.image_title ||
+                      `Image for ${topArticles[0]?.title}`
+                    }
                     width={300}
                     height={300}
                   />
@@ -113,9 +120,9 @@ const TopArticles = () => {
             <Article>
               <NavigationLink href={`/blog/${topArticles[2]?.slug}`}>
                 <Imagew>
-                  <Image
+                  <ValidImage
                     src={topArticles[2]?.image}
-                    alt={topArticles[2]?.image_title}
+                    alt={topArticles[2]?.image_title || "Article image"}
                     width={300}
                     height={300}
                   />

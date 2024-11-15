@@ -16,7 +16,13 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  
+  swcMinify: true,
+  compiler: {
+    removeConsole: true,
+  },
+  experimental: {
+    optimizeCss: true,
+  },
 };
 
 export default withNextIntl(nextConfig);
