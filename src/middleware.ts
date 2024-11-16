@@ -10,7 +10,6 @@ export default async function middleware(req: any) {
   const userLocale = acceptLanguage.split(",")[0].split("-")[0];
   const supportedLocales = routing.locales;
 
-  // Mamlakat kodi asosida tilni aniqlash (ba'zi davlatlarda mos til tanlanadi)
   const locale = supportedLocales.includes(userLocale)
     ? userLocale
     : routing.defaultLocale;
