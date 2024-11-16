@@ -17,9 +17,6 @@ const nextConfig = {
     styledComponents: true,
   },
   swcMinify: true,
-  compiler: {
-    removeConsole: true,
-  },
   experimental: {
     optimizeCss: true,
   },

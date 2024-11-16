@@ -35,7 +35,14 @@ const SubService: React.FC = () => {
       );
     }
   }, [dispatch, currentLanguage, params["item-id"]]);
-
+  useEffect(() => {
+    if (params["item-id"] && subServiceData?.metaTitle) {
+      document.title = subServiceData?.metaTitle;
+      document
+        .querySelector("meta[name='description']")
+        ?.setAttribute("content", subServiceData?.metaDescription || "");
+    }
+  }, [currentLanguage, params["item-id"], subServiceData]);
   if (loading || !subServiceData) {
     return (
       <MyLoadingContainer>

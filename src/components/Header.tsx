@@ -14,12 +14,17 @@ import GooglePlay from "@/assets/google_play.svg";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useParams } from "next/navigation";
 import NavigationLink from "./NavigationLink";
+import { initializeUserInfo } from "@/services/getUserData";
+import Cookies from "js-cookie";
+import { resetUserFormData } from "@/valtio-store/bookStore";
+import { clearUserDataIfNeeded } from "@/helper/appCurrentVersion";
 
 interface HeaderProps {
   language: string;
 }
 export default function Header({ language: currentLang }: HeaderProps) {
   const t = useTranslations("");
+  const urlParts = location.pathname.split("/");
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const languageDropdownRef = useRef(null);
@@ -63,6 +68,32 @@ export default function Header({ language: currentLang }: HeaderProps) {
   const handleNavigate = (url: string) => {
     router.push(`/${url}`);
   };
+
+  let urlCode = urlParts[1];
+  if (urlCode === "hy") {
+    urlCode = "am";
+  }
+
+  Cookies.set("countryCode", urlCode, { expires: 365 });
+  useEffect(() => {
+    if (!location.pathname.includes("/services/booking-process/")) {
+      resetUserFormData();
+    }
+  }, [location.pathname]);
+  useEffect(() => {
+    const initializeApp = async () => {
+      const start = Date.now();
+      try {
+        clearUserDataIfNeeded();
+        const countryCode = await initializeUserInfo();
+      } catch (error) {
+      } finally {
+        const end = Date.now();
+      }
+    };
+
+    initializeApp();
+  }, []);
 
   return (
     <Container>

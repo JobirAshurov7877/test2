@@ -21,7 +21,7 @@ const BlogSinglePage = ({ params }: any) => {
     const fetchData = async () => {
       try {
         const response = await api.get(
-          `/api/blog/article/${currentLanguage}/${params.slug}`
+          `/api/blog/article/${currentLanguage}/${params?.slug}`
         );
         setArticle(response.data);
         console.log(response.data);
@@ -30,7 +30,15 @@ const BlogSinglePage = ({ params }: any) => {
       }
     };
     fetchData();
-  }, [currentLanguage, params.slug]);
+  }, [currentLanguage, params?.slug]);
+  useEffect(() => {
+    if (params?.slug && article) {
+      document.title = article.title;
+      document
+        .querySelector("meta[name='description']")
+        ?.setAttribute("content", article.meta_description);
+    }
+  }, [currentLanguage, params?.slug, article]);
 
   return (
     <>

@@ -48,7 +48,6 @@ export default async function RootLayout({
   if (!localeData) {
     return notFound();
   }
-
   return (
     <ClientRootLayout messages={localeData.messages} locale={localeData.locale}>
       {children}

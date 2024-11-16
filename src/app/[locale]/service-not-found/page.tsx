@@ -6,11 +6,16 @@ import { proportions } from "@/styles/proportions";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
+import { useEffect } from "react";
 
 const ServiceNotFound = () => {
   const navigate = useRouter();
   const translations = useTranslations();
   const currentLanguage = useLocale();
+  useEffect(() => {
+    document.title =
+      translations("The page is unavailable") || "The page is unavailable";
+  }, [currentLanguage]);
 
   return (
     <>

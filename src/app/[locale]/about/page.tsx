@@ -33,6 +33,7 @@ export async function generateMetadata(
 }
 
 const AboutUs = () => {
+  console.log("fdsfds");
   return <AboutUsClient />;
 };
 

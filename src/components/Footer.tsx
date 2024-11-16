@@ -19,8 +19,11 @@ import { useTranslations } from "next-intl";
 import { MyColors } from "@/styles/color";
 import useHubSpotFormService from "./HubSpotFormService";
 import NavigationLink from "./NavigationLink";
+import { useSnapshot } from "valtio";
+import { locationStore } from "@/valtio-store/locationStore";
 
 export default function Footer() {
+  const { supportNumber, supportEmail } = useSnapshot(locationStore);
   const t = useTranslations();
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -118,7 +121,13 @@ export default function Footer() {
             <li>
               <FiPhone />
               <div>
-                <a href={`tel:${"+374 96 999 944"}`}>{"+374 96 999 944"}</a>
+                <a
+                  href={`tel:${
+                    supportNumber ? supportNumber : "+374 96 999 944"
+                  }`}
+                >
+                  {supportNumber ? supportNumber : "+374 96 999 944"}
+                </a>
               </div>
             </li>
             <li>
@@ -134,8 +143,12 @@ export default function Footer() {
             </li>
             <li>
               <LuMailOpen />
-              <a href={`mailto:${"support@varpet.com"}`}>
-                {"support@varpet.com"}
+              <a
+                href={`mailto:${
+                  supportEmail ? supportEmail : "support@varpet.com"
+                }`}
+              >
+                {supportEmail ? supportEmail : "support@varpet.com"}
               </a>
             </li>
           </ul>

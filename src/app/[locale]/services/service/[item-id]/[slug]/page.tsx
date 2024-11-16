@@ -39,6 +39,15 @@ const Categories = () => {
     }
   }, [dispatch, currentLanguage, params["item-id"]]);
 
+  useEffect(() => {
+    if (params["item-id"] && rootWithServicesSlice?.title) {
+      document.title = rootWithServicesSlice?.title;
+      document
+        .querySelector("meta[name='description']")
+        ?.setAttribute("content", rootWithServicesSlice?.description);
+    }
+  }, [currentLanguage, params["item-id"], rootWithServicesSlice]);
+
   if (loading || !rootWithServicesSlice) {
     return (
       <MyLoadingContainer>
