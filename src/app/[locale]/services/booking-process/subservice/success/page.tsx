@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { MyButton } from "@/ui";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { store } from "@/valtio-store/store";
-import qr from "@/assets/varpetQr.png";
+import qr from "@/assets/varpetQr1.svg";
 import { TbSpeakerphone } from "react-icons/tb";
 import { proportions } from "@/styles/proportions";
 import { MyColors } from "@/styles/color";

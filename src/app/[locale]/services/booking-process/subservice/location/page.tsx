@@ -10,9 +10,6 @@ import {
 } from "@/styles/booking-service";
 import { useEffect, useState } from "react";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
-
-import { store } from "@/valtio-store/store";
-import { proportions } from "@/styles/proportions";
 import styled from "styled-components";
 import {
   GoogleMap,
@@ -20,50 +17,35 @@ import {
   Autocomplete,
   Marker,
 } from "@react-google-maps/api";
-import { useSnapshot } from "valtio";
-import { locationStore } from "@/valtio-store/locationStore";
-import { setFormDataItem } from "@/valtio-store/bookStore";
-import { MyColors } from "@/styles/color";
-import { userFormDataStore } from "@/valtio-store/bookStore";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { setUser, userStore } from "@/valtio-store/userStore";
-import StepForm from "@/widgets/booking/StepForm";
-import BookingDetails from "@/widgets/booking/BookingDetails";
 import { MyButton } from "@/ui";
 import MyLocationLoader from "@/ui/mylocation-loader/MyLocationLoader";
+import { MyColors } from "@/styles/color";
+import { proportions } from "@/styles/proportions";
 
 const OrderLocation = () => {
-  store.bookingFormStep = 3;
   const navigate = useRouter();
-  const [orderDate, setOrderDate] = useState(() => {
-    {
-      const today = new Date();
-      const year = today.getFullYear();
-      const month = String(today.getMonth() + 1).padStart(2, "0");
-      const day = String(today.getDate()).padStart(2, "0");
-      return `${year}-${month}-${day}`;
-    }
-  });
   const translations = useTranslations();
   const currentLanguage = useLocale();
 
-  const { location } = useSnapshot(locationStore);
+  const [orderDate, setOrderDate] = useState(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  });
 
   const [orderTime, setOrderTime] = useState(() => {
-    // Initialize with current time rounded to the next hour
     const today = new Date();
     const minutes = today.getMinutes();
-
     if (minutes > 0) {
-      today.setHours(today.getHours() + 2); // Round up to the next hour
-      today.setMinutes(0); // Reset minutes to 0
+      today.setHours(today.getHours() + 2);
+      today.setMinutes(0);
     }
-
-    // Format time as HH:MM
     const hours = String(today.getHours()).padStart(2, "0");
     const mins = String(today.getMinutes()).padStart(2, "0");
-
     return `${hours}:${mins}`;
   });
 
@@ -71,64 +53,23 @@ const OrderLocation = () => {
     lat: number;
     lng: number;
     address: string | undefined;
-  } | null>(() => {
-    const initialLocation = userStore.location;
-    if (initialLocation && initialLocation.lat && initialLocation.lng) {
-      return {
-        lat: parseFloat(initialLocation.lat),
-        lng: parseFloat(initialLocation.lng),
-        address: initialLocation.address,
-      };
-    }
-    return null;
-  });
+  } | null>(null);
+
   const [markerPosition, setMarkerPosition] = useState<{
     lat: number;
     lng: number;
   } | null>(null);
 
-  const handleFormSend = () => {
-    if (
-      selectedLocation &&
-      selectedLocation.lat !== undefined &&
-      selectedLocation.lng !== undefined
-    ) {
-      // Ensure address is converted to string | null
-      const addressOrNull: string | undefined =
-        selectedLocation.address !== undefined
-          ? selectedLocation.address
-          : undefined;
-
-      setFormDataItem("time", orderTime);
-      setFormDataItem("date", orderDate);
-      setFormDataItem("location", {
-        address: addressOrNull,
-        lat: selectedLocation.lat.toString(),
-        lng: selectedLocation.lng.toString(),
-      });
-
-      setUser({
-        ...userStore,
-        location: {
-          address: addressOrNull,
-          lat: selectedLocation.lat.toString(),
-          lng: selectedLocation.lng.toString(),
-        },
-      });
-
-      navigate.push(
-        `/${currentLanguage}/services/booking-process/subservice/sign-up`
-      );
-    } else {
-      console.error("Missing or invalid location data for form submission.");
-    }
-  };
-
+  const [mapRef, setMapRef] = useState<google.maps.Map | null>(null); // Xarita referensi
   const [autocomplete, setAutocomplete] =
     useState<google.maps.places.Autocomplete | null>(null);
 
   const onLoad = (autocomplete: google.maps.places.Autocomplete) => {
     setAutocomplete(autocomplete);
+  };
+
+  const onMapLoad = (map: google.maps.Map) => {
+    setMapRef(map);
   };
 
   const onPlaceChanged = () => {
@@ -144,43 +85,47 @@ const OrderLocation = () => {
         lng: place.geometry.location.lng(),
         address: place.formatted_address,
       };
+
       setMarkerPosition({ lat: selected.lat, lng: selected.lng });
       setSelectedLocation(selected);
+
+      // Xarita markerni ko'rsatish uchun markazga o'tadi va zoom qiladi
+      if (mapRef) {
+        mapRef.setCenter(selected);
+        mapRef.setZoom(15); // Zoom darajasi
+      }
     } else {
       console.log("Autocomplete is not loaded yet!");
     }
   };
 
-  useEffect(() => {
+  const handleFormSend = () => {
     if (
-      !userFormDataStore.ServiceSummary ||
-      userFormDataStore.ServiceSummary.length === 0
+      selectedLocation &&
+      selectedLocation.lat !== undefined &&
+      selectedLocation.lng !== undefined
     ) {
-      navigate.push(`/${currentLanguage}/service-not-found`);
+      // Formani yuborish jarayoni
+      console.log("Location Selected:", selectedLocation);
+      navigate.push(
+        `/${currentLanguage}/services/booking-process/subservice/sign-up`
+      );
+    } else {
+      console.error("Missing or invalid location data for form submission.");
     }
-  }, [userFormDataStore.ServiceSummary, navigate, currentLanguage]);
+  };
 
   const mapOptions = {
     streetViewControl: false,
     mapTypeControl: false,
     fullscreenControl: false,
-    zoomControl: false,
-  };
-
-  const options = {
-    bounds: {
-      east: location.lng + 0.1,
-      west: location.lng - 0.1,
-      north: location.lat + 0.1,
-      south: location.lat - 0.1,
-    },
+    zoomControl: true,
   };
 
   return (
     <Container>
       <Box>
         <OrderPreparation>
-          <StepForm />
           <Title>
             <h4>{translations("Location")}</h4>
           </Title>
@@ -204,7 +149,7 @@ const OrderLocation = () => {
               </TimeInputContainer>
             </DateTimeInputs>
             <LoadScript
-              googleMapsApiKey="AIzaSyD7BWT58CQO-RdY8I4F0kdS5CPx82PC1G8"
+              googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY"
               libraries={["places"]}
               loadingElement={
                 <LoadingContainer>
@@ -216,10 +161,11 @@ const OrderLocation = () => {
                 options={mapOptions}
                 mapContainerStyle={{
                   width: "100%",
-                  height: "250px", // Adjust height as needed
+                  height: "250px",
                 }}
-                center={{ lat: location.lat, lng: location.lng }}
+                center={{ lat: 41.2995, lng: 69.2401 }} // Default center (Tashkent)
                 zoom={11}
+                onLoad={onMapLoad}
               >
                 {markerPosition && (
                   <Marker
@@ -230,11 +176,7 @@ const OrderLocation = () => {
                   />
                 )}
               </GoogleMap>
-              <Autocomplete
-                onLoad={onLoad}
-                onPlaceChanged={onPlaceChanged}
-                options={options}
-              >
+              <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
                 <GoogleSearchInput>
                   <input
                     type="text"
@@ -265,7 +207,6 @@ const OrderLocation = () => {
             </NextStep>
           </Movement>
         </OrderPreparation>
-        <BookingDetails />
       </Box>
     </Container>
   );
