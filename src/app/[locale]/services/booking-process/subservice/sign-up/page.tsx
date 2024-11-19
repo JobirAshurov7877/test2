@@ -337,263 +337,264 @@ const PhoneMail = () => {
   }, [loading]);
 
   return (
-    <Container>
-      {loading && <MyLoading />}
-      <Box>
-        <OrderPreparation>
-          <div>
-            <StepForm />
-            <Title>
-              <h4>{translations("Sign up")}</h4>
-              <p>{translations("Sign up to complete the booking process")}</p>
-            </Title>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={async (_, { resetForm }) => {
-                try {
-                  resetForm();
-                } catch (error) {
-                  console.error("Error submitting form:", error);
-                }
-              }}
-            >
-              {({
-                touched,
-                errors,
-                setFieldValue,
-                setFieldTouched,
-                handleSubmit,
-              }) => (
-                <Form onSubmit={handleSubmit}>
-                  <SignUpInputs>
-                    {namesInputsOpen ? (
-                      <>
-                        <InputContainer>
-                          <InputLabel>{translations("First Name")}</InputLabel>
-                          <NameInputWrapper>
-                            <HiOutlineUser />
-                            <Field
-                              as={NameInput}
-                              name="firstName"
-                              value={firstName}
-                              placeholder={translations("First Name")}
-                              onChange={(
-                                e: React.ChangeEvent<HTMLInputElement>
-                              ) => {
-                                setFieldValue("firstName", e.target.value);
-                                setFirstName(e.target.value);
-                              }}
-                              onFocus={() => setIsFirstNameFocused(true)}
-                              onBlur={() => {
-                                setIsFirstNameFocused(false);
-                                setFieldTouched("firstName", true);
-                              }}
-                              $isFocused={isFirstNameFocused}
-                              className={
-                                isFirstNameFocused
-                                  ? "focused"
-                                  : touched.firstName && errors.firstName
-                                  ? "error"
-                                  : ""
-                              }
-                            />
-                          </NameInputWrapper>
-                          {touched.firstName && errors.firstName && (
-                            <ErrorLabel>{errors.firstName}</ErrorLabel>
-                          )}
-                        </InputContainer>
-                        <InputContainer>
-                          <InputLabel>{translations("Last Name")}</InputLabel>
-                          <NameInputWrapper>
-                            <HiOutlineUser />
-                            <Field
-                              as={NameInput}
-                              name="lastName"
-                              value={lastName}
-                              placeholder={translations("Last Name")}
-                              onChange={(
-                                e: React.ChangeEvent<HTMLInputElement>
-                              ) => {
-                                setFieldValue("lastName", e.target.value);
-                                setLastName(e.target.value);
-                              }}
-                              onFocus={() => setIsLastNameFocused(true)}
-                              onBlur={() => {
-                                setIsLastNameFocused(false);
-                                setFieldTouched("lastName", true);
-                              }}
-                              $isFocused={isLastNameFocused}
-                              className={
-                                isLastNameFocused
-                                  ? "focused"
-                                  : touched.lastName && errors.lastName
-                                  ? "error"
-                                  : ""
-                              }
-                            />
-                          </NameInputWrapper>
-                          {touched.lastName && errors.lastName && (
-                            <ErrorLabel>{errors.lastName}</ErrorLabel>
-                          )}
-                        </InputContainer>
-                      </>
-                    ) : (
-                      <>
-                        <InputContainer>
-                          <InputLabel>
-                            {translations("Phone number")}
-                          </InputLabel>
-                          <PhoneInputWrapper $isFocused={isPhoneFocused}>
-                            <Field
-                              disabled={
-                                verifiedUser.code || verifiedUser.userId
-                              }
-                              as={PhoneInput}
-                              name="tel.recipient"
-                              value={phoneValue.recipient}
-                              country={phoneValue.countryCode}
-                              onChange={(value: string, country: any) => {
-                                setPhoneValue((prevState) => ({
-                                  ...prevState,
-                                  recipient: value,
-                                  countryCode: country?.countryCode,
-                                }));
-                                setFieldValue("tel.recipient", value);
-                              }}
-                              onFocus={() => setIsPhoneFocused(true)}
-                              onBlur={() => {
-                                setIsPhoneFocused(false);
-                                setFieldTouched("tel.recipient", true);
-                              }}
-                            />
-                            <ErrorMessage
-                              name="tel.recipient"
-                              component={ErrorLabel}
-                            />
-                          </PhoneInputWrapper>
-                        </InputContainer>
-                        <InputContainer>
-                          <InputLabel>{translations("Email")}</InputLabel>
-                          <EmailInputWrapper>
-                            <MdMailOutline />
-                            <Field
-                              disabled={verifiedUser.email}
-                              as={EmailInput}
-                              name="email"
-                              placeholder="example@gmail.com"
-                              type="email"
-                              value={emailValue}
-                              onChange={(
-                                e: React.ChangeEvent<HTMLInputElement>
-                              ) => {
-                                setEmailValue(e.target.value);
-                                setFieldValue("email", e.target.value);
-                              }}
-                              onFocus={() => setIsEmailFocused(true)}
-                              onBlur={() => {
-                                setIsEmailFocused(false);
-                                setFieldTouched("email", true);
-                              }}
-                              $isFocused={isEmailFocused}
-                              className={
-                                isEmailFocused
-                                  ? "focused"
-                                  : touched.email && errors.email
-                                  ? "error"
-                                  : ""
-                              }
-                            />
-                          </EmailInputWrapper>
-                          {touched.email && errors.email && (
-                            <ErrorLabel>{errors.email}</ErrorLabel>
-                          )}
-                        </InputContainer>
-                      </>
-                    )}
-                  </SignUpInputs>
-                  <Movement>
-                    <PrevStep>
-                      <MyButton
-                        type="button"
-                        $variant="secondary"
-                        onClick={() => {
-                          setUser({
-                            email: "",
-                            phone: {
-                              recipient: "",
-                              countryCode: "",
-                            },
-                            userId: "",
-                            code: "",
-                          });
-                          navigate.back();
-                        }}
-                      >
-                        <IoIosArrowRoundBack />
-                        {translations("Back")}
-                      </MyButton>
-                    </PrevStep>
-                    <NextStep>
-                      <MyButton
-                        style={
-                          namesInputsOpen
-                            ? { display: "flex" }
-                            : { display: "none" }
-                        }
-                        type="submit"
-                        disabled={!firstName || !lastName}
-                        onClick={handleRegister}
-                      >
-                        {translations("Complete")}
-                        <IoIosArrowRoundForward />
-                      </MyButton>
-                      <MyButton
-                        style={
-                          !namesInputsOpen
-                            ? { display: "flex" }
-                            : { display: "none" }
-                        }
-                        type="submit"
-                        disabled={
-                          !errors.email && phoneValue.recipient.length < 10
-                        }
-                        onClick={
-                          verifiedUser.code && verifiedUser.userId
-                            ? handleRegister
-                            : handleVerify
-                        }
-                      >
-                        {translations("Complete")}
-                        <IoIosArrowRoundForward />
-                      </MyButton>
-                    </NextStep>
-                  </Movement>
-                </Form>
-              )}
-            </Formik>
-          </div>
-        </OrderPreparation>
-        <BookingDetails />
-      </Box>
-      {/* Verification Modal */}
-      {requestModal && (
-        <VerificationModal
-          timer={timer}
-          setTimer={setTimer}
-          phoneValue={phoneValue}
-          setRequestModal={setRequestModal}
-          setVerificationCode={setVerificationCode}
-          verificationCode={verificationCode}
-          handleVerify={handleVerify}
-          handleSignIn={handleSignIn}
-          verifyError={verifyError}
-          setVerifyError={setVerifyError}
-          setVerificationCodeInterval={setVerificationCodeInterval}
-          encodedKey={encodedKey}
-        />
-      )}
-    </Container>
+    <div className="">Helo</div>
+    // <Container>
+    //   {loading && <MyLoading />}
+    //   <Box>
+    //     <OrderPreparation>
+    //       <div>
+    //         <StepForm />
+    //         <Title>
+    //           <h4>{translations("Sign up")}</h4>
+    //           <p>{translations("Sign up to complete the booking process")}</p>
+    //         </Title>
+    //         <Formik
+    //           initialValues={initialValues}
+    //           validationSchema={validationSchema}
+    //           onSubmit={async (_, { resetForm }) => {
+    //             try {
+    //               resetForm();
+    //             } catch (error) {
+    //               console.error("Error submitting form:", error);
+    //             }
+    //           }}
+    //         >
+    //           {({
+    //             touched,
+    //             errors,
+    //             setFieldValue,
+    //             setFieldTouched,
+    //             handleSubmit,
+    //           }) => (
+    //             <Form onSubmit={handleSubmit}>
+    //               <SignUpInputs>
+    //                 {namesInputsOpen ? (
+    //                   <>
+    //                     <InputContainer>
+    //                       <InputLabel>{translations("First Name")}</InputLabel>
+    //                       <NameInputWrapper>
+    //                         <HiOutlineUser />
+    //                         <Field
+    //                           as={NameInput}
+    //                           name="firstName"
+    //                           value={firstName}
+    //                           placeholder={translations("First Name")}
+    //                           onChange={(
+    //                             e: React.ChangeEvent<HTMLInputElement>
+    //                           ) => {
+    //                             setFieldValue("firstName", e.target.value);
+    //                             setFirstName(e.target.value);
+    //                           }}
+    //                           onFocus={() => setIsFirstNameFocused(true)}
+    //                           onBlur={() => {
+    //                             setIsFirstNameFocused(false);
+    //                             setFieldTouched("firstName", true);
+    //                           }}
+    //                           $isFocused={isFirstNameFocused}
+    //                           className={
+    //                             isFirstNameFocused
+    //                               ? "focused"
+    //                               : touched.firstName && errors.firstName
+    //                               ? "error"
+    //                               : ""
+    //                           }
+    //                         />
+    //                       </NameInputWrapper>
+    //                       {touched.firstName && errors.firstName && (
+    //                         <ErrorLabel>{errors.firstName}</ErrorLabel>
+    //                       )}
+    //                     </InputContainer>
+    //                     <InputContainer>
+    //                       <InputLabel>{translations("Last Name")}</InputLabel>
+    //                       <NameInputWrapper>
+    //                         <HiOutlineUser />
+    //                         <Field
+    //                           as={NameInput}
+    //                           name="lastName"
+    //                           value={lastName}
+    //                           placeholder={translations("Last Name")}
+    //                           onChange={(
+    //                             e: React.ChangeEvent<HTMLInputElement>
+    //                           ) => {
+    //                             setFieldValue("lastName", e.target.value);
+    //                             setLastName(e.target.value);
+    //                           }}
+    //                           onFocus={() => setIsLastNameFocused(true)}
+    //                           onBlur={() => {
+    //                             setIsLastNameFocused(false);
+    //                             setFieldTouched("lastName", true);
+    //                           }}
+    //                           $isFocused={isLastNameFocused}
+    //                           className={
+    //                             isLastNameFocused
+    //                               ? "focused"
+    //                               : touched.lastName && errors.lastName
+    //                               ? "error"
+    //                               : ""
+    //                           }
+    //                         />
+    //                       </NameInputWrapper>
+    //                       {touched.lastName && errors.lastName && (
+    //                         <ErrorLabel>{errors.lastName}</ErrorLabel>
+    //                       )}
+    //                     </InputContainer>
+    //                   </>
+    //                 ) : (
+    //                   <>
+    //                     <InputContainer>
+    //                       <InputLabel>
+    //                         {translations("Phone number")}
+    //                       </InputLabel>
+    //                       <PhoneInputWrapper $isFocused={isPhoneFocused}>
+    //                         <Field
+    //                           disabled={
+    //                             verifiedUser.code || verifiedUser.userId
+    //                           }
+    //                           as={PhoneInput}
+    //                           name="tel.recipient"
+    //                           value={phoneValue.recipient}
+    //                           country={phoneValue.countryCode}
+    //                           onChange={(value: string, country: any) => {
+    //                             setPhoneValue((prevState) => ({
+    //                               ...prevState,
+    //                               recipient: value,
+    //                               countryCode: country?.countryCode,
+    //                             }));
+    //                             setFieldValue("tel.recipient", value);
+    //                           }}
+    //                           onFocus={() => setIsPhoneFocused(true)}
+    //                           onBlur={() => {
+    //                             setIsPhoneFocused(false);
+    //                             setFieldTouched("tel.recipient", true);
+    //                           }}
+    //                         />
+    //                         <ErrorMessage
+    //                           name="tel.recipient"
+    //                           component={ErrorLabel}
+    //                         />
+    //                       </PhoneInputWrapper>
+    //                     </InputContainer>
+    //                     <InputContainer>
+    //                       <InputLabel>{translations("Email")}</InputLabel>
+    //                       <EmailInputWrapper>
+    //                         <MdMailOutline />
+    //                         <Field
+    //                           disabled={verifiedUser.email}
+    //                           as={EmailInput}
+    //                           name="email"
+    //                           placeholder="example@gmail.com"
+    //                           type="email"
+    //                           value={emailValue}
+    //                           onChange={(
+    //                             e: React.ChangeEvent<HTMLInputElement>
+    //                           ) => {
+    //                             setEmailValue(e.target.value);
+    //                             setFieldValue("email", e.target.value);
+    //                           }}
+    //                           onFocus={() => setIsEmailFocused(true)}
+    //                           onBlur={() => {
+    //                             setIsEmailFocused(false);
+    //                             setFieldTouched("email", true);
+    //                           }}
+    //                           $isFocused={isEmailFocused}
+    //                           className={
+    //                             isEmailFocused
+    //                               ? "focused"
+    //                               : touched.email && errors.email
+    //                               ? "error"
+    //                               : ""
+    //                           }
+    //                         />
+    //                       </EmailInputWrapper>
+    //                       {touched.email && errors.email && (
+    //                         <ErrorLabel>{errors.email}</ErrorLabel>
+    //                       )}
+    //                     </InputContainer>
+    //                   </>
+    //                 )}
+    //               </SignUpInputs>
+    //               <Movement>
+    //                 <PrevStep>
+    //                   <MyButton
+    //                     type="button"
+    //                     $variant="secondary"
+    //                     onClick={() => {
+    //                       setUser({
+    //                         email: "",
+    //                         phone: {
+    //                           recipient: "",
+    //                           countryCode: "",
+    //                         },
+    //                         userId: "",
+    //                         code: "",
+    //                       });
+    //                       navigate.back();
+    //                     }}
+    //                   >
+    //                     <IoIosArrowRoundBack />
+    //                     {translations("Back")}
+    //                   </MyButton>
+    //                 </PrevStep>
+    //                 <NextStep>
+    //                   <MyButton
+    //                     style={
+    //                       namesInputsOpen
+    //                         ? { display: "flex" }
+    //                         : { display: "none" }
+    //                     }
+    //                     type="submit"
+    //                     disabled={!firstName || !lastName}
+    //                     onClick={handleRegister}
+    //                   >
+    //                     {translations("Complete")}
+    //                     <IoIosArrowRoundForward />
+    //                   </MyButton>
+    //                   <MyButton
+    //                     style={
+    //                       !namesInputsOpen
+    //                         ? { display: "flex" }
+    //                         : { display: "none" }
+    //                     }
+    //                     type="submit"
+    //                     disabled={
+    //                       !errors.email && phoneValue.recipient.length < 10
+    //                     }
+    //                     onClick={
+    //                       verifiedUser.code && verifiedUser.userId
+    //                         ? handleRegister
+    //                         : handleVerify
+    //                     }
+    //                   >
+    //                     {translations("Complete")}
+    //                     <IoIosArrowRoundForward />
+    //                   </MyButton>
+    //                 </NextStep>
+    //               </Movement>
+    //             </Form>
+    //           )}
+    //         </Formik>
+    //       </div>
+    //     </OrderPreparation>
+    //     <BookingDetails />
+    //   </Box>
+    //   {/* Verification Modal */}
+    //   {requestModal && (
+    //     <VerificationModal
+    //       timer={timer}
+    //       setTimer={setTimer}
+    //       phoneValue={phoneValue}
+    //       setRequestModal={setRequestModal}
+    //       setVerificationCode={setVerificationCode}
+    //       verificationCode={verificationCode}
+    //       handleVerify={handleVerify}
+    //       handleSignIn={handleSignIn}
+    //       verifyError={verifyError}
+    //       setVerifyError={setVerifyError}
+    //       setVerificationCodeInterval={setVerificationCodeInterval}
+    //       encodedKey={encodedKey}
+    //     />
+    //   )}
+    // </Container>
   );
 };
 export default PhoneMail;
