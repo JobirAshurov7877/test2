@@ -54,21 +54,21 @@ const PhoneMail = () => {
   const [isLastNameFocused, setIsLastNameFocused] = useState(false);
   const [isPhoneFocused, setIsPhoneFocused] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  // const [requestModal, setRequestModal] = useState(false);
-  // // const verifiedUserString = typeof window !== "undefined" ? localStorage.getItem("userData") : null;
-  // const verifiedUserString = null;
-  // const verifiedUser = verifiedUserString ? JSON.parse(verifiedUserString) : {};
-  // const [verificationCode, setVerificationCode] = useState<string>(
-  //   verifiedUser.code
-  // );
-  // const [verificationId, setVerificationId] = useState<string>(
-  //   verifiedUser.userId
-  // );
-  // const [verifyError, setVerifyError] = useState<string>("");
-  // const [registered, setRegistered] = useState<boolean>(true);
-  // const [namesInputsOpen, setNamesInputsOpen] = useState<boolean>(false);
-  // const [loading, setLoading] = useState<boolean>(false);
-  // const encodedKey = btoa("verificationTimer");
+  const [requestModal, setRequestModal] = useState(false);
+  // const verifiedUserString = typeof window !== "undefined" ? localStorage.getItem("userData") : null;
+  const verifiedUserString = null;
+  const verifiedUser = verifiedUserString ? JSON.parse(verifiedUserString) : {};
+  const [verificationCode, setVerificationCode] = useState<string>(
+    verifiedUser.code
+  );
+  const [verificationId, setVerificationId] = useState<string>(
+    verifiedUser.userId
+  );
+  const [verifyError, setVerifyError] = useState<string>("");
+  const [registered, setRegistered] = useState<boolean>(true);
+  const [namesInputsOpen, setNamesInputsOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const encodedKey = btoa("verificationTimer");
   // const initialTimer = useMemo(() => {
   //   if (typeof window !== "undefined") {
   //     // const initialTimerEncoded = localStorage.getItem(encodedKey);
