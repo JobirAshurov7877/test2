@@ -55,7 +55,8 @@ const PhoneMail = () => {
   const [isPhoneFocused, setIsPhoneFocused] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
   const [requestModal, setRequestModal] = useState(false);
-  const verifiedUserString = localStorage.getItem("userData");
+  const verifiedUserString =
+    typeof window !== "undefined" ? localStorage.getItem("userData") : null;
   const verifiedUser = verifiedUserString ? JSON.parse(verifiedUserString) : {};
   const [verificationCode, setVerificationCode] = useState<string>(
     verifiedUser.code
