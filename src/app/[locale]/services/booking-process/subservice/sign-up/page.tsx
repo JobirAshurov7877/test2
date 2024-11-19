@@ -144,85 +144,85 @@ const PhoneMail = () => {
   // );
   const rest: any = {};
 
-  // const handleRegister = async () => {
-  //   setLoading(true);
-  //   setUser({
-  //     ...userStore,
-  //     firstName,
-  //     lastName,
-  //   });
-  //   // const rest = JSON.parse(
-  //   //   (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
-  //   //     "{}"
-  //   // );
-  //   const rest: any = {};
-  //   // const updatedUserData = JSON.parse(
-  //   //   (typeof window !== "undefined" && localStorage.getItem("userData")) ||
-  //   //     "{}"
-  //   // );
-  //   const updatedUserData: any = {};
-  //   await new Promise((resolve) => setTimeout(resolve, 0));
-  //   const orderResponse = await api.post("/api/auth-and-order", {
-  //     orderServices: rest.ServiceSummary,
-  //     comment: rest.desc,
-  //     orderLocation: rest.location,
-  //     orderDate: rest.date + rest.time,
-  //     phone: "+" + updatedUserData.phone.recipient,
-  //     email: updatedUserData.email,
-  //     firstName: updatedUserData.firstName,
-  //     lastName: updatedUserData.lastName,
-  //     verificationId: updatedUserData.userId,
-  //     verificationCode: updatedUserData.code,
-  //     registered,
-  //   });
-  //   if (orderResponse.data === 200) {
-  //     const formValues: FormData = {
-  //       firstName: firstName,
-  //       lastName: lastName,
-  //       email: emailValue,
-  //       tel: {
-  //         recipient: phoneValue.recipient,
-  //         countryCode: phoneValue.countryCode,
-  //       },
-  //     };
-  //     submitToHubSpot(formValues);
-  //     setUser({
-  //       email: emailValue,
-  //       phone: {
-  //         recipient: phoneValue.recipient,
-  //         countryCode: phoneValue.countryCode,
-  //       },
-  //       userId: verificationId,
-  //       code: verificationCode,
-  //     });
-  //     setLoading(false);
-  //     navigate.push(
-  //       `/${currentLanguage}/services/booking-process/subservice/success`
-  //     );
-  //   } else {
-  //     setLoading(false);
-  //     navigate.push(
-  //       `/${currentLanguage}/services/booking-process/subservice/error`
-  //     );
-  //   }
-  // };
+  const handleRegister = async () => {
+    setLoading(true);
+    setUser({
+      ...userStore,
+      firstName,
+      lastName,
+    });
+    // const rest = JSON.parse(
+    //   (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
+    //     "{}"
+    // );
+    const rest: any = {};
+    // const updatedUserData = JSON.parse(
+    //   (typeof window !== "undefined" && localStorage.getItem("userData")) ||
+    //     "{}"
+    // );
+    const updatedUserData: any = {};
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const orderResponse = await api.post("/api/auth-and-order", {
+      orderServices: rest.ServiceSummary,
+      comment: rest.desc,
+      orderLocation: rest.location,
+      orderDate: rest.date + rest.time,
+      phone: "+" + updatedUserData.phone.recipient,
+      email: updatedUserData.email,
+      firstName: updatedUserData.firstName,
+      lastName: updatedUserData.lastName,
+      verificationId: updatedUserData.userId,
+      verificationCode: updatedUserData.code,
+      registered,
+    });
+    if (orderResponse.data === 200) {
+      const formValues: FormData = {
+        firstName: firstName,
+        lastName: lastName,
+        email: emailValue,
+        tel: {
+          recipient: phoneValue.recipient,
+          countryCode: phoneValue.countryCode,
+        },
+      };
+      submitToHubSpot(formValues);
+      setUser({
+        email: emailValue,
+        phone: {
+          recipient: phoneValue.recipient,
+          countryCode: phoneValue.countryCode,
+        },
+        userId: verificationId,
+        code: verificationCode,
+      });
+      setLoading(false);
+      navigate.push(
+        `/${currentLanguage}/services/booking-process/subservice/success`
+      );
+    } else {
+      setLoading(false);
+      navigate.push(
+        `/${currentLanguage}/services/booking-process/subservice/error`
+      );
+    }
+  };
 
-  // const handleVerify = async () => {
-  //   setRequestModal(true);
-  //   if (verificationCodeInterval) return;
-  //   // if (typeof window !== "undefined") {
-  //   //   localStorage.setItem(encodedKey, btoa("60"));
-  //   //   localStorage.setItem(encodedKey + "_interval", btoa("true"));
-  //   // }
-  //   setVerificationCodeInterval(true);
-  //   setVerificationCode("");
-  //   const response = await api.post("/api/user/signin", {
-  //     recipient: "+" + phoneValue.recipient,
-  //     countryCode: phoneValue.countryCode,
-  //   });
-  //   setVerificationId(response.data.verificationId);
-  //   setRegistered(response.data.registered);
-  // };
+  const handleVerify = async () => {
+    setRequestModal(true);
+    if (verificationCodeInterval) return;
+    // if (typeof window !== "undefined") {
+    //   localStorage.setItem(encodedKey, btoa("60"));
+    //   localStorage.setItem(encodedKey + "_interval", btoa("true"));
+    // }
+    setVerificationCodeInterval(true);
+    setVerificationCode("");
+    const response = await api.post("/api/user/signin", {
+      recipient: "+" + phoneValue.recipient,
+      countryCode: phoneValue.countryCode,
+    });
+    setVerificationId(response.data.verificationId);
+    setRegistered(response.data.registered);
+  };
 
   // const handleSignIn = async () => {
   //   console.log("sign in 1 ");
