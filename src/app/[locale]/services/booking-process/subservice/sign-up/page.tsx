@@ -142,17 +142,16 @@ const PhoneMail = () => {
   );
 
   const handleRegister = async () => {
-    setLoading(true);
-    setUser({
-      ...userStore,
-      firstName,
-      lastName,
-    });
+    // setLoading(true);
+    // setUser({
+    //   ...userStore,
+    //   firstName,
+    //   lastName,
+    // });
     // const rest = JSON.parse(
     //   (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
     //     "{}"
     // );
-    const rest: any = {};
     // const updatedUserData = JSON.parse(
     //   (typeof window !== "undefined" && localStorage.getItem("userData")) ||
     //     "{}"
@@ -313,13 +312,13 @@ const PhoneMail = () => {
   // //   }
   // // }, [userFormDataStore.ServiceSummary, navigate, currentLanguage]);
 
-  const { submitToHubSpot } = useHubSpotFormService(
-    "Varpet - register",
-    "6b8a15a3-3ff5-4e02-848e-738b4c5c5720",
-    translations("Subscribed successfully!"),
-    translations("Failed to subscribe. Please try again"),
-    false
-  );
+  // const { submitToHubSpot } = useHubSpotFormService(
+  //   "Varpet - register",
+  //   "6b8a15a3-3ff5-4e02-848e-738b4c5c5720",
+  //   translations("Subscribed successfully!"),
+  //   translations("Failed to subscribe. Please try again"),
+  //   false
+  // );
 
   // // useEffect(() => {
   // //   if (loading) {
