@@ -96,53 +96,53 @@ const PhoneMail = () => {
   /* /// FORM INPUTS STATES /// */
   /* /// FORM INPUTS STATES /// */
   /* /// FORM INPUTS STATES /// */
-  // const initialValues: FormData = {
-  //   firstName: verifiedUser.firstName ? verifiedUser.firstName : "",
-  //   lastName: verifiedUser.lastName ? verifiedUser.lastName : "",
-  //   tel: {
-  //     recipient: verifiedUser.phone.recipient
-  //       ? verifiedUser.phone.recipient
-  //       : "",
-  //     countryCode: verifiedUser.phone.countryCode
-  //       ? verifiedUser.phone.countryCode
-  //       : correctCountryCode,
-  //   },
-  //   email: verifiedUser.email ? verifiedUser.email : "",
-  // };
+  const initialValues: FormData = {
+    firstName: verifiedUser.firstName ? verifiedUser.firstName : "",
+    lastName: verifiedUser.lastName ? verifiedUser.lastName : "",
+    tel: {
+      recipient: verifiedUser.phone.recipient
+        ? verifiedUser.phone.recipient
+        : "",
+      countryCode: verifiedUser.phone.countryCode
+        ? verifiedUser.phone.countryCode
+        : correctCountryCode,
+    },
+    email: verifiedUser.email ? verifiedUser.email : "",
+  };
 
-  // const [firstName, setFirstName] = useState(initialValues.firstName);
-  // const [lastName, setLastName] = useState(initialValues.lastName);
-  // const [phoneValue, setPhoneValue] = useState<{
-  //   recipient: string;
-  //   countryCode: string;
-  // }>({
-  //   recipient: initialValues.tel.recipient,
-  //   countryCode: initialValues.tel.countryCode,
-  // });
-  // const [emailValue, setEmailValue] = useState(initialValues.email);
-  // /* /// FORM INPUTS STATES END /// */
-  // /* /// FORM INPUTS STATES END /// */
-  // /* /// FORM INPUTS STATES END /// */
+  const [firstName, setFirstName] = useState(initialValues.firstName);
+  const [lastName, setLastName] = useState(initialValues.lastName);
+  const [phoneValue, setPhoneValue] = useState<{
+    recipient: string;
+    countryCode: string;
+  }>({
+    recipient: initialValues.tel.recipient,
+    countryCode: initialValues.tel.countryCode,
+  });
+  const [emailValue, setEmailValue] = useState(initialValues.email);
+  /* /// FORM INPUTS STATES END /// */
+  /* /// FORM INPUTS STATES END /// */
+  /* /// FORM INPUTS STATES END /// */
 
-  // /* FORM VALIDATION */
-  // /* FORM VALIDATION */
-  // /* FORM VALIDATION */
-  // const validationSchema = Yup.object().shape({
-  //   firstName: Yup.string().required(translations("First name is required")),
-  //   lastName: Yup.string().required(translations("Last name is required")),
-  //   tel: Yup.object().shape({
-  //     recipient: Yup.string().required(
-  //       translations("Phone number is required")
-  //     ),
-  //     countryCode: Yup.string(),
-  //   }),
-  //   email: Yup.string().email(translations("Invalid email address")),
-  // });
-  // // const rest = JSON.parse(
-  // //   (typeof window !== "undefined" && localStorage?.getItem("userFormData")) ||
-  // //     "{}"
-  // // );
-  // const rest: any = {};
+  /* FORM VALIDATION */
+  /* FORM VALIDATION */
+  /* FORM VALIDATION */
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required(translations("First name is required")),
+    lastName: Yup.string().required(translations("Last name is required")),
+    tel: Yup.object().shape({
+      recipient: Yup.string().required(
+        translations("Phone number is required")
+      ),
+      countryCode: Yup.string(),
+    }),
+    email: Yup.string().email(translations("Invalid email address")),
+  });
+  // const rest = JSON.parse(
+  //   (typeof window !== "undefined" && localStorage?.getItem("userFormData")) ||
+  //     "{}"
+  // );
+  const rest: any = {};
 
   // const handleRegister = async () => {
   //   setLoading(true);
