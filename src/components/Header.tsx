@@ -24,7 +24,7 @@ interface HeaderProps {
 }
 export default function Header({ language: currentLang }: HeaderProps) {
   const t = useTranslations("");
-  const urlParts = location?.pathname?.split("/");
+  const [urlParts, setUrlParts] = useState<string[] | null>(null);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const languageDropdownRef = useRef(null);
@@ -45,6 +45,12 @@ export default function Header({ language: currentLang }: HeaderProps) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const currentUrlParts = window.location.pathname.split("/");
+      setUrlParts(currentUrlParts);
+    }
   }, []);
   function changeLanguage(lang: string) {
     startTransition(() => {
