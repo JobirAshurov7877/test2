@@ -114,9 +114,7 @@ export default function Header({ language: currentLang }: HeaderProps) {
               </NavigationLink>
             </Li>
             <Li>
-              <NavigationLink href={`/blog`} prefetch={true}>
-                {t("Blog")}
-              </NavigationLink>
+              <NavigationLink href={`/blog`}>{t("Blog")}</NavigationLink>
             </Li>
             <Li>
               <NavigationLink href={`/contact`}>{t("Contact")}</NavigationLink>

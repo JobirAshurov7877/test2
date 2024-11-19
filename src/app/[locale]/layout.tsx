@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "./globals.scss";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import ClientRootLayout from "@/components/ClientRootLayout";
+import { ReactNode } from "react";
+import { ReduxProvider } from "@/components/ReduxProvider";
+import { NextIntlClientProvider } from "next-intl";
+import { Footer, Header } from "@/components";
 
-// Define the possible locales explicitly
-type Locale = "en" | "ru" | "es" | "hy";
+type Props = {
+  children: ReactNode;
+  params: { locale: string };
+};
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export const metadata: Metadata = {
   title: "Varpet - When everything is ok",
@@ -19,38 +28,38 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "./BigLogo.svg",
+    icon: "/BigLogo.svg",
   },
 };
 
-async function fetchLocaleData(locale: Locale) {
-  if (!routing.locales.includes(locale)) {
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params;
+  let messages = {};
+  if (!routing?.locales?.includes(locale as any)) {
+    notFound(); // Redirect to 404 if locale is invalid
+  }
+  try {
+    setRequestLocale(locale);
+  } catch (error) {
     notFound();
   }
   try {
-    const messages = await getMessages({ locale });
-    return { locale, messages };
+    messages = await getMessages();
   } catch (error) {
-    console.error("Failed to load messages:", error);
     notFound();
   }
-}
 
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { locale: Locale };
-}) {
-  const localeData = await fetchLocaleData(params.locale);
-
-  if (!localeData) {
-    return notFound();
-  }
   return (
-    <ClientRootLayout messages={localeData.messages} locale={localeData.locale}>
-      {children}
-    </ClientRootLayout>
+    <html lang={locale}>
+      <body>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <ReduxProvider>
+            <Header language={locale} />
+            {children}
+            <Footer />
+          </ReduxProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

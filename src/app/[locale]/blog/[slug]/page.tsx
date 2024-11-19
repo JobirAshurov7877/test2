@@ -39,6 +39,7 @@ const BlogSinglePage = ({ params }: any) => {
         ?.setAttribute("content", article.meta_description);
     }
   }, [currentLanguage, params?.slug, article]);
+  console.log(article?.content);
 
   return (
     <>
@@ -105,8 +106,6 @@ const BlogSinglePage = ({ params }: any) => {
 };
 
 export default BlogSinglePage;
-
-// Styled components here, same as in your original code
 
 const Container = styled.div`
   @media screen and (max-width: 1024px) {

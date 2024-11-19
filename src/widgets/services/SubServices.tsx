@@ -99,9 +99,7 @@ const SubServices: React.FC = () => {
                 </h4>
                 <p>
                   {category.description === "."
-                    ? t(
-                        "We are currently working on providing detailed information about this service.Please contact us for more information or if you have any questions."
-                      )
+                    ? "We are currently working on providing detailed information about this service.Please contact us for more information or if you have any questions."
                     : category.description}
                 </p>
                 <MyButton

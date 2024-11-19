@@ -1,5 +1,3 @@
-// store.ts
-
 import { proxy } from "valtio";
 
 interface UserFormData {
@@ -34,17 +32,19 @@ const initialState: UserFormData = {
 // Create the Valtio proxy
 export const userFormDataStore = proxy<UserFormData>(initialState);
 
-// Load initial state from localStorage if available
-const storedData = localStorage.getItem("userFormData");
-if (storedData) {
-  const parsedData = JSON.parse(storedData);
-  userFormDataStore.serviceTitle = parsedData.serviceTitle;
-  userFormDataStore.subServiceTitle = parsedData.subServiceTitle;
-  userFormDataStore.ServiceSummary = parsedData.ServiceSummary || [];
-  userFormDataStore.desc = parsedData.desc;
-  userFormDataStore.time = parsedData.time;
-  userFormDataStore.date = parsedData.date;
-  userFormDataStore.location = parsedData.location || initialState.location;
+// Access localStorage only if it's available (client-side)
+if (typeof window !== "undefined") {
+  const storedData = localStorage.getItem("userFormData");
+  if (storedData) {
+    const parsedData = JSON.parse(storedData);
+    userFormDataStore.serviceTitle = parsedData.serviceTitle;
+    userFormDataStore.subServiceTitle = parsedData.subServiceTitle;
+    userFormDataStore.ServiceSummary = parsedData.ServiceSummary || [];
+    userFormDataStore.desc = parsedData.desc;
+    userFormDataStore.time = parsedData.time;
+    userFormDataStore.date = parsedData.date;
+    userFormDataStore.location = parsedData.location || initialState.location;
+  }
 }
 
 // Function to update userFormDataStore and localStorage
@@ -54,7 +54,10 @@ export const setFormDataItem = (key: keyof UserFormData, value: any) => {
   }
 
   userFormDataStore[key] = value;
-  localStorage.setItem("userFormData", JSON.stringify(userFormDataStore));
+
+  if (typeof window !== "undefined") {
+    localStorage.setItem("userFormData", JSON.stringify(userFormDataStore));
+  }
 };
 
 export const resetUserFormData = () => {
@@ -62,13 +65,14 @@ export const resetUserFormData = () => {
     if (userFormDataStore.hasOwnProperty(key)) {
       const initialValue = initialState[key as keyof UserFormData];
       if (initialValue === null) {
-        // Handle null case explicitly
         userFormDataStore[key as keyof UserFormData] = initialValue as any;
       } else {
-        // Assign initial value from initialState if not null
         userFormDataStore[key as keyof UserFormData] = initialValue as any; // Use 'as any' to handle type assertion
       }
     }
   }
-  localStorage.setItem("userFormData", JSON.stringify(userFormDataStore));
+
+  if (typeof window !== "undefined") {
+    localStorage.setItem("userFormData", JSON.stringify(userFormDataStore));
+  }
 };

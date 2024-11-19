@@ -1,6 +1,5 @@
 import { ExploreServices, WeGuarantee } from "@/components";
 import FAQ from "@/components/FAQ";
-import { locationStore, setLocationData } from "@/valtio-store/locationStore";
 import AboutUs from "@/widgets/home/AboutUs";
 import DownloadOurApp from "@/widgets/home/DownloadOurApp";
 import Header from "@/widgets/home/Header";
@@ -8,6 +7,7 @@ import OurServices from "@/widgets/home/OurServices";
 import SubServiceAbout from "@/widgets/home/Partners";
 import TopArticles from "@/widgets/home/TopArticles";
 import { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 type Props = {
   params: Promise<{ locale: string }>;
