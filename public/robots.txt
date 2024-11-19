@@ -7,6 +7,7 @@ Disallow: /reset-password/
 Disallow: /dashboard/   # Example of private or admin area
 
 # Allow public pages
+Allow: /
 Allow: /services
 Allow: /blog
 Allow: /about
