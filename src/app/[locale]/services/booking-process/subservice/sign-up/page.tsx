@@ -70,19 +70,23 @@ const PhoneMail = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const encodedKey = btoa("verificationTimer");
   const initialTimer = useMemo(() => {
-    const initialTimerEncoded =
-      typeof window !== "undefined" ? localStorage.getItem(encodedKey) : null;
-    return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
+    if (typeof window !== "undefined") {
+      const initialTimerEncoded = localStorage.getItem(encodedKey);
+      return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
+    }
+    return 60; // Fallback for SSR
   }, [encodedKey]);
   const [timer, setTimer] = useState(initialTimer);
   const [verificationCodeInterval, setVerificationCodeInterval] = useState(
     () => {
-      const interval =
-        typeof window !== "undefined" &&
-        localStorage.getItem(encodedKey + "_interval");
-      return interval ? JSON.parse(atob(interval)) : false;
+      if (typeof window !== "undefined") {
+        const interval = localStorage.getItem(encodedKey + "_interval");
+        return interval ? JSON.parse(atob(interval)) : false;
+      }
+      return false;
     }
   );
+
   /* /// VERIFY NUMBER STATES END /// */
   /* /// VERIFY NUMBER STATES END /// */
   /* /// VERIFY NUMBER STATES END /// */
@@ -144,6 +148,10 @@ const PhoneMail = () => {
       firstName,
       lastName,
     });
+    const rest = JSON.parse(
+      (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
+        "{}"
+    );
     const updatedUserData = JSON.parse(
       (typeof window !== "undefined" && localStorage.getItem("userData")) ||
         "{}"
@@ -197,8 +205,10 @@ const PhoneMail = () => {
   const handleVerify = async () => {
     setRequestModal(true);
     if (verificationCodeInterval) return;
-    localStorage.setItem(encodedKey, btoa("60"));
-    localStorage.setItem(encodedKey + "_interval", btoa("true"));
+    if (typeof window !== "undefined") {
+      localStorage.setItem(encodedKey, btoa("60"));
+      localStorage.setItem(encodedKey + "_interval", btoa("true"));
+    }
     setVerificationCodeInterval(true);
     setVerificationCode("");
     const response = await api.post("/api/user/signin", {
@@ -308,11 +318,17 @@ const PhoneMail = () => {
     false
   );
 
-  if (loading) {
-    document.body.style.overflowY = "hidden";
-  } else {
-    document.body.style.overflowY = "scroll";
-  }
+  useEffect(() => {
+    if (loading) {
+      if (typeof document !== "undefined") {
+        document.body.style.overflowY = "hidden";
+      }
+    } else {
+      if (typeof document !== "undefined") {
+        document.body.style.overflowY = "scroll";
+      }
+    }
+  }, [loading]);
 
   return (
     <Container>
