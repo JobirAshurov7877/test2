@@ -54,287 +54,287 @@ const PhoneMail = () => {
   const [isLastNameFocused, setIsLastNameFocused] = useState(false);
   const [isPhoneFocused, setIsPhoneFocused] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [requestModal, setRequestModal] = useState(false);
-  // const verifiedUserString = typeof window !== "undefined" ? localStorage.getItem("userData") : null;
-  const verifiedUserString = null;
-  const verifiedUser = verifiedUserString ? JSON.parse(verifiedUserString) : {};
-  const [verificationCode, setVerificationCode] = useState<string>(
-    verifiedUser.code
-  );
-  const [verificationId, setVerificationId] = useState<string>(
-    verifiedUser.userId
-  );
-  const [verifyError, setVerifyError] = useState<string>("");
-  const [registered, setRegistered] = useState<boolean>(true);
-  const [namesInputsOpen, setNamesInputsOpen] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const encodedKey = btoa("verificationTimer");
-  const initialTimer = useMemo(() => {
-    if (typeof window !== "undefined") {
-      // const initialTimerEncoded = localStorage.getItem(encodedKey);
-      const initialTimerEncoded = null;
-      return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
-    }
-    return 60; // Fallback for SSR
-  }, [encodedKey]);
-  const [timer, setTimer] = useState(initialTimer);
-  const [verificationCodeInterval, setVerificationCodeInterval] = useState(
-    () => {
-      if (typeof window !== "undefined") {
-        // const interval = localStorage.getItem(encodedKey + "_interval");
-        const interval = null;
-        return interval ? JSON.parse(atob(interval)) : false;
-      }
-      return false;
-    }
-  );
-
-  /* /// VERIFY NUMBER STATES END /// */
-  /* /// VERIFY NUMBER STATES END /// */
-  /* /// VERIFY NUMBER STATES END /// */
-
-  /* /// FORM INPUTS STATES /// */
-  /* /// FORM INPUTS STATES /// */
-  /* /// FORM INPUTS STATES /// */
-  const initialValues: FormData = {
-    firstName: verifiedUser.firstName ? verifiedUser.firstName : "",
-    lastName: verifiedUser.lastName ? verifiedUser.lastName : "",
-    tel: {
-      recipient: verifiedUser.phone.recipient
-        ? verifiedUser.phone.recipient
-        : "",
-      countryCode: verifiedUser.phone.countryCode
-        ? verifiedUser.phone.countryCode
-        : correctCountryCode,
-    },
-    email: verifiedUser.email ? verifiedUser.email : "",
-  };
-
-  const [firstName, setFirstName] = useState(initialValues.firstName);
-  const [lastName, setLastName] = useState(initialValues.lastName);
-  const [phoneValue, setPhoneValue] = useState<{
-    recipient: string;
-    countryCode: string;
-  }>({
-    recipient: initialValues.tel.recipient,
-    countryCode: initialValues.tel.countryCode,
-  });
-  const [emailValue, setEmailValue] = useState(initialValues.email);
-  /* /// FORM INPUTS STATES END /// */
-  /* /// FORM INPUTS STATES END /// */
-  /* /// FORM INPUTS STATES END /// */
-
-  /* FORM VALIDATION */
-  /* FORM VALIDATION */
-  /* FORM VALIDATION */
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required(translations("First name is required")),
-    lastName: Yup.string().required(translations("Last name is required")),
-    tel: Yup.object().shape({
-      recipient: Yup.string().required(
-        translations("Phone number is required")
-      ),
-      countryCode: Yup.string(),
-    }),
-    email: Yup.string().email(translations("Invalid email address")),
-  });
-  // const rest = JSON.parse(
-  //   (typeof window !== "undefined" && localStorage?.getItem("userFormData")) ||
-  //     "{}"
+  // const [requestModal, setRequestModal] = useState(false);
+  // // const verifiedUserString = typeof window !== "undefined" ? localStorage.getItem("userData") : null;
+  // const verifiedUserString = null;
+  // const verifiedUser = verifiedUserString ? JSON.parse(verifiedUserString) : {};
+  // const [verificationCode, setVerificationCode] = useState<string>(
+  //   verifiedUser.code
   // );
-  const rest: any = {};
+  // const [verificationId, setVerificationId] = useState<string>(
+  //   verifiedUser.userId
+  // );
+  // const [verifyError, setVerifyError] = useState<string>("");
+  // const [registered, setRegistered] = useState<boolean>(true);
+  // const [namesInputsOpen, setNamesInputsOpen] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
+  // const encodedKey = btoa("verificationTimer");
+  // const initialTimer = useMemo(() => {
+  //   if (typeof window !== "undefined") {
+  //     // const initialTimerEncoded = localStorage.getItem(encodedKey);
+  //     const initialTimerEncoded = null;
+  //     return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
+  //   }
+  //   return 60; // Fallback for SSR
+  // }, [encodedKey]);
+  // const [timer, setTimer] = useState(initialTimer);
+  // const [verificationCodeInterval, setVerificationCodeInterval] = useState(
+  //   () => {
+  //     if (typeof window !== "undefined") {
+  //       // const interval = localStorage.getItem(encodedKey + "_interval");
+  //       const interval = null;
+  //       return interval ? JSON.parse(atob(interval)) : false;
+  //     }
+  //     return false;
+  //   }
+  // );
 
-  const handleRegister = async () => {
-    setLoading(true);
-    setUser({
-      ...userStore,
-      firstName,
-      lastName,
-    });
-    // const rest = JSON.parse(
-    //   (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
-    //     "{}"
-    // );
-    const rest: any = {};
-    // const updatedUserData = JSON.parse(
-    //   (typeof window !== "undefined" && localStorage.getItem("userData")) ||
-    //     "{}"
-    // );
-    const updatedUserData: any = {};
-    await new Promise((resolve) => setTimeout(resolve, 0));
-    const orderResponse = await api.post("/api/auth-and-order", {
-      orderServices: rest.ServiceSummary,
-      comment: rest.desc,
-      orderLocation: rest.location,
-      orderDate: rest.date + rest.time,
-      phone: "+" + updatedUserData.phone.recipient,
-      email: updatedUserData.email,
-      firstName: updatedUserData.firstName,
-      lastName: updatedUserData.lastName,
-      verificationId: updatedUserData.userId,
-      verificationCode: updatedUserData.code,
-      registered,
-    });
-    if (orderResponse.data === 200) {
-      const formValues: FormData = {
-        firstName: firstName,
-        lastName: lastName,
-        email: emailValue,
-        tel: {
-          recipient: phoneValue.recipient,
-          countryCode: phoneValue.countryCode,
-        },
-      };
-      submitToHubSpot(formValues);
-      setUser({
-        email: emailValue,
-        phone: {
-          recipient: phoneValue.recipient,
-          countryCode: phoneValue.countryCode,
-        },
-        userId: verificationId,
-        code: verificationCode,
-      });
-      setLoading(false);
-      navigate.push(
-        `/${currentLanguage}/services/booking-process/subservice/success`
-      );
-    } else {
-      setLoading(false);
-      navigate.push(
-        `/${currentLanguage}/services/booking-process/subservice/error`
-      );
-    }
-  };
+  // /* /// VERIFY NUMBER STATES END /// */
+  // /* /// VERIFY NUMBER STATES END /// */
+  // /* /// VERIFY NUMBER STATES END /// */
 
-  const handleVerify = async () => {
-    setRequestModal(true);
-    if (verificationCodeInterval) return;
-    // if (typeof window !== "undefined") {
-    //   localStorage.setItem(encodedKey, btoa("60"));
-    //   localStorage.setItem(encodedKey + "_interval", btoa("true"));
-    // }
-    setVerificationCodeInterval(true);
-    setVerificationCode("");
-    const response = await api.post("/api/user/signin", {
-      recipient: "+" + phoneValue.recipient,
-      countryCode: phoneValue.countryCode,
-    });
-    setVerificationId(response.data.verificationId);
-    setRegistered(response.data.registered);
-  };
+  // /* /// FORM INPUTS STATES /// */
+  // /* /// FORM INPUTS STATES /// */
+  // /* /// FORM INPUTS STATES /// */
+  // const initialValues: FormData = {
+  //   firstName: verifiedUser.firstName ? verifiedUser.firstName : "",
+  //   lastName: verifiedUser.lastName ? verifiedUser.lastName : "",
+  //   tel: {
+  //     recipient: verifiedUser.phone.recipient
+  //       ? verifiedUser.phone.recipient
+  //       : "",
+  //     countryCode: verifiedUser.phone.countryCode
+  //       ? verifiedUser.phone.countryCode
+  //       : correctCountryCode,
+  //   },
+  //   email: verifiedUser.email ? verifiedUser.email : "",
+  // };
 
-  const handleSignIn = async () => {
-    console.log("sign in 1 ");
-    setVerifyError("");
-    setLoading(true);
-    const response = await api.post("/api/user/verify", {
-      verificationId,
-      verificationCode,
-    });
-    if (registered) {
-      if (response.data === 200) {
-        setUser({
-          email: emailValue,
-          phone: {
-            recipient: phoneValue.recipient,
-            countryCode: phoneValue.countryCode,
-          },
-          userId: verificationId,
-          code: verificationCode,
-        });
-        // const updatedUserData = JSON.parse(
-        //   localStorage.getItem("userData") || "{}"
-        // );
-        const updatedUserData: any = {};
-        await new Promise((resolve) => setTimeout(resolve, 0));
+  // const [firstName, setFirstName] = useState(initialValues.firstName);
+  // const [lastName, setLastName] = useState(initialValues.lastName);
+  // const [phoneValue, setPhoneValue] = useState<{
+  //   recipient: string;
+  //   countryCode: string;
+  // }>({
+  //   recipient: initialValues.tel.recipient,
+  //   countryCode: initialValues.tel.countryCode,
+  // });
+  // const [emailValue, setEmailValue] = useState(initialValues.email);
+  // /* /// FORM INPUTS STATES END /// */
+  // /* /// FORM INPUTS STATES END /// */
+  // /* /// FORM INPUTS STATES END /// */
 
-        const orderResponse = await api.post("/api/auth-and-order", {
-          orderServices: rest.ServiceSummary,
-          comment: rest.desc,
-          orderLocation: rest.location,
-          firstName: "Registered User",
-          lastName: "Registered User",
-          orderDate: rest.date,
-          orderTime: rest.time,
-          phone: "+" + updatedUserData.phone.recipient,
-          email: updatedUserData.email,
-          verificationId: updatedUserData.userId,
-          verificationCode: updatedUserData.code,
-          registered,
-        });
-        if (orderResponse.data === 200) {
-          const formValues: FormData = {
-            firstName: firstName,
-            lastName: lastName,
-            email: emailValue,
-            tel: {
-              recipient: phoneValue.recipient,
-              countryCode: phoneValue.countryCode,
-            },
-          };
-          submitToHubSpot(formValues);
-          setLoading(false);
-          navigate.push(
-            `/${currentLanguage}/services/booking-process/subservice/success`
-          );
-        } else {
-          setLoading(false);
-          navigate.push(
-            `/${currentLanguage}/services/booking-process/subservice/error`
-          );
-        }
-      } else {
-        setLoading(false);
-        setVerifyError(translations("Oops"));
-      }
-    } else {
-      if (response.data === 200) {
-        setUser({
-          firstName,
-          lastName,
-          email: emailValue,
-          phone: {
-            recipient: phoneValue.recipient,
-            countryCode: phoneValue.countryCode,
-          },
-          userId: verificationId,
-          code: verificationCode,
-        });
-        setLoading(false);
-        setNamesInputsOpen(true);
-        setRequestModal(false);
-      }
-    }
-  };
-  useEffect(() => {
-    if (
-      !userFormDataStore.ServiceSummary ||
-      userFormDataStore.ServiceSummary.length === 0
-    ) {
-      navigate.push(`/${currentLanguage}/service-not-found`);
-    }
-  }, [userFormDataStore.ServiceSummary, navigate, currentLanguage]);
+  // /* FORM VALIDATION */
+  // /* FORM VALIDATION */
+  // /* FORM VALIDATION */
+  // const validationSchema = Yup.object().shape({
+  //   firstName: Yup.string().required(translations("First name is required")),
+  //   lastName: Yup.string().required(translations("Last name is required")),
+  //   tel: Yup.object().shape({
+  //     recipient: Yup.string().required(
+  //       translations("Phone number is required")
+  //     ),
+  //     countryCode: Yup.string(),
+  //   }),
+  //   email: Yup.string().email(translations("Invalid email address")),
+  // });
+  // // const rest = JSON.parse(
+  // //   (typeof window !== "undefined" && localStorage?.getItem("userFormData")) ||
+  // //     "{}"
+  // // );
+  // const rest: any = {};
 
-  const { submitToHubSpot } = useHubSpotFormService(
-    "Varpet - register",
-    "6b8a15a3-3ff5-4e02-848e-738b4c5c5720",
-    translations("Subscribed successfully!"),
-    translations("Failed to subscribe. Please try again"),
-    false
-  );
+  // const handleRegister = async () => {
+  //   setLoading(true);
+  //   setUser({
+  //     ...userStore,
+  //     firstName,
+  //     lastName,
+  //   });
+  //   // const rest = JSON.parse(
+  //   //   (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
+  //   //     "{}"
+  //   // );
+  //   const rest: any = {};
+  //   // const updatedUserData = JSON.parse(
+  //   //   (typeof window !== "undefined" && localStorage.getItem("userData")) ||
+  //   //     "{}"
+  //   // );
+  //   const updatedUserData: any = {};
+  //   await new Promise((resolve) => setTimeout(resolve, 0));
+  //   const orderResponse = await api.post("/api/auth-and-order", {
+  //     orderServices: rest.ServiceSummary,
+  //     comment: rest.desc,
+  //     orderLocation: rest.location,
+  //     orderDate: rest.date + rest.time,
+  //     phone: "+" + updatedUserData.phone.recipient,
+  //     email: updatedUserData.email,
+  //     firstName: updatedUserData.firstName,
+  //     lastName: updatedUserData.lastName,
+  //     verificationId: updatedUserData.userId,
+  //     verificationCode: updatedUserData.code,
+  //     registered,
+  //   });
+  //   if (orderResponse.data === 200) {
+  //     const formValues: FormData = {
+  //       firstName: firstName,
+  //       lastName: lastName,
+  //       email: emailValue,
+  //       tel: {
+  //         recipient: phoneValue.recipient,
+  //         countryCode: phoneValue.countryCode,
+  //       },
+  //     };
+  //     submitToHubSpot(formValues);
+  //     setUser({
+  //       email: emailValue,
+  //       phone: {
+  //         recipient: phoneValue.recipient,
+  //         countryCode: phoneValue.countryCode,
+  //       },
+  //       userId: verificationId,
+  //       code: verificationCode,
+  //     });
+  //     setLoading(false);
+  //     navigate.push(
+  //       `/${currentLanguage}/services/booking-process/subservice/success`
+  //     );
+  //   } else {
+  //     setLoading(false);
+  //     navigate.push(
+  //       `/${currentLanguage}/services/booking-process/subservice/error`
+  //     );
+  //   }
+  // };
 
-  useEffect(() => {
-    if (loading) {
-      if (typeof document !== "undefined") {
-        document.body.style.overflowY = "hidden";
-      }
-    } else {
-      if (typeof document !== "undefined") {
-        document.body.style.overflowY = "scroll";
-      }
-    }
-  }, [loading]);
+  // const handleVerify = async () => {
+  //   setRequestModal(true);
+  //   if (verificationCodeInterval) return;
+  //   // if (typeof window !== "undefined") {
+  //   //   localStorage.setItem(encodedKey, btoa("60"));
+  //   //   localStorage.setItem(encodedKey + "_interval", btoa("true"));
+  //   // }
+  //   setVerificationCodeInterval(true);
+  //   setVerificationCode("");
+  //   const response = await api.post("/api/user/signin", {
+  //     recipient: "+" + phoneValue.recipient,
+  //     countryCode: phoneValue.countryCode,
+  //   });
+  //   setVerificationId(response.data.verificationId);
+  //   setRegistered(response.data.registered);
+  // };
+
+  // const handleSignIn = async () => {
+  //   console.log("sign in 1 ");
+  //   setVerifyError("");
+  //   setLoading(true);
+  //   const response = await api.post("/api/user/verify", {
+  //     verificationId,
+  //     verificationCode,
+  //   });
+  //   if (registered) {
+  //     if (response.data === 200) {
+  //       setUser({
+  //         email: emailValue,
+  //         phone: {
+  //           recipient: phoneValue.recipient,
+  //           countryCode: phoneValue.countryCode,
+  //         },
+  //         userId: verificationId,
+  //         code: verificationCode,
+  //       });
+  //       // const updatedUserData = JSON.parse(
+  //       //   localStorage.getItem("userData") || "{}"
+  //       // );
+  //       const updatedUserData: any = {};
+  //       await new Promise((resolve) => setTimeout(resolve, 0));
+
+  //       const orderResponse = await api.post("/api/auth-and-order", {
+  //         orderServices: rest.ServiceSummary,
+  //         comment: rest.desc,
+  //         orderLocation: rest.location,
+  //         firstName: "Registered User",
+  //         lastName: "Registered User",
+  //         orderDate: rest.date,
+  //         orderTime: rest.time,
+  //         phone: "+" + updatedUserData.phone.recipient,
+  //         email: updatedUserData.email,
+  //         verificationId: updatedUserData.userId,
+  //         verificationCode: updatedUserData.code,
+  //         registered,
+  //       });
+  //       if (orderResponse.data === 200) {
+  //         const formValues: FormData = {
+  //           firstName: firstName,
+  //           lastName: lastName,
+  //           email: emailValue,
+  //           tel: {
+  //             recipient: phoneValue.recipient,
+  //             countryCode: phoneValue.countryCode,
+  //           },
+  //         };
+  //         submitToHubSpot(formValues);
+  //         setLoading(false);
+  //         navigate.push(
+  //           `/${currentLanguage}/services/booking-process/subservice/success`
+  //         );
+  //       } else {
+  //         setLoading(false);
+  //         navigate.push(
+  //           `/${currentLanguage}/services/booking-process/subservice/error`
+  //         );
+  //       }
+  //     } else {
+  //       setLoading(false);
+  //       setVerifyError(translations("Oops"));
+  //     }
+  //   } else {
+  //     if (response.data === 200) {
+  //       setUser({
+  //         firstName,
+  //         lastName,
+  //         email: emailValue,
+  //         phone: {
+  //           recipient: phoneValue.recipient,
+  //           countryCode: phoneValue.countryCode,
+  //         },
+  //         userId: verificationId,
+  //         code: verificationCode,
+  //       });
+  //       setLoading(false);
+  //       setNamesInputsOpen(true);
+  //       setRequestModal(false);
+  //     }
+  //   }
+  // };
+  // useEffect(() => {
+  //   if (
+  //     !userFormDataStore.ServiceSummary ||
+  //     userFormDataStore.ServiceSummary.length === 0
+  //   ) {
+  //     navigate.push(`/${currentLanguage}/service-not-found`);
+  //   }
+  // }, [userFormDataStore.ServiceSummary, navigate, currentLanguage]);
+
+  // const { submitToHubSpot } = useHubSpotFormService(
+  //   "Varpet - register",
+  //   "6b8a15a3-3ff5-4e02-848e-738b4c5c5720",
+  //   translations("Subscribed successfully!"),
+  //   translations("Failed to subscribe. Please try again"),
+  //   false
+  // );
+
+  // useEffect(() => {
+  //   if (loading) {
+  //     if (typeof document !== "undefined") {
+  //       document.body.style.overflowY = "hidden";
+  //     }
+  //   } else {
+  //     if (typeof document !== "undefined") {
+  //       document.body.style.overflowY = "scroll";
+  //     }
+  //   }
+  // }, [loading]);
 
   return (
     <div className="">Helo</div>
