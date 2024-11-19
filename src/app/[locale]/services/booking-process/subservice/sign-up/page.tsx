@@ -202,22 +202,22 @@ const PhoneMail = () => {
     // }
   };
 
-  // const handleVerify = async () => {
-  //   setRequestModal(true);
-  //   if (verificationCodeInterval) return;
-  //   // if (typeof window !== "undefined") {
-  //   //   localStorage.setItem(encodedKey, btoa("60"));
-  //   //   localStorage.setItem(encodedKey + "_interval", btoa("true"));
-  //   // }
-  //   setVerificationCodeInterval(true);
-  //   setVerificationCode("");
-  //   const response = await api.post("/api/user/signin", {
-  //     recipient: "+" + phoneValue.recipient,
-  //     countryCode: phoneValue.countryCode,
-  //   });
-  //   setVerificationId(response.data.verificationId);
-  //   setRegistered(response.data.registered);
-  // };
+  const handleVerify = async () => {
+    setRequestModal(true);
+    if (verificationCodeInterval) return;
+    if (typeof window !== "undefined") {
+      localStorage.setItem(encodedKey, btoa("60"));
+      localStorage.setItem(encodedKey + "_interval", btoa("true"));
+    }
+    setVerificationCodeInterval(true);
+    setVerificationCode("");
+    const response = await api.post("/api/user/signin", {
+      recipient: "+" + phoneValue.recipient,
+      countryCode: phoneValue.countryCode,
+    });
+    setVerificationId(response.data.verificationId);
+    setRegistered(response.data.registered);
+  };
 
   // // const handleSignIn = async () => {
   // //   console.log("sign in 1 ");
