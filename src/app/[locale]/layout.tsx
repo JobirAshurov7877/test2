@@ -8,6 +8,7 @@ import { ReactNode } from "react";
 import { ReduxProvider } from "@/components/ReduxProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { Footer, Header } from "@/components";
+import ClientRootLayout from "@/components/ClientRootLayout";
 
 type Props = {
   children: ReactNode;
@@ -50,16 +51,8 @@ export default async function RootLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages} locale={locale}>
-          <ReduxProvider>
-            <Header language={locale} />
-            {children}
-            <Footer />
-          </ReduxProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <ClientRootLayout messages={messages} locale={locale}>
+      {children}
+    </ClientRootLayout>
   );
 }

@@ -1,29 +1,42 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { ReduxProvider } from "@/components/ReduxProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { Footer, Header } from "@/components";
-import { getMessages } from "next-intl/server";
+import Onboarding from "./Onboarding";
 
 interface ClientRootLayoutProps {
   children: React.ReactNode;
+  messages: any;
   locale: string;
 }
 
-export default async function ClientRootLayout({
+export default function ClientRootLayout({
   children,
+  messages,
   locale,
 }: ClientRootLayoutProps) {
-  const messages = await getMessages();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <ReduxProvider>
       <NextIntlClientProvider messages={messages} locale={locale}>
         <html lang={locale}>
           <body>
-            <>
-              <Header language={locale} />
-              {children}
-              <Footer />
-            </>
+            {loading ? (
+              <Onboarding />
+            ) : (
+              <>
+                <Header language={locale} />
+                {children}
+                <Footer />
+              </>
+            )}
           </body>
         </html>
       </NextIntlClientProvider>
