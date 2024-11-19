@@ -69,33 +69,33 @@ const PhoneMail = () => {
   const [namesInputsOpen, setNamesInputsOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const encodedKey = btoa("verificationTimer");
-  // const initialTimer = useMemo(() => {
-  //   if (typeof window !== "undefined") {
-  //     // const initialTimerEncoded = localStorage.getItem(encodedKey);
-  //     const initialTimerEncoded = null;
-  //     return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
-  //   }
-  //   return 60; // Fallback for SSR
-  // }, [encodedKey]);
-  // const [timer, setTimer] = useState(initialTimer);
-  // const [verificationCodeInterval, setVerificationCodeInterval] = useState(
-  //   () => {
-  //     if (typeof window !== "undefined") {
-  //       // const interval = localStorage.getItem(encodedKey + "_interval");
-  //       const interval = null;
-  //       return interval ? JSON.parse(atob(interval)) : false;
-  //     }
-  //     return false;
-  //   }
-  // );
+  const initialTimer = useMemo(() => {
+    if (typeof window !== "undefined") {
+      // const initialTimerEncoded = localStorage.getItem(encodedKey);
+      const initialTimerEncoded = null;
+      return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
+    }
+    return 60; // Fallback for SSR
+  }, [encodedKey]);
+  const [timer, setTimer] = useState(initialTimer);
+  const [verificationCodeInterval, setVerificationCodeInterval] = useState(
+    () => {
+      if (typeof window !== "undefined") {
+        // const interval = localStorage.getItem(encodedKey + "_interval");
+        const interval = null;
+        return interval ? JSON.parse(atob(interval)) : false;
+      }
+      return false;
+    }
+  );
 
-  // /* /// VERIFY NUMBER STATES END /// */
-  // /* /// VERIFY NUMBER STATES END /// */
-  // /* /// VERIFY NUMBER STATES END /// */
+  /* /// VERIFY NUMBER STATES END /// */
+  /* /// VERIFY NUMBER STATES END /// */
+  /* /// VERIFY NUMBER STATES END /// */
 
-  // /* /// FORM INPUTS STATES /// */
-  // /* /// FORM INPUTS STATES /// */
-  // /* /// FORM INPUTS STATES /// */
+  /* /// FORM INPUTS STATES /// */
+  /* /// FORM INPUTS STATES /// */
+  /* /// FORM INPUTS STATES /// */
   // const initialValues: FormData = {
   //   firstName: verifiedUser.firstName ? verifiedUser.firstName : "",
   //   lastName: verifiedUser.lastName ? verifiedUser.lastName : "",
