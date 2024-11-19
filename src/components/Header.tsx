@@ -24,7 +24,7 @@ interface HeaderProps {
 }
 export default function Header({ language: currentLang }: HeaderProps) {
   const t = useTranslations("");
-  const urlParts = location.pathname.split("/");
+  const urlParts = location?.pathname?.split("/");
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const languageDropdownRef = useRef(null);
