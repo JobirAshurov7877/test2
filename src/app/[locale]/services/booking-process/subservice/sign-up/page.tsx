@@ -136,74 +136,73 @@ const PhoneMail = () => {
     }),
     email: Yup.string().email(translations("Invalid email address")),
   });
-  // const rest = JSON.parse(
-  //   (typeof window !== "undefined" && localStorage?.getItem("userFormData")) ||
-  //     "{}"
-  // );
-  const rest: any = {};
+  const rest = JSON.parse(
+    (typeof window !== "undefined" && localStorage?.getItem("userFormData")) ||
+      "{}"
+  );
 
-  // const handleRegister = async () => {
-  //   setLoading(true);
-  //   setUser({
-  //     ...userStore,
-  //     firstName,
-  //     lastName,
-  //   });
-  //   // const rest = JSON.parse(
-  //   //   (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
-  //   //     "{}"
-  //   // );
-  //   const rest: any = {};
-  //   // const updatedUserData = JSON.parse(
-  //   //   (typeof window !== "undefined" && localStorage.getItem("userData")) ||
-  //   //     "{}"
-  //   // );
-  //   const updatedUserData: any = {};
-  //   await new Promise((resolve) => setTimeout(resolve, 0));
-  //   const orderResponse = await api.post("/api/auth-and-order", {
-  //     orderServices: rest.ServiceSummary,
-  //     comment: rest.desc,
-  //     orderLocation: rest.location,
-  //     orderDate: rest.date + rest.time,
-  //     phone: "+" + updatedUserData.phone.recipient,
-  //     email: updatedUserData.email,
-  //     firstName: updatedUserData.firstName,
-  //     lastName: updatedUserData.lastName,
-  //     verificationId: updatedUserData.userId,
-  //     verificationCode: updatedUserData.code,
-  //     registered,
-  //   });
-  //   if (orderResponse.data === 200) {
-  //     const formValues: FormData = {
-  //       firstName: firstName,
-  //       lastName: lastName,
-  //       email: emailValue,
-  //       tel: {
-  //         recipient: phoneValue.recipient,
-  //         countryCode: phoneValue.countryCode,
-  //       },
-  //     };
-  //     submitToHubSpot(formValues);
-  //     setUser({
-  //       email: emailValue,
-  //       phone: {
-  //         recipient: phoneValue.recipient,
-  //         countryCode: phoneValue.countryCode,
-  //       },
-  //       userId: verificationId,
-  //       code: verificationCode,
-  //     });
-  //     setLoading(false);
-  //     navigate.push(
-  //       `/${currentLanguage}/services/booking-process/subservice/success`
-  //     );
-  //   } else {
-  //     setLoading(false);
-  //     navigate.push(
-  //       `/${currentLanguage}/services/booking-process/subservice/error`
-  //     );
-  //   }
-  // };
+  const handleRegister = async () => {
+    setLoading(true);
+    setUser({
+      ...userStore,
+      firstName,
+      lastName,
+    });
+    // const rest = JSON.parse(
+    //   (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
+    //     "{}"
+    // );
+    const rest: any = {};
+    // const updatedUserData = JSON.parse(
+    //   (typeof window !== "undefined" && localStorage.getItem("userData")) ||
+    //     "{}"
+    // );
+    const updatedUserData: any = {};
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const orderResponse = await api.post("/api/auth-and-order", {
+      orderServices: rest.ServiceSummary,
+      comment: rest.desc,
+      orderLocation: rest.location,
+      orderDate: rest.date + rest.time,
+      phone: "+" + updatedUserData.phone.recipient,
+      email: updatedUserData.email,
+      firstName: updatedUserData.firstName,
+      lastName: updatedUserData.lastName,
+      verificationId: updatedUserData.userId,
+      verificationCode: updatedUserData.code,
+      registered,
+    });
+    if (orderResponse.data === 200) {
+      const formValues: FormData = {
+        firstName: firstName,
+        lastName: lastName,
+        email: emailValue,
+        tel: {
+          recipient: phoneValue.recipient,
+          countryCode: phoneValue.countryCode,
+        },
+      };
+      submitToHubSpot(formValues);
+      setUser({
+        email: emailValue,
+        phone: {
+          recipient: phoneValue.recipient,
+          countryCode: phoneValue.countryCode,
+        },
+        userId: verificationId,
+        code: verificationCode,
+      });
+      setLoading(false);
+      navigate.push(
+        `/${currentLanguage}/services/booking-process/subservice/success`
+      );
+    } else {
+      setLoading(false);
+      navigate.push(
+        `/${currentLanguage}/services/booking-process/subservice/error`
+      );
+    }
+  };
 
   // const handleVerify = async () => {
   //   setRequestModal(true);
@@ -314,13 +313,13 @@ const PhoneMail = () => {
   // //   }
   // // }, [userFormDataStore.ServiceSummary, navigate, currentLanguage]);
 
-  // // const { submitToHubSpot } = useHubSpotFormService(
-  // //   "Varpet - register",
-  // //   "6b8a15a3-3ff5-4e02-848e-738b4c5c5720",
-  // //   translations("Subscribed successfully!"),
-  // //   translations("Failed to subscribe. Please try again"),
-  // //   false
-  // // );
+  const { submitToHubSpot } = useHubSpotFormService(
+    "Varpet - register",
+    "6b8a15a3-3ff5-4e02-848e-738b4c5c5720",
+    translations("Subscribed successfully!"),
+    translations("Failed to subscribe. Please try again"),
+    false
+  );
 
   // // useEffect(() => {
   // //   if (loading) {
