@@ -17,61 +17,56 @@ interface UserData {
   };
 }
 
-const storedData = JSON.parse(localStorage.getItem("userData") || "{}");
+// Helper function to check if the code is running in the browser
+function isBrowser() {
+  return typeof window !== "undefined" && typeof localStorage !== "undefined";
+}
 
+// Fetch stored data from localStorage or use an empty object if not available
+const storedData = isBrowser()
+  ? JSON.parse(localStorage.getItem("userData") || "{}")
+  : {}; // Default to an empty object for SSR environments
+
+// Initialize the user store using Valtio
+export const userStore = proxy<UserData>({
+  firstName: storedData.firstName ?? null,
+  lastName: storedData.lastName ?? null,
+  phone: storedData.phone ?? { recipient: undefined, countryCode: undefined },
+  email: storedData.email ?? null,
+  userId: storedData.userId ?? undefined,
+  code: storedData.code ?? undefined,
+  location: storedData.location ?? {
+    address: undefined,
+    lat: undefined,
+    lng: undefined,
+  },
+});
+
+// Function to initialize localStorage if it doesn't exist
 export function initializeLocalStorage() {
-  const existingData = localStorage.getItem("userData");
+  if (isBrowser()) {
+    const existingData = localStorage.getItem("userData");
+    if (!existingData) {
+      localStorage.setItem("userData", JSON.stringify(userStore));
+    }
+  }
+}
 
-  // Check if userData already exists in localStorage
-  if (!existingData) {
-    // Initialize localStorage with initialUserData
+// Function to save the current state of userStore to localStorage
+export function saveStateToLocalStorage() {
+  if (isBrowser()) {
     localStorage.setItem("userData", JSON.stringify(userStore));
   }
 }
 
-export const userStore = proxy<UserData>({
-  firstName: storedData.firstName !== undefined ? storedData.firstName : null,
-  lastName: storedData.lastName !== undefined ? storedData.lastName : null,
-  phone: storedData.phone !== undefined ? storedData.phone : "",
-  email: storedData.email !== undefined ? storedData.email : null,
-  userId: storedData.userId !== undefined ? storedData.userId : "",
-  code: storedData.code !== undefined ? storedData.code : "",
-  location:
-    storedData.location !== undefined
-      ? {
-          address:
-            storedData.location.address !== undefined
-              ? storedData.location.address
-              : undefined,
-          lat:
-            storedData.location.lat !== undefined
-              ? storedData.location.lat
-              : undefined,
-          lng:
-            storedData.location.lng !== undefined
-              ? storedData.location.lng
-              : undefined,
-        }
-      : {
-          address: undefined,
-          lat: undefined,
-          lng: undefined,
-        },
-});
-
-export function saveStateToLocalStorage() {
-  localStorage.setItem("userData", JSON.stringify(userStore));
-}
-
+// Function to update the userStore state and save it to localStorage
 export const setUser = (newData: Partial<UserData>) => {
-  // Update userStore state
   Object.assign(userStore, {
     ...userStore,
     ...newData,
   });
-
-  // Save updated state to local storage
   saveStateToLocalStorage();
 };
 
+// Initialize localStorage on script execution
 initializeLocalStorage();

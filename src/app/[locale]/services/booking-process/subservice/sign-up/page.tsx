@@ -141,7 +141,8 @@ const PhoneMail = () => {
       "{}"
   );
 
-  const handleRegister = async () => {
+  const handleRegister = () => {
+    console.log("register");
     // setLoading(true);
     // setUser({
     //   ...userStore,
@@ -218,7 +219,9 @@ const PhoneMail = () => {
     setVerificationId(response.data.verificationId);
     setRegistered(response.data.registered);
   };
-  const handleSignIn = async () => {};
+  const handleSignIn = () => {
+    console.log("sign in 1 ");
+  };
   // const handleSignIn = async () => {
   //   console.log("sign in 1 ");
   //   setVerifyError("");
@@ -315,7 +318,7 @@ const PhoneMail = () => {
     "Varpet - register",
     "6b8a15a3-3ff5-4e02-848e-738b4c5c5720",
     translations("Subscribed successfully!"),
-    translations("Failed to subscribe. Please try again"),
+    translations("Failed_to_subscribe"),
     false
   );
 
