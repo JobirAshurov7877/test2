@@ -55,8 +55,8 @@ const PhoneMail = () => {
   const [isPhoneFocused, setIsPhoneFocused] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
   const [requestModal, setRequestModal] = useState(false);
-  // const verifiedUserString = typeof window !== "undefined" ? localStorage.getItem("userData") : null;
-  const verifiedUserString = null;
+  const verifiedUserString =
+    typeof window !== "undefined" ? localStorage.getItem("userData") : null;
   const verifiedUser = verifiedUserString ? JSON.parse(verifiedUserString) : {};
   const [verificationCode, setVerificationCode] = useState<string>(
     verifiedUser.code
@@ -71,18 +71,16 @@ const PhoneMail = () => {
   const encodedKey = btoa("verificationTimer");
   const initialTimer = useMemo(() => {
     if (typeof window !== "undefined") {
-      // const initialTimerEncoded = localStorage.getItem(encodedKey);
-      const initialTimerEncoded = null;
+      const initialTimerEncoded = localStorage.getItem(encodedKey);
       return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
     }
-    return 60; // Fallback for SSR
+    return 60;
   }, [encodedKey]);
   const [timer, setTimer] = useState(initialTimer);
   const [verificationCodeInterval, setVerificationCodeInterval] = useState(
     () => {
       if (typeof window !== "undefined") {
-        // const interval = localStorage.getItem(encodedKey + "_interval");
-        const interval = null;
+        const interval = localStorage.getItem(encodedKey + "_interval");
         return interval ? JSON.parse(atob(interval)) : false;
       }
       return false;
