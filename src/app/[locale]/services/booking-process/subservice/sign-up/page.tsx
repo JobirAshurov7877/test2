@@ -142,12 +142,12 @@ const PhoneMail = () => {
   );
 
   const handleRegister = async () => {
-    // setLoading(true);
-    // setUser({
-    //   ...userStore,
-    //   firstName,
-    //   lastName,
-    // });
+    setLoading(true);
+    setUser({
+      ...userStore,
+      firstName,
+      lastName,
+    });
     // const rest = JSON.parse(
     //   (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
     //     "{}"
