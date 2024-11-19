@@ -55,8 +55,7 @@ const PhoneMail = () => {
   const [isPhoneFocused, setIsPhoneFocused] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
   const [requestModal, setRequestModal] = useState(false);
-  const verifiedUserString =
-    typeof window !== "undefined" ? localStorage.getItem("userData") : null;
+  const verifiedUserString = localStorage.getItem("userData");
   const verifiedUser = verifiedUserString ? JSON.parse(verifiedUserString) : {};
   const [verificationCode, setVerificationCode] = useState<string>(
     verifiedUser.code
@@ -70,23 +69,16 @@ const PhoneMail = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const encodedKey = btoa("verificationTimer");
   const initialTimer = useMemo(() => {
-    if (typeof window !== "undefined") {
-      const initialTimerEncoded = localStorage.getItem(encodedKey);
-      return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
-    }
-    return 60;
+    const initialTimerEncoded = localStorage.getItem(encodedKey);
+    return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
   }, [encodedKey]);
   const [timer, setTimer] = useState(initialTimer);
   const [verificationCodeInterval, setVerificationCodeInterval] = useState(
     () => {
-      if (typeof window !== "undefined") {
-        const interval = localStorage.getItem(encodedKey + "_interval");
-        return interval ? JSON.parse(atob(interval)) : false;
-      }
-      return false;
+      const interval = localStorage.getItem(encodedKey + "_interval");
+      return interval ? JSON.parse(atob(interval)) : false;
     }
   );
-
   /* /// VERIFY NUMBER STATES END /// */
   /* /// VERIFY NUMBER STATES END /// */
   /* /// VERIFY NUMBER STATES END /// */
@@ -136,10 +128,7 @@ const PhoneMail = () => {
     }),
     email: Yup.string().email(translations("Invalid email address")),
   });
-  const rest = JSON.parse(
-    (typeof window !== "undefined" && localStorage?.getItem("userFormData")) ||
-      "{}"
-  );
+  const rest = JSON.parse(localStorage.getItem("userFormData") || "{}");
 
   const handleRegister = async () => {
     setLoading(true);
@@ -148,13 +137,8 @@ const PhoneMail = () => {
       firstName,
       lastName,
     });
-    const rest = JSON.parse(
-      (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
-        "{}"
-    );
     const updatedUserData = JSON.parse(
-      (typeof window !== "undefined" && localStorage.getItem("userData")) ||
-        "{}"
+      localStorage.getItem("userData") || "{}"
     );
     await new Promise((resolve) => setTimeout(resolve, 0));
     const orderResponse = await api.post("/api/auth-and-order", {
@@ -170,7 +154,7 @@ const PhoneMail = () => {
       verificationCode: updatedUserData.code,
       registered,
     });
-    if (orderResponse?.data === 200) {
+    if (orderResponse.data === 200) {
       const formValues: FormData = {
         firstName: firstName,
         lastName: lastName,
@@ -180,7 +164,7 @@ const PhoneMail = () => {
           countryCode: phoneValue.countryCode,
         },
       };
-      // submitToHubSpot(formValues);
+      submitToHubSpot(formValues);
       setUser({
         email: emailValue,
         phone: {
@@ -205,10 +189,8 @@ const PhoneMail = () => {
   const handleVerify = async () => {
     setRequestModal(true);
     if (verificationCodeInterval) return;
-    if (typeof window !== "undefined") {
-      localStorage.setItem(encodedKey, btoa("60"));
-      localStorage.setItem(encodedKey + "_interval", btoa("true"));
-    }
+    localStorage.setItem(encodedKey, btoa("60"));
+    localStorage.setItem(encodedKey + "_interval", btoa("true"));
     setVerificationCodeInterval(true);
     setVerificationCode("");
     const response = await api.post("/api/user/signin", {
@@ -218,92 +200,89 @@ const PhoneMail = () => {
     setVerificationId(response.data.verificationId);
     setRegistered(response.data.registered);
   };
-  const handleSignIn = () => {
-    console.log("sign in 1 ");
-  };
-  // const handleSignIn = async () => {
-  //   console.log("sign in 1 ");
-  //   setVerifyError("");
-  //   setLoading(true);
-  //   const response = await api.post("/api/user/verify", {
-  //     verificationId,
-  //     verificationCode,
-  //   });
-  //   if (registered) {
-  //     if (response.data === 200) {
-  //       setUser({
-  //         email: emailValue,
-  //         phone: {
-  //           recipient: phoneValue.recipient,
-  //           countryCode: phoneValue.countryCode,
-  //         },
-  //         userId: verificationId,
-  //         code: verificationCode,
-  //       });
-  //       // const updatedUserData = JSON.parse(
-  //       //   localStorage.getItem("userData") || "{}"
-  //       // );
-  //       const updatedUserData: any = {};
-  //       await new Promise((resolve) => setTimeout(resolve, 0));
 
-  //       const orderResponse = await api.post("/api/auth-and-order", {
-  //         orderServices: rest.ServiceSummary,
-  //         comment: rest.desc,
-  //         orderLocation: rest.location,
-  //         firstName: "Registered User",
-  //         lastName: "Registered User",
-  //         orderDate: rest.date,
-  //         orderTime: rest.time,
-  //         phone: "+" + updatedUserData.phone.recipient,
-  //         email: updatedUserData.email,
-  //         verificationId: updatedUserData.userId,
-  //         verificationCode: updatedUserData.code,
-  //         registered,
-  //       });
-  //       if (orderResponse.data === 200) {
-  //         const formValues: FormData = {
-  //           firstName: firstName,
-  //           lastName: lastName,
-  //           email: emailValue,
-  //           tel: {
-  //             recipient: phoneValue.recipient,
-  //             countryCode: phoneValue.countryCode,
-  //           },
-  //         };
-  //         submitToHubSpot(formValues);
-  //         setLoading(false);
-  //         navigate.push(
-  //           `/${currentLanguage}/services/booking-process/subservice/success`
-  //         );
-  //       } else {
-  //         setLoading(false);
-  //         navigate.push(
-  //           `/${currentLanguage}/services/booking-process/subservice/error`
-  //         );
-  //       }
-  //     } else {
-  //       setLoading(false);
-  //       setVerifyError(translations("Oops"));
-  //     }
-  //   } else {
-  //     if (response.data === 200) {
-  //       setUser({
-  //         firstName,
-  //         lastName,
-  //         email: emailValue,
-  //         phone: {
-  //           recipient: phoneValue.recipient,
-  //           countryCode: phoneValue.countryCode,
-  //         },
-  //         userId: verificationId,
-  //         code: verificationCode,
-  //       });
-  //       setLoading(false);
-  //       setNamesInputsOpen(true);
-  //       setRequestModal(false);
-  //     }
-  //   }
-  // };
+  const handleSignIn = async () => {
+    console.log("sign in 1 ");
+    setVerifyError("");
+    setLoading(true);
+    const response = await api.post("/api/user/verify", {
+      verificationId,
+      verificationCode,
+    });
+    if (registered) {
+      if (response.data === 200) {
+        setUser({
+          email: emailValue,
+          phone: {
+            recipient: phoneValue.recipient,
+            countryCode: phoneValue.countryCode,
+          },
+          userId: verificationId,
+          code: verificationCode,
+        });
+        const updatedUserData = JSON.parse(
+          localStorage.getItem("userData") || "{}"
+        );
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
+        const orderResponse = await api.post("/api/auth-and-order", {
+          orderServices: rest.ServiceSummary,
+          comment: rest.desc,
+          orderLocation: rest.location,
+          firstName: "Registered User",
+          lastName: "Registered User",
+          orderDate: rest.date,
+          orderTime: rest.time,
+          phone: "+" + updatedUserData.phone.recipient,
+          email: updatedUserData.email,
+          verificationId: updatedUserData.userId,
+          verificationCode: updatedUserData.code,
+          registered,
+        });
+        if (orderResponse.data === 200) {
+          const formValues: FormData = {
+            firstName: firstName,
+            lastName: lastName,
+            email: emailValue,
+            tel: {
+              recipient: phoneValue.recipient,
+              countryCode: phoneValue.countryCode,
+            },
+          };
+          submitToHubSpot(formValues);
+          setLoading(false);
+          navigate.push(
+            `/${currentLanguage}/services/booking-process/subservice/success`
+          );
+        } else {
+          setLoading(false);
+          navigate.push(
+            `/${currentLanguage}/services/booking-process/subservice/error`
+          );
+        }
+      } else {
+        setLoading(false);
+        setVerifyError(translations("Oops"));
+      }
+    } else {
+      if (response.data === 200) {
+        setUser({
+          firstName,
+          lastName,
+          email: emailValue,
+          phone: {
+            recipient: phoneValue.recipient,
+            countryCode: phoneValue.countryCode,
+          },
+          userId: verificationId,
+          code: verificationCode,
+        });
+        setLoading(false);
+        setNamesInputsOpen(true);
+        setRequestModal(false);
+      }
+    }
+  };
   useEffect(() => {
     if (
       !userFormDataStore.ServiceSummary ||
@@ -317,21 +296,15 @@ const PhoneMail = () => {
     "Varpet - register",
     "6b8a15a3-3ff5-4e02-848e-738b4c5c5720",
     translations("Subscribed successfully!"),
-    translations("Failed_to_subscribe"),
+    translations("Failed to subscribe. Please try again"),
     false
   );
 
-  useEffect(() => {
-    if (loading) {
-      if (typeof document !== "undefined") {
-        document.body.style.overflowY = "hidden";
-      }
-    } else {
-      if (typeof document !== "undefined") {
-        document.body.style.overflowY = "scroll";
-      }
-    }
-  }, [loading]);
+  if (loading) {
+    document.body.style.overflowY = "hidden";
+  } else {
+    document.body.style.overflowY = "scroll";
+  }
 
   return (
     <Container>
