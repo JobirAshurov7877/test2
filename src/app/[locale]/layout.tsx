@@ -18,7 +18,6 @@ type Props = {
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
-
 export const metadata: Metadata = {
   title: "Varpet - When everything is ok",
   description:
@@ -30,9 +29,6 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/BigLogo.svg",
-  },
-  alternates: {
-    canonical: "https://varpet.com/",
   },
   robots: {
     index: true,
