@@ -29,7 +29,7 @@ export async function generateMetadata(
       description: t("home_meta_description"),
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/about`,
+      canonical: `https://varpet.com/${locale}/about`,
     },
   };
 }
