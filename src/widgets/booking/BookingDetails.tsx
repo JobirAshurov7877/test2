@@ -13,7 +13,7 @@ const BookingDetails = () => {
     <Wrapper>
       <DownloadApp>
         <Header>
-          <Image src={Logo} alt="logo" width={80} height={80} />
+          <Image src={Logo} alt="logo" width={80} height={80} priority />
           <h6>
             {translations("Download")}
             <a

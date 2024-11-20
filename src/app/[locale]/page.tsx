@@ -7,11 +7,15 @@ import OurServices from "@/widgets/home/OurServices";
 import SubServiceAbout from "@/widgets/home/Partners";
 import TopArticles from "@/widgets/home/TopArticles";
 import { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import Head from "next/head";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+type HomeProps = {
+  params: { locale: string };
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const messages = await import(`../../../messages/${locale}.json`);
@@ -31,12 +35,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t("Home_meta_title"),
       description: t("home_meta_description"),
     },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}`,
+    },
   };
 }
 
-export default function Home() {
+export default async function Home({ params }: HomeProps) {
+  const { locale } = await params;
   return (
     <>
+      <Head>
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/${locale}`}
+        />
+      </Head>
       <Header />
       <OurServices />
       <DownloadOurApp />

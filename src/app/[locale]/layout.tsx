@@ -31,6 +31,15 @@ export const metadata: Metadata = {
   icons: {
     icon: "/BigLogo.svg",
   },
+  alternates: {
+    canonical: "https://varpet.com/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  viewport: "width=device-width, initial-scale=1.0",
+  themeColor: "#ffffff",
 };
 
 export default async function RootLayout({ children, params }: Props) {

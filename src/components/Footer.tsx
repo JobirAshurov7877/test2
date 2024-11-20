@@ -58,7 +58,7 @@ export default function Footer() {
       <Box>
         <MyLogo>
           <Link href={"/"}>
-            <Image src={Logo} alt="" />
+            <Image src={Logo} alt="logo" priority />
           </Link>
           <p>{t("Download the app by clicking the link below")} :</p>
           <Store>

@@ -39,7 +39,7 @@ const BlogSinglePage = ({ params }: any) => {
         ?.setAttribute("content", article.meta_description);
     }
   }, [currentLanguage, params?.slug, article]);
-  console.log(article?.content);
+  console.log(article);
 
   return (
     <>
@@ -53,13 +53,15 @@ const BlogSinglePage = ({ params }: any) => {
         <meta property="og:image" content={article?.image} />
         <meta property="og:type" content="article" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="Your Site Name" />
+        <meta property="og:site_name" content="Varpet" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={article?.title} />
         <meta name="twitter:description" content={article?.meta_description} />
         <meta name="twitter:image" content={article?.image} />
-        <meta name="twitter:site" content="@YourTwitterHandle" />
-        <meta name="twitter:creator" content="@YourTwitterHandle" />
+        <link
+          rel="canonical"
+          href={`${window.location.origin}/${currentLanguage}/blog/${article?.slug}`}
+        />
       </Head>
 
       <Container>

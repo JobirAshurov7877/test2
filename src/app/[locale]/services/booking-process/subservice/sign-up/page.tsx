@@ -296,7 +296,7 @@ const PhoneMail = () => {
     "Varpet - register",
     "6b8a15a3-3ff5-4e02-848e-738b4c5c5720",
     translations("Subscribed successfully!"),
-    translations("Failed to subscribe. Please try again"),
+    translations("Failed_to_subscribe"),
     false
   );
 

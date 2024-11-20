@@ -16,6 +16,7 @@ import { useParams } from "next/navigation";
 import MyLoading from "@/ui/loading/MyLoading";
 import { useLocale } from "next-intl";
 import { Guide } from "@/components";
+import Head from "next/head";
 
 const Categories = () => {
   const params = useParams<{ "item-id": string }>();
@@ -58,6 +59,15 @@ const Categories = () => {
 
   return (
     <>
+      <Head>
+        <title>{rootWithServicesSlice?.title}</title>
+        <meta name="description" content={rootWithServicesSlice?.description} />
+        <meta name="keywords" content="Varpet, footer, services" />
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/${currentLanguage}/services/${params["item-id"]}`}
+        />
+      </Head>
       <Container>
         <Header service={rootWithServicesSlice} />
         <SubServices service={rootWithServicesSlice} />

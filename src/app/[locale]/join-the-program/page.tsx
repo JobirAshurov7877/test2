@@ -10,6 +10,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("Join_the_program"),
     description: t("home_meta_description"),
+    keywords: "Varpet, footer, services",
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/join-the-program`,
+    },
   };
 }
 

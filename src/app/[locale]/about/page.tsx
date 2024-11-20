@@ -20,7 +20,6 @@ export async function generateMetadata(
     openGraph: {
       title: t("About us"),
       description: t("home_meta_description"),
-      url: `https://new.varpet.com/`,
       type: "website",
       images: previousImages,
     },
@@ -28,6 +27,9 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: t("About us"),
       description: t("home_meta_description"),
+    },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/about`,
     },
   };
 }

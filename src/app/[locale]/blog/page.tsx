@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import BlogClient from "./page.Client";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -23,9 +24,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t("Blog"),
       description: t("home_meta_description"),
     },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/about`,
+    },
   };
 }
-const BlogClient = dynamic(() => import("./page.Client"));
+
 export default function Blog() {
   return <BlogClient />;
 }

@@ -17,7 +17,7 @@ const MediaResources = () => {
       <Box>
         <Item>
           <Imagew>
-            <Image src={Logo} alt="logo" />
+            <Image src={Logo} alt="logo" priority />
           </Imagew>
           <Anchor href="https://varpet.com/downloads/varpet_logos.zip">
             <TbCloudDownload />
