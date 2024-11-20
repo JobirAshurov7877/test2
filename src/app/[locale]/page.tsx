@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Home({ params }: HomeProps) {
-  const { locale } = await params;
+  const { locale } = params;
   return (
     <>
       <Head>
