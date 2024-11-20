@@ -27,6 +27,12 @@ export default function ClientRootLayout({
     <ReduxProvider>
       <NextIntlClientProvider messages={messages} locale={locale}>
         <html lang={locale}>
+          <head>
+            <meta
+              name="google-site-verification"
+              content="cVyizMFawU8etT7LUQlG1ZISjtIZpc4M8zuwG90FEpw"
+            />
+          </head>
           <body>
             {loading ? (
               <Onboarding />
