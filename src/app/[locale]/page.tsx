@@ -12,9 +12,6 @@ import Head from "next/head";
 type Props = {
   params: Promise<{ locale: string }>;
 };
-type HomeProps = {
-  params: { locale: string };
-};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -41,16 +38,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Home({ params }: HomeProps) {
-  const { locale } = params;
+export default async function Home() {
   return (
     <>
-      <Head>
-        <link
-          rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/${locale}`}
-        />
-      </Head>
       <Header />
       <OurServices />
       <DownloadOurApp />
