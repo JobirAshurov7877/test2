@@ -98,7 +98,10 @@ const BlogSinglePage = ({ params }: any) => {
             />
           </Imagew>
         </Wrapper>
-        <Box dangerouslySetInnerHTML={{ __html: article?.content || "" }} />
+        <Box
+          className="markdown"
+          dangerouslySetInnerHTML={{ __html: article?.content || "" }}
+        />
         <SubserviceContiner>
           <Subscribe />
         </SubserviceContiner>
