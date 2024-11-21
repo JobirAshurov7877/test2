@@ -7,7 +7,6 @@ import OurServices from "@/widgets/home/OurServices";
 import SubServiceAbout from "@/widgets/home/Partners";
 import TopArticles from "@/widgets/home/TopArticles";
 import { Metadata } from "next";
-import Head from "next/head";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -24,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: t("Home_meta_title"),
       description: t("home_meta_description"),
-      url: `https://new.varpet.com/`,
+      url: `https://varpet.com/`,
       type: "website",
     },
     twitter: {

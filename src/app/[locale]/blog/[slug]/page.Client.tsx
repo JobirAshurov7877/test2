@@ -11,11 +11,12 @@ import Head from "next/head";
 import { proportions } from "@/styles/proportions";
 import { api } from "@/services/axios";
 import Image from "next/image";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const BlogSinglePageClient = () => {
   const params = useParams<{ slug: string }>();
   const currentLanguage = useLocale();
+  const t = useTranslations();
   const [article, setArticle] = useState<any>(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +36,7 @@ const BlogSinglePageClient = () => {
   return (
     <>
       <Head>
-        <title>{article?.meta_title}</title>
+        <title>{article?.meta_title || t("Home_meta_title")}</title>
         <meta name="description" content={article?.meta_description} />
         <meta name="robots" content="index,follow" />
         <meta name="keywords" content={article?.meta_keywords} />

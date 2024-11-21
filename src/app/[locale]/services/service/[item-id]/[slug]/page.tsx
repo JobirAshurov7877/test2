@@ -14,13 +14,14 @@ import { fetchServiceRootData } from "@/store/rootWithServicesSlice";
 import MyLoadingContainer from "@/components/MyLoadingContainer";
 import { useParams } from "next/navigation";
 import MyLoading from "@/ui/loading/MyLoading";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Guide } from "@/components";
 import Head from "next/head";
 
 const Categories = () => {
   const params = useParams<{ "item-id": string }>();
   const currentLanguage = useLocale();
+  const t = useTranslations();
 
   const { data: rootWithServicesSlice, loading } = useSelector(
     (state: RootState) => state.rootWithServicesSlice
@@ -60,7 +61,7 @@ const Categories = () => {
   return (
     <>
       <Head>
-        <title>{rootWithServicesSlice?.title}</title>
+        <title>{rootWithServicesSlice?.title || t("Services")}</title>
         <meta name="description" content={rootWithServicesSlice?.description} />
         <meta name="keywords" content="Varpet, footer, services" />
         <link

@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: t("Services"),
       description: t("home_meta_description"),
-      url: `https://new.varpet.com/`,
+      url: `https://varpet.com/`,
       type: "website",
     },
     twitter: {
