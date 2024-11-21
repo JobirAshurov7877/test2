@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [{ url: article?.image || "" }],
     },
     alternates: {
-      canonical: `https://new.varpet.com/${locale}/blog/${slug}`,
+      canonical: `https://varpet.com/${locale}/blog/${slug}`,
     },
   };
 }
