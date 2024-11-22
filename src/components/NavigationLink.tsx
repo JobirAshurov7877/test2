@@ -12,7 +12,7 @@ interface NavigationLinkProps extends ComponentProps<typeof Link> {
 
 export default function NavigationLink({
   href,
-  prefetch = true, // Default prefetch qiymatini qo'shdik
+  prefetch = false, // Default prefetch qiymatini qo'shdik
   className,
   ...rest
 }: NavigationLinkProps) {

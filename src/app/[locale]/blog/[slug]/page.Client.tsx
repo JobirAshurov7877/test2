@@ -23,14 +23,16 @@ const BlogSinglePageClient = () => {
   const [loader, setLoader] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
+      setLoader(true);
       try {
         const response = await api.get(
           `/api/blog/article/${currentLanguage}/${params?.slug}`
         );
         setArticle(response.data);
-        console.log(response.data);
+        setLoader(false);
       } catch (error) {
         console.error("Error fetching article data:", error);
+        setLoader(false);
       }
     };
     fetchData();
@@ -60,7 +62,9 @@ const BlogSinglePageClient = () => {
       </Head>
 
       {loader ? (
-        <MyLoading />
+        <Container>
+          <MyLoading />
+        </Container>
       ) : (
         <Container>
           <Wrapper>
