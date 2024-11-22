@@ -12,12 +12,15 @@ import { proportions } from "@/styles/proportions";
 import { api } from "@/services/axios";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import MyLoadingContainer from "@/components/MyLoadingContainer";
+import { MyLoading } from "@/ui";
 
 const BlogSinglePageClient = () => {
   const params = useParams<{ slug: string }>();
   const currentLanguage = useLocale();
   const t = useTranslations();
   const [article, setArticle] = useState<any>(null);
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,48 +59,52 @@ const BlogSinglePageClient = () => {
         />
       </Head>
 
-      <Container>
-        <Wrapper>
-          <Title>
-            <DateAndCategory>
-              <FormattedDate createdAt={article?.created_at || ""} />
-              <li>{article?.categories[0]}</li>
-            </DateAndCategory>
-            <h1>{article?.title}</h1>
-            <SocialMedias>
-              <a
-                href="https://www.facebook.com/VarpetArmenia"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <LiaFacebookF />
-              </a>
-              <a
-                href="https://www.linkedin.com/company/varpet/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedinIn />
-              </a>
-            </SocialMedias>
-          </Title>
-          <Imagew>
-            <Image
-              src={article?.image}
-              alt={article?.title}
-              loading="lazy"
-              fill
-            />
-          </Imagew>
-        </Wrapper>
-        <Box
-          className="markdown"
-          dangerouslySetInnerHTML={{ __html: article?.content || "" }}
-        />
-        <SubserviceContiner>
-          <Subscribe />
-        </SubserviceContiner>
-      </Container>
+      {loader ? (
+        <MyLoading />
+      ) : (
+        <Container>
+          <Wrapper>
+            <Title>
+              <DateAndCategory>
+                <FormattedDate createdAt={article?.created_at || ""} />
+                <li>{article?.categories[0]}</li>
+              </DateAndCategory>
+              <h1>{article?.title}</h1>
+              <SocialMedias>
+                <a
+                  href="https://www.facebook.com/VarpetArmenia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LiaFacebookF />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/varpet/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaLinkedinIn />
+                </a>
+              </SocialMedias>
+            </Title>
+            <Imagew>
+              <Image
+                src={article?.image}
+                alt={article?.title}
+                loading="lazy"
+                fill
+              />
+            </Imagew>
+          </Wrapper>
+          <Box
+            className="markdown"
+            dangerouslySetInnerHTML={{ __html: article?.content || "" }}
+          />
+          <SubserviceContiner>
+            <Subscribe />
+          </SubserviceContiner>
+        </Container>
+      )}
     </>
   );
 };
