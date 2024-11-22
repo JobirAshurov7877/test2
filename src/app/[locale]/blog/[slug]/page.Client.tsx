@@ -41,7 +41,7 @@ const BlogSinglePageClient = () => {
   return (
     <>
       <Head>
-        <title>{article?.meta_title || t("Home_meta_title")}</title>
+        <title>{article?.meta_title}</title>
         <meta name="description" content={article?.meta_description} />
         <meta name="robots" content="index,follow" />
         <meta name="keywords" content={article?.meta_keywords} />
