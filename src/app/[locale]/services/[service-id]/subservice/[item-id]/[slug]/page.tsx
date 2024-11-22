@@ -37,8 +37,8 @@ const SubService: React.FC = () => {
     }
   }, [dispatch, currentLanguage, params["item-id"]]);
   useEffect(() => {
-    if (params["item-id"] && subServiceData?.metaTitle) {
-      document.title = subServiceData?.metaTitle;
+    if (params["item-id"] && subServiceData?.title) {
+      document.title = subServiceData?.title;
       document
         .querySelector("meta[name='description']")
         ?.setAttribute("content", subServiceData?.metaDescription || "");
@@ -51,6 +51,7 @@ const SubService: React.FC = () => {
       </MyLoadingContainer>
     );
   }
+  console.log(subServiceData);
 
   return (
     <>
