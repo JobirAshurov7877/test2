@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("Privacy_policy"),
     description: t("home_meta_description"),
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/privacy-policy`,
+      canonical: `https://varpet.com/${locale}/privacy-policy`,
     },
   };
 }

@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t("home_meta_description"),
     keywords: "Varpet, footer, services",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/join-the-program`,
+      canonical: `https://varpet.com/${locale}/join-the-program`,
     },
   };
 }

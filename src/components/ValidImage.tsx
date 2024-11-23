@@ -1,13 +1,13 @@
 // components/ValidImage.tsx
 import React from "react";
 import Image from "next/image"; // or your preferred image component
+import fallbackSrc from "@/assets/fallback.jpg";
 
 interface ValidImageProps {
   src?: string | null;
   alt: string;
   width?: number;
   height?: number;
-  fallbackSrc?: string;
   fill?: boolean;
   // Optional fallback image source
 }
@@ -17,8 +17,7 @@ const ValidImage: React.FC<ValidImageProps> = ({
   alt,
   width,
   height,
-  fill,
-  fallbackSrc = "/images/fallback.png", // Default fallback image path
+  fill, // Default fallback image path
 }) => {
   const imageSrc = src && src.trim() !== "" ? src : fallbackSrc;
 
@@ -29,9 +28,6 @@ const ValidImage: React.FC<ValidImageProps> = ({
       width={width}
       height={height}
       fill={fill}
-      onError={(e) => {
-        e.currentTarget.src = fallbackSrc;
-      }}
     />
   );
 };

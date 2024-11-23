@@ -43,10 +43,22 @@ const Categories = () => {
 
   useEffect(() => {
     if (params["item-id"] && rootWithServicesSlice?.title) {
-      document.title = rootWithServicesSlice?.title;
+      document.title = rootWithServicesSlice?.title || t("Services");
       document
         .querySelector("meta[name='description']")
-        ?.setAttribute("content", rootWithServicesSlice?.description);
+        ?.setAttribute(
+          "content",
+          rootWithServicesSlice?.description || t("home_meta_description")
+        );
+      document
+        .querySelector("meta[name='keywords']")
+        ?.setAttribute("content", "Varpet, footer, services");
+      document
+        .querySelector("link[rel='canonical']")
+        ?.setAttribute(
+          "href",
+          `https://varpet.com/${currentLanguage}/services/${params["item-id"]}`
+        );
     }
   }, [currentLanguage, params["item-id"], rootWithServicesSlice]);
 
@@ -66,7 +78,7 @@ const Categories = () => {
         <meta name="keywords" content="Varpet, footer, services" />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/${currentLanguage}/services/${params["item-id"]}`}
+          href={`https://varpet.com/${currentLanguage}/services/${params["item-id"]}`}
         />
       </Head>
       <Container>

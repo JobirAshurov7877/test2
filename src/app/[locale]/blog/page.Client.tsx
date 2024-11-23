@@ -11,12 +11,12 @@ import { fetchBlog } from "@/store/blogSlice";
 import { fetchArticlesByCategory } from "@/store/blogCategorySlice";
 import { useSnapshot } from "valtio";
 import { blogCategoryStore } from "@/valtio-store/blogCategoryStore";
+import Header from "@/widgets/blog/Header";
+import TopArticles from "@/widgets/blog/TopArticles";
+import Subscribe from "@/widgets/blog/Subscribe";
 
 const AllArticles = dynamic(() => import("@/widgets/blog/AllArticles"));
 const Categories = dynamic(() => import("@/widgets/blog/Categories"));
-const Header = dynamic(() => import("@/widgets/blog/Header"));
-const Subscribe = dynamic(() => import("@/widgets/blog/Subscribe"));
-const TopArticles = dynamic(() => import("@/widgets/blog/TopArticles"));
 
 export default function BlogClient() {
   const currentLanguage = useLocale();

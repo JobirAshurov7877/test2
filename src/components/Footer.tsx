@@ -154,15 +154,27 @@ export default function Footer() {
           </ul>
         </Contacts>
         <SocialMedia>
-          <a href="https://www.facebook.com/VarpetArmenia" target="blank">
+          <Link
+            href="https://www.facebook.com/VarpetArmenia"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <LiaFacebookF />
-          </a>
-          <a href="https://www.linkedin.com/company/varpet/" target="blank">
+          </Link>
+          <Link
+            href="https://www.linkedin.com/company/varpet/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaLinkedinIn />
-          </a>
-          <a href="https://www.instagram.com/varpetcom/" target="blank">
+          </Link>
+          <Link
+            href="https://www.instagram.com/varpetcom/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaInstagram />
-          </a>
+          </Link>
         </SocialMedia>
       </Box>
       <EndPart>

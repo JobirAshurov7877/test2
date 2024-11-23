@@ -109,18 +109,24 @@ export default function Header({ language: currentLang }: HeaderProps) {
         <Nav>
           <Ul>
             <Li>
-              <span onClick={() => handleNavigate("about")}>{t("About")}</span>
+              <NavigationLink href={`/about`} rel=" noopener noreferrer">
+                {t("About")}
+              </NavigationLink>
             </Li>
             <Li>
-              <NavigationLink href={`/services`} prefetch={true}>
+              <NavigationLink href={`/services`} rel=" noopener noreferrer">
                 {t("Services")}
               </NavigationLink>
             </Li>
             <Li>
-              <NavigationLink href={`/blog`}>{t("Blog")}</NavigationLink>
+              <NavigationLink href={`/blog`} rel=" noopener noreferrer">
+                {t("Blog")}
+              </NavigationLink>
             </Li>
             <Li>
-              <NavigationLink href={`/contact`}>{t("Contact")}</NavigationLink>
+              <NavigationLink href={`/contact`} rel=" noopener noreferrer">
+                {t("Contact")}
+              </NavigationLink>
             </Li>
           </Ul>
         </Nav>

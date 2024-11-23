@@ -76,7 +76,7 @@ const SubServiceClient: React.FC = () => {
         />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/${currentLanguage}/services/${params["service-id"]}/subservice/${params["item-id"]}/${subServiceData.slug}}`}
+          href={`https://varpet.com/${currentLanguage}/services/${params["service-id"]}/subservice/${params["item-id"]}/${subServiceData.slug}}`}
         />
       </Head>
       <Container>

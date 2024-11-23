@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t("home_meta_description"),
     keywords: "home, services, articles",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/press`,
+      canonical: `https://varpet.com/${locale}/press`,
     },
   };
 }

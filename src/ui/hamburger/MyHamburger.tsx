@@ -1,7 +1,7 @@
 import "./MyHamburger.scss";
 
 interface MyHamburgerProps {
-  checked: boolean;
+  checked?: boolean;
   onClick?: () => void;
 }
 
