@@ -5,8 +5,41 @@ import { proportions } from "@/styles/proportions";
 import ServicesHeader from "@/widgets/services/ServicesHeader";
 import Categories from "@/widgets/services/Categories";
 import SubServices from "@/widgets/services/SubServices";
+import { useEffect, useState } from "react";
 
 export default function ServicesClient() {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+
+    if (scrollTop > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, [location]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <Container>
       <ServicesHeader />
@@ -14,7 +47,10 @@ export default function ServicesClient() {
         <Categories />
         <SubServices />
       </Box>
-      <ButtonContainer>
+      <ButtonContainer
+        style={isVisible ? { display: "block" } : { display: "none" }}
+        onClick={scrollToTop}
+      >
         <FaArrowUp />
       </ButtonContainer>
     </Container>
