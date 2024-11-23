@@ -19,14 +19,10 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 export const metadata: Metadata = {
-  // title: "Varpet - When everything is ok",
-  // description:
-  //   "Varpet - Where you can find the appropriate qualification specialists for each job",
-  // keywords: "home, services, articles",
-  // openGraph: {
-  //   url: "https://varpet.com/",
-  //   type: "website",
-  // },
+  title: "Varpet - When everything is ok",
+  description:
+    "Varpet - Where you can find the appropriate qualification specialists for each job",
+  keywords: "home, services, articles",
   icons: {
     icon: "/BigLogo.svg",
   },

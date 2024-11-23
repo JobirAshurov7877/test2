@@ -16,7 +16,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     "item-id": itemId,
     "service-id": serviceId,
   } = await params;
-  console.log(locale, slug, itemId);
+  const messages = await import(
+    `../../../../../../../../messages/${locale}.json`
+  );
+  const t = (key: string) => messages[key];
   const articleResponse = await fetch(
     `https://new.varpet.com/api/service/${locale}/${itemId}`
   );
@@ -26,20 +29,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const subServiceData = await articleResponse.json();
 
   return {
-    title: subServiceData?.title,
-    description: subServiceData?.metaDescription || "null",
-    keywords: subServiceData?.keywords,
+    title: subServiceData?.title || t("Home_meta_title"),
+    description: subServiceData?.metaDescription || t("home_meta_description"),
+    keywords: subServiceData?.keywords || "home, services, articles",
     openGraph: {
-      title: subServiceData?.title,
-      description: subServiceData?.metaDescription,
+      title: subServiceData?.title || t("Home_meta_title"),
+      description:
+        subServiceData?.metaDescription || t("home_meta_description"),
       url: `https://varpet.com/${locale}/services/${serviceId}/subservice/${itemId}/${subServiceData.slug}`,
       type: "website",
       images: [{ url: subServiceData?.image }],
     },
     twitter: {
       card: "summary_large_image",
-      title: subServiceData?.title,
-      description: subServiceData?.metaDescription,
+      title: subServiceData?.title || t("Home_meta_title"),
+      description:
+        subServiceData?.metaDescription || t("home_meta_description"),
       images: [{ url: subServiceData?.image }],
     },
     alternates: {

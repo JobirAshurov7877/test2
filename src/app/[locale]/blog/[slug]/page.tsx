@@ -19,20 +19,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await articleResponse.json();
 
   return {
-    title: article?.title,
-    description: article?.metaDescription,
-    keywords: article?.keywords,
+    title: article?.title || t("Home_meta_title"),
+    description: article?.metaDescription || t("home_meta_description"),
+    keywords: article?.keywords || "home, services, articles",
     openGraph: {
-      title: article?.title,
-      description: article?.metaDescription,
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/blog/${slug}`,
+      title: article?.title || t("Home_meta_title"),
+      description: article?.metaDescription || t("home_meta_description"),
+      url: `https://varpet.com/${locale}/blog/${slug}`,
       type: "website",
       images: [{ url: article?.image }],
     },
     twitter: {
       card: "summary_large_image",
-      title: article?.title,
-      description: article?.metaDescription,
+      title: article?.title || t("Home_meta_title"),
+      description: article?.metaDescription || t("home_meta_description"),
       images: [{ url: article?.image }],
     },
     alternates: {
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-const BlogSinglePage = ({ params }: any) => {
+const BlogSinglePage = () => {
   return <BlogSinglePageClient />;
 };
 
