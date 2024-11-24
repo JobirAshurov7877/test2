@@ -1,103 +1,48 @@
-"use client";
-import { useEffect } from "react";
-import styled from "styled-components";
-import Header from "@/widgets/service/Header";
-import SubServices from "@/widgets/service/SubServices";
-import FAQ from "@/components/FAQ";
-import Related from "@/widgets/service/Related";
-import ExploreServices from "@/components/ExploreServices";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { useDispatch } from "react-redux";
-import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
-import { fetchServiceRootData } from "@/store/rootWithServicesSlice";
-import MyLoadingContainer from "@/components/MyLoadingContainer";
-import { useParams } from "next/navigation";
-import MyLoading from "@/ui/loading/MyLoading";
-import { useLocale, useTranslations } from "next-intl";
-import { Guide } from "@/components";
-import Head from "next/head";
+import { Metadata } from "next";
+import CategoriesClient from "./page.Client";
+type Props = {
+  params: Promise<{ locale: string; slug: string; "item-id": string }>;
+};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, slug, "item-id": itemId } = await params;
+  const messages = await import(`../../../../../../../messages/${locale}.json`);
+  const t = (key: string) => messages[key];
+  const articleResponse = await fetch(
+    `https://new.varpet.com/api/service-with-subs/${locale}/${itemId}`
+  );
+
+  if (!articleResponse.ok) {
+    throw new Error("Maqola ma'lumotlari yuklanmadi");
+  }
+  const rootWithServicesSlice = await articleResponse?.json();
+  return {
+    title: rootWithServicesSlice?.title || t("Home_meta_title"),
+    description:
+      rootWithServicesSlice?.metaDescription || t("home_meta_description"),
+    keywords: rootWithServicesSlice?.keywords || "home, services, subservices",
+    openGraph: {
+      title: rootWithServicesSlice?.title || t("Home_meta_title"),
+      description:
+        rootWithServicesSlice?.metaDescription || t("home_meta_description"),
+      url: `https://varpet.com/${locale}/services/${itemId}/${slug}`,
+      type: "website",
+      images: [{ url: rootWithServicesSlice?.image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: rootWithServicesSlice?.title || t("Home_meta_title"),
+      description:
+        rootWithServicesSlice?.metaDescription || t("home_meta_description"),
+      images: [{ url: rootWithServicesSlice?.image }],
+    },
+    alternates: {
+      canonical: `https://varpet.com/${locale}/services/${itemId}/${slug}`,
+    },
+  };
+}
 
 const Categories = () => {
-  const params = useParams<{ "item-id": string }>();
-  const currentLanguage = useLocale();
-  const t = useTranslations();
-
-  const { data: rootWithServicesSlice, loading } = useSelector(
-    (state: RootState) => state.rootWithServicesSlice
-  );
-  const dispatch = useDispatch();
-  console.log(params["item-id"]);
-
-  useEffect(() => {
-    if (params["item-id"]) {
-      const itemId = params["item-id"];
-      (dispatch as ThunkDispatch<RootState, unknown, UnknownAction>)(
-        fetchServiceRootData({
-          rootId: itemId,
-          lang: currentLanguage,
-        })
-      );
-    }
-  }, [dispatch, currentLanguage, params["item-id"]]);
-
-  useEffect(() => {
-    if (params["item-id"] && rootWithServicesSlice?.title) {
-      document.title = rootWithServicesSlice?.title || t("Services");
-      document
-        .querySelector("meta[name='description']")
-        ?.setAttribute(
-          "content",
-          rootWithServicesSlice?.description || t("home_meta_description")
-        );
-      document
-        .querySelector("meta[name='keywords']")
-        ?.setAttribute("content", "Varpet, footer, services");
-      document
-        .querySelector("link[rel='canonical']")
-        ?.setAttribute(
-          "href",
-          `https://varpet.com/${currentLanguage}/services/${params["item-id"]}`
-        );
-    }
-  }, [currentLanguage, params["item-id"], rootWithServicesSlice]);
-
-  if (loading || !rootWithServicesSlice) {
-    return (
-      <MyLoadingContainer>
-        <MyLoading />
-      </MyLoadingContainer>
-    );
-  }
-
-  return (
-    <>
-      <Head>
-        <title>{rootWithServicesSlice?.title || t("Services")}</title>
-        <meta name="description" content={rootWithServicesSlice?.description} />
-        <meta name="keywords" content="Varpet, footer, services" />
-        <link
-          rel="canonical"
-          href={`https://varpet.com/${currentLanguage}/services/${params["item-id"]}`}
-        />
-      </Head>
-      <Container>
-        <Header service={rootWithServicesSlice} />
-        <SubServices service={rootWithServicesSlice} />
-        <Guide />
-        <FAQ />
-        <ExploreServices />
-        <Related
-          currentCategoryTitle={rootWithServicesSlice?.title}
-          services={[]}
-        />
-      </Container>
-    </>
-  );
+  return <CategoriesClient />;
 };
 
 export default Categories;
-
-const Container = styled.main`
-  overflow: hidden;
-`;

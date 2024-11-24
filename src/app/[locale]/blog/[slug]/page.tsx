@@ -15,9 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!articleResponse.ok) {
     throw new Error("Maqola ma'lumotlari yuklanmadi");
   }
-
-  const article = await articleResponse.json();
-
+  const article = await articleResponse?.json();
   return {
     title: article?.title || t("Home_meta_title"),
     description: article?.metaDescription || t("home_meta_description"),

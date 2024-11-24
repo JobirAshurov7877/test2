@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import styled from "styled-components";
 import FormattedDate from "@/components/FormattedDate";
 import { MyColors } from "@/styles/color";
@@ -12,7 +12,6 @@ import { proportions } from "@/styles/proportions";
 import { api } from "@/services/axios";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import MyLoadingContainer from "@/components/MyLoadingContainer";
 import { MyLoading } from "@/ui";
 
 const BlogSinglePageClient = () => {
