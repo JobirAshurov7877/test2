@@ -105,7 +105,7 @@ export default function Footer() {
                 </NavigationLink>
               </li>
               <li>
-                <NavigationLink href={`/join-the-program`}>
+                <NavigationLink href={`/join-to-the-program`}>
                   {t("Join_the_program")}
                 </NavigationLink>
               </li>

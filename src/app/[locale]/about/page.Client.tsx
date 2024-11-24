@@ -111,7 +111,7 @@ const AboutUsClient = () => {
               "Along with the growth of orders, we always need new specialists"
             )}
           </p>
-          <NavigationLink href="/join-the-program">
+          <NavigationLink href="/join-to-the-program">
             <MyButton>{t("How to join?")}</MyButton>
           </NavigationLink>
         </JoinUs>
