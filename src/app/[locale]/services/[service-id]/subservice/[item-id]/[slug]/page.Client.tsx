@@ -47,38 +47,6 @@ const SubServiceClient: React.FC = () => {
 
   return (
     <>
-      <Head>
-        <title>{subServiceData?.title}</title>
-        <meta name="description" content={subServiceData.metaDescription} />
-        <meta property="og:title" content={subServiceData.metaTitle} />
-        <meta
-          property="og:description"
-          content={subServiceData?.metaDescription}
-        />
-        <meta name="robots" content="index,follow"></meta>
-        <meta name="keywords" content={subServiceData?.metaDescription} />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content={`https://varpet.com/${currentLanguage}/services/:serviceId/subservice/${params["item-id"]}/${subServiceData.slug}`}
-        />
-        <meta property="og:image" content={subServiceData.image} />
-        <meta property="og:locale" content={currentLanguage} />
-        <meta
-          property="twitter:url"
-          content={`https://varpet.com/${currentLanguage}/services/${params["service-id"]}/subservice/${params["item-id"]}/${subServiceData.slug}`}
-        ></meta>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={subServiceData?.title} />
-        <meta
-          name="twitter:description"
-          content={subServiceData?.description}
-        />
-        <link
-          rel="canonical"
-          href={`https://varpet.com/${currentLanguage}/services/${params["service-id"]}/subservice/${params["item-id"]}/${subServiceData.slug}}`}
-        />
-      </Head>
       <Container>
         <SubServicesHeader subService={subServiceData} />
         <SubServiceAbout service={subServiceData?.aboutText} />

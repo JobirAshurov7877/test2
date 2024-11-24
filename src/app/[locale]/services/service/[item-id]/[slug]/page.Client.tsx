@@ -41,27 +41,6 @@ const CategoriesClient = () => {
     }
   }, [dispatch, currentLanguage, params["item-id"]]);
 
-  // useEffect(() => {
-  //   if (params["item-id"] && rootWithServicesSlice?.title) {
-  //     document.title = rootWithServicesSlice?.title || t("Services");
-  //     document
-  //       .querySelector("meta[name='description']")
-  //       ?.setAttribute(
-  //         "content",
-  //         rootWithServicesSlice?.description || t("home_meta_description")
-  //       );
-  //     document
-  //       .querySelector("meta[name='keywords']")
-  //       ?.setAttribute("content", "Varpet, footer, services");
-  //     document
-  //       .querySelector("link[rel='canonical']")
-  //       ?.setAttribute(
-  //         "href",
-  //         `https://varpet.com/${currentLanguage}/services/${params["item-id"]}`
-  //       );
-  //   }
-  // }, [currentLanguage, params["item-id"], rootWithServicesSlice]);
-
   if (loading || !rootWithServicesSlice) {
     return (
       <MyLoadingContainer>
@@ -72,15 +51,6 @@ const CategoriesClient = () => {
 
   return (
     <>
-      <Head>
-        <title>{rootWithServicesSlice?.title || t("Services")}</title>
-        <meta name="description" content={rootWithServicesSlice?.description} />
-        <meta name="keywords" content="Varpet, footer, services" />
-        <link
-          rel="canonical"
-          href={`https://varpet.com/${currentLanguage}/services/${params["item-id"]}`}
-        />
-      </Head>
       <Container>
         <Header service={rootWithServicesSlice} />
         <SubServices service={rootWithServicesSlice} />

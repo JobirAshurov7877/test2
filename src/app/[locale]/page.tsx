@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: t("Home_meta_title"),
       description: t("home_meta_description"),
-      url: `https://varpet.com/`,
+      url: `https://varpet.com/${locale}/`,
       type: "website",
     },
     twitter: {
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: t("home_meta_description"),
     },
     alternates: {
-      canonical: `https://varpet.com/${locale}`,
+      canonical: `https://varpet.com/${locale}/`,
     },
   };
 }

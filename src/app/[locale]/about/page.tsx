@@ -22,6 +22,7 @@ export async function generateMetadata(
       description: t("home_meta_description"),
       type: "website",
       images: previousImages,
+      url: `https://varpet.com/${locale}/about/`,
     },
     twitter: {
       card: "summary_large_image",
@@ -29,7 +30,7 @@ export async function generateMetadata(
       description: t("home_meta_description"),
     },
     alternates: {
-      canonical: `https://varpet.com/${locale}/about`,
+      canonical: `https://varpet.com/${locale}/about/`,
     },
   };
 }

@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: rootWithServicesSlice?.title || t("Home_meta_title"),
       description:
         rootWithServicesSlice?.metaDescription || t("home_meta_description"),
-      url: `https://varpet.com/${locale}/services/${itemId}/${slug}`,
+      url: `https://varpet.com/${locale}/services/${itemId}/${slug}/`,
       type: "website",
       images: [{ url: rootWithServicesSlice?.image }],
     },
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [{ url: rootWithServicesSlice?.image }],
     },
     alternates: {
-      canonical: `https://varpet.com/${locale}/services/${itemId}/${slug}`,
+      canonical: `https://varpet.com/${locale}/services/${itemId}/${slug}/`,
     },
   };
 }
