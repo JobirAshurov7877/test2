@@ -1,27 +1,39 @@
+# Global rules
 User-agent: *
+Allow: /
+
+# Disallow admin and private areas
 Disallow: /admin/
 Disallow: /private/
 Disallow: /login/
 Disallow: /logout/
 Disallow: /reset-password/
-Disallow: /dashboard/   # Example of private or admin area
+Disallow: /dashboard/
+Disallow: /*?*  # Block URLs with query parameters
+Disallow: /*?$ # Block URLs ending with ?
 
-# Allow public pages
-Allow: /
-Allow: /services
-Allow: /blog
-Allow: /about
-Allow: /contact
-Allow: /press
-Allow: /blog/
-Allow: /services/
-Allow: /services/:serviceId/subservice/:itemId/:slug
-Allow: /services/service/:itemId/:slug
+# Allow public pages and their translations
+Allow: /*/services
+Allow: /*/blog
+Allow: /*/about
+Allow: /*/contact
+Allow: /*/press
+Allow: /*/blog/
+Allow: /*/services/
+Allow: /*/services/:serviceId/subservice/:itemId/:slug
+Allow: /*/services/service/:itemId/:slug
 
-# Allow specific dynamic routes
-Allow: /blog/:slug
-Allow: /services/:serviceId/subservice/:itemId/:slug
-Allow: /services/service/:itemId/:slug
+# Allow static assets
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.ico$
 
-# Other general directives
-Sitemap: https://varpet.com/sitemap.xml 
+# Crawl delays and limits
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://varpet.com/sitemap.xml

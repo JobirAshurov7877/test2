@@ -18,13 +18,27 @@ type Props = {
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
 export const metadata: Metadata = {
   title: "Varpet - When everything is ok",
   description:
-    "Varpet - Where you can find the appropriate qualification specialists for each job",
-  keywords: "home, services, articles",
-  icons: {
-    icon: "/BigLogo.svg",
+    "Varpet connects you with qualified specialists for all your home service needs. Find trusted professionals for repairs, maintenance, and improvements.",
+  keywords: "Varpet",
+  openGraph: {
+    title: "Varpet - When everything is ok",
+    description:
+      "Varpet - Where you can find the appropriate qualification specialists for each job",
+    url: "https://varpet.com",
+    siteName: "Varpet",
+    type: "website",
+    images: ["https://varpet.com/BigLogo.svg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Varpet - Professional Home Services",
+    description:
+      "Varpet - Where you can find the appropriate qualification specialists for each job",
+    images: ["https://varpet.com/BigLogo.svg"],
   },
 };
 

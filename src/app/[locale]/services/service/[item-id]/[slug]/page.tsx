@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 import CategoriesClient from "./page.Client";
+import { imagesAPI } from "../../../../../../../env";
 type Props = {
   params: Promise<{ locale: string; slug: string; "item-id": string }>;
 };
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug, "item-id": itemId } = await params;
   const messages = await import(`../../../../../../../messages/${locale}.json`);
@@ -15,28 +17,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     throw new Error("Maqola ma'lumotlari yuklanmadi");
   }
   const rootWithServicesSlice = await articleResponse?.json();
+  console.log(rootWithServicesSlice);
   return {
     title: rootWithServicesSlice?.title || t("Home_meta_title"),
     description:
-      rootWithServicesSlice?.metaDescription || t("home_meta_description"),
+      rootWithServicesSlice?.description || t("home_meta_description"),
     keywords: rootWithServicesSlice?.keywords || "home, services, subservices",
     openGraph: {
       title: rootWithServicesSlice?.title || t("Home_meta_title"),
       description:
-        rootWithServicesSlice?.metaDescription || t("home_meta_description"),
-      url: `https://varpet.com/${locale}/services/${itemId}/${slug}/`,
+        rootWithServicesSlice?.description || t("home_meta_description"),
+      url: `https://varpet.com/${locale}/services/${itemId}/${slug}`,
       type: "website",
-      images: [{ url: rootWithServicesSlice?.image }],
+      images: [{ url: imagesAPI + rootWithServicesSlice?.image }],
     },
     twitter: {
       card: "summary_large_image",
       title: rootWithServicesSlice?.title || t("Home_meta_title"),
       description:
-        rootWithServicesSlice?.metaDescription || t("home_meta_description"),
-      images: [{ url: rootWithServicesSlice?.image }],
+        rootWithServicesSlice?.description || t("home_meta_description"),
+      images: [{ url: imagesAPI + rootWithServicesSlice?.image }],
     },
     alternates: {
-      canonical: `https://varpet.com/${locale}/services/${itemId}/${slug}/`,
+      canonical: `https://varpet.com/${locale}/services/${itemId}/${slug}`,
     },
   };
 }

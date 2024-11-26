@@ -2,12 +2,10 @@
 import { api } from "@/services/axios";
 import { proportions } from "@/styles/proportions";
 import { useLocale, useTranslations } from "next-intl";
-import Head from "next/head";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const JoinTheProgramClient = () => {
-  const t = useTranslations();
   const [html, setHtml] = useState("");
   const currentLanguage = useLocale();
 
@@ -24,19 +22,9 @@ const JoinTheProgramClient = () => {
   }, [currentLanguage]);
 
   return (
-    <>
-      <Head>
-        <title>{t("Join_the_program")}</title>
-        <meta
-          name="description"
-          content="This is the footer page for Varpet."
-        />
-        <meta name="keywords" content="Varpet, footer, services" />
-      </Head>
-      <Container>
-        <Box dangerouslySetInnerHTML={{ __html: html }} />
-      </Container>
-    </>
+    <Container>
+      <Box dangerouslySetInnerHTML={{ __html: html }} />
+    </Container>
   );
 };
 

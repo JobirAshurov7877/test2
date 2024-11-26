@@ -14,16 +14,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: t("Services"),
       description: t("home_meta_description"),
-      url: `https://varpet.com/${locale}/services/`,
+      url: `https://varpet.com/${locale}/services`,
       type: "website",
+      images: [{ url: "https://varpet.com/BigLogo.svg" }],
     },
     twitter: {
       card: "summary_large_image",
       title: t("Services"),
       description: t("home_meta_description"),
+      images: [{ url: "https://varpet.com/BigLogo.svg" }],
     },
     alternates: {
-      canonical: `https://varpet.com/${locale}/services/`,
+      canonical: `https://varpet.com/${locale}/services`,
     },
   };
 }

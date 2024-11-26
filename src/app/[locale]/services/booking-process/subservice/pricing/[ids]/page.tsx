@@ -32,6 +32,7 @@ const Pricing = () => {
   const params = useParams<{ ids: string }>();
   const navigate = useRouter();
   const [quantities, setQuantities] = useState<{ [id: number]: number }>({});
+  const [loader, setLoader] = useState(false);
   const currentLanguage = useLocale();
   const translations = useTranslations();
   const { data: pricingData, loading } = useSelector(
@@ -41,16 +42,21 @@ const Pricing = () => {
   useEffect(() => {
     if (params["ids"]) {
       try {
+        setLoader(true);
         // Decode the URL-encoded parameter
         const decodedParam = decodeURIComponent(params["ids"]);
         // Now decode the base64 string
         const decodedIds = JSON.parse(atob(decodedParam));
         dispatch(
           fetchPricingData({ itemIds: decodedIds, lang: currentLanguage })
-        );
+        ).finally(() => {
+          setLoader(false);
+        });
       } catch (error) {
         console.error("Failed to decode base64 string:", error);
-        // Handle the error, maybe show a fallback message
+        setLoader(false);
+        // Show error message to user
+        navigate.push(`/${currentLanguage}/error`);
       }
     }
   }, [params["ids"], dispatch, pathname, currentLanguage]);
@@ -88,7 +94,7 @@ const Pricing = () => {
         <OrderPreparation>
           <div>
             <StepForm />
-            {loading || !pricingData || !Array.isArray(pricingData) ? (
+            {loader || loading || !pricingData || !Array.isArray(pricingData) ? (
               <>
                 <MyLoaderContainer>
                   <MyLoading />

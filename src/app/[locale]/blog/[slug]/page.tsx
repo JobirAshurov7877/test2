@@ -16,14 +16,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     throw new Error("Maqola ma'lumotlari yuklanmadi");
   }
   const article = await articleResponse?.json();
+  console.log(article);
   return {
     title: article?.title || t("Home_meta_title"),
     description: article?.metaDescription || t("home_meta_description"),
-    keywords: article?.keywords || "home, services, articles",
+    keywords: article?.keywords || "Varpet, blog",
     openGraph: {
       title: article?.title || t("Home_meta_title"),
       description: article?.metaDescription || t("home_meta_description"),
-      url: `https://varpet.com/${locale}/blog/${slug}/`,
+      url: `https://varpet.com/${locale}/blog/${slug}`,
       type: "website",
       images: [{ url: article?.image }],
     },
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [{ url: article?.image }],
     },
     alternates: {
-      canonical: `https://varpet.com/${locale}/blog/${slug}/`,
+      canonical: `https://varpet.com/${locale}/blog/${slug}`,
     },
   };
 }

@@ -14,9 +14,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("Press"),
     description: t("home_meta_description"),
-    keywords: "home, services, articles",
+    keywords: "Varpet, press",
     alternates: {
-      canonical: `https://varpet.com/${locale}/press/`,
+      canonical: `https://varpet.com/${locale}/press`,
     },
   };
 }

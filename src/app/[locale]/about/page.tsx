@@ -11,26 +11,27 @@ export async function generateMetadata(
   const { locale } = await params;
   const messages = await import(`../../../../messages/${locale}.json`);
   const t = (key: string) => messages[key];
-  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: t("About us"),
     description: t("home_meta_description"),
-    keywords: "home, services, articles",
+    keywords: "Varpet, about us",
     openGraph: {
       title: t("About us"),
       description: t("home_meta_description"),
       type: "website",
-      images: previousImages,
-      url: `https://varpet.com/${locale}/about/`,
+      images: ["https://varpet.com/BigLogo.svg"],
+      url: `https://varpet.com/${locale}/about`,
+      siteName: "Varpet",
     },
     twitter: {
       card: "summary_large_image",
       title: t("About us"),
       description: t("home_meta_description"),
+      images: ["https://varpet.com/BigLogo.svg"],
     },
     alternates: {
-      canonical: `https://varpet.com/${locale}/about/`,
+      canonical: `https://varpet.com/${locale}/about`,
     },
   };
 }

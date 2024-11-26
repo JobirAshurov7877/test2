@@ -19,20 +19,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("Home_meta_title"),
     description: t("home_meta_description"),
-    keywords: "home, services, articles",
+    keywords: "Varpet home, services, articles",
     openGraph: {
       title: t("Home_meta_title"),
       description: t("home_meta_description"),
-      url: `https://varpet.com/${locale}/`,
+      url: `https://varpet.com/${locale}`,
       type: "website",
+      images: [{ url: "https://varpet.com/BigLogo.svg" }],
     },
     twitter: {
       card: "summary_large_image",
       title: t("Home_meta_title"),
       description: t("home_meta_description"),
+      images: [{ url: "https://varpet.com/BigLogo.svg" }],
     },
     alternates: {
-      canonical: `https://varpet.com/${locale}/`,
+      canonical: `https://varpet.com/${locale}`,
     },
   };
 }
