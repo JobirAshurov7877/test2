@@ -27,7 +27,7 @@ export default function NavigationLink({
 
   return (
     <Link
-      href={`https://varpet.com/${local}${href}`}
+      href={`${href}`}
       prefetch={prefetch}
       className={clsx(
         "transition-colors duration-200",

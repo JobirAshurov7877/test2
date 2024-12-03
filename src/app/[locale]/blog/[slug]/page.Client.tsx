@@ -13,6 +13,7 @@ import { api } from "@/services/axios";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { MyLoading } from "@/ui";
+import SimilarBlogs from "@/widgets/blog/SimilarBlogs";
 
 const BlogSinglePageClient = () => {
   const params = useParams<{ slug: string }>();
@@ -82,6 +83,7 @@ const BlogSinglePageClient = () => {
             className="markdown"
             dangerouslySetInnerHTML={{ __html: article?.content || "" }}
           />
+          <SimilarBlogs />
           <SubserviceContiner>
             <Subscribe />
           </SubserviceContiner>
