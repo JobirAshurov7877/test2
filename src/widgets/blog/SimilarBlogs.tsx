@@ -6,18 +6,21 @@ import Image from "next/image";
 import Link from "next/link";
 import dateIcon from "../../assets/newsdate.svg";
 import FormattedDate from "@/components/FormattedDate";
+import { useLocale, useTranslations } from "next-intl";
 
-const SimilarBlogs = () => {
+const SimilarBlogs = ({ slug }: any) => {
   const [similarBlogData, setSimilarBlogData] = useState([]);
+  const locale = useLocale();
+  const t = useTranslations();
+  console.log(locale);
   useEffect(() => {
     api
-      .get("/api/blog/articles/similar/en")
+      .get(`/api/blog/articles/similar/${locale}`)
       .then((response) => setSimilarBlogData(response?.data));
-  }, []);
-  console.log(similarBlogData);
+  }, [locale, slug]);
   return (
     <div className="similar-news">
-      <h2 className="title-h2">Similar news</h2>
+      <h2 className="title-h2">{t("Similar_news")}</h2>
       {similarBlogData.map((item: any) => (
         <div className="main-news d-flex" key={item?.id}>
           <Link className="news-img-single" href={`/blog/${item?.slug}`}>

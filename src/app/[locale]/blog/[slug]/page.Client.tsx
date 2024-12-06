@@ -18,7 +18,6 @@ import SimilarBlogs from "@/widgets/blog/SimilarBlogs";
 const BlogSinglePageClient = () => {
   const params = useParams<{ slug: string }>();
   const currentLanguage = useLocale();
-  const t = useTranslations();
   const [article, setArticle] = useState<any>(null);
   const [loader, setLoader] = useState(false);
   useEffect(() => {
@@ -83,7 +82,7 @@ const BlogSinglePageClient = () => {
             className="markdown"
             dangerouslySetInnerHTML={{ __html: article?.content || "" }}
           />
-          <SimilarBlogs />
+          <SimilarBlogs slug={params?.slug} />
           <SubserviceContiner>
             <Subscribe />
           </SubserviceContiner>
