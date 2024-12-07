@@ -12,7 +12,6 @@ const SimilarBlogs = ({ slug }: any) => {
   const [similarBlogData, setSimilarBlogData] = useState([]);
   const locale = useLocale();
   const t = useTranslations();
-  console.log(locale);
   useEffect(() => {
     api
       .get(`/api/blog/articles/similar/${locale}`)

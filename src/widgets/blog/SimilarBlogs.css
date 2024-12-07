@@ -54,3 +54,25 @@
   object-fit: cover;
   width: 100%;
 }
+@media screen and (max-width: 575px) {
+  .similar-news .title-h2 {
+    font-size: 14px;
+  }
+  .similar-news .main-news .news-content .title-h3 {
+    font-size: 15px;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: start;
+  }
+  .news-img-single {
+    width: 60px;
+    flex: 0 0 60px;
+  }
+  .similar-news .news-img {
+    width: 65px;
+    height: 45px;
+  }
+  .similar-news .main-news .news-content .news-category {
+    display: none;
+  }
+}
