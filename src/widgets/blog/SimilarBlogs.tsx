@@ -32,11 +32,6 @@ const SimilarBlogs = ({ slug }: any) => {
             />
           </Link>
           <div className="news-content">
-            {item.categories.map((category: any, index: number) => (
-              <Link key={index} href="" className="news-category">
-                {category}
-              </Link>
-            ))}
             <a className="news-single" href="#">
               <h3 className="title-h3">{item?.title}</h3>
             </a>
@@ -51,6 +46,13 @@ const SimilarBlogs = ({ slug }: any) => {
               <span>
                 <FormattedDate createdAt={item?.created_at || ""} />
               </span>
+            </div>
+            <div className="news-category-wrap">
+              {item.categories.map((category: any, index: number) => (
+                <Link key={index} href="" className="news-category">
+                  {category}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

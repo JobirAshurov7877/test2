@@ -21,6 +21,12 @@
 .similar-news .main-news .news-content {
   padding: 0 20px;
 }
+.news-category-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
 .similar-news .main-news .news-content .news-category {
   background: #ff4d4d;
   border-radius: 5px;
@@ -36,6 +42,7 @@
   line-height: 21px;
   font-family: Mardoto-Medium, sans-serif;
   margin: 15px 0;
+  text-align: start;
 }
 .similar-news .main-news .news-content .news-date {
   display: flex;
@@ -62,7 +69,6 @@
     font-size: 15px;
     margin: 0;
     margin-bottom: 10px;
-    text-align: start;
   }
   .news-img-single {
     width: 60px;
