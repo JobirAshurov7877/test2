@@ -50,7 +50,7 @@ export default function Header() {
       .map((service) => ({
         title: service!.title,
         id: service!.id,
-        description: service?.description || "", // Handle undefined description
+        description: service?.description || "",
         image: service?.image || "", // Handle undefined image
         slug: service?.slug || "",
       })); // Assert that service exists and access the title property

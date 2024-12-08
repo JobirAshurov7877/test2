@@ -68,10 +68,6 @@ export default function Header({ language: currentLang }: HeaderProps) {
   };
   const currentLanguage = languages.find((lang) => lang.code === currentLang);
 
-  const handleNavigate = (url: string) => {
-    router.push(`/${url}`);
-  };
-
   let urlCode = urlParts[1];
   if (urlCode === "hy") {
     urlCode = "am";
@@ -85,16 +81,14 @@ export default function Header({ language: currentLang }: HeaderProps) {
   }, [location.pathname]);
   useEffect(() => {
     const initializeApp = async () => {
-      const start = Date.now();
       try {
         clearUserDataIfNeeded();
         const countryCode = await initializeUserInfo();
+        changeLanguage(countryCode);
       } catch (error) {
-      } finally {
-        const end = Date.now();
+        changeLanguage("en");
       }
     };
-
     initializeApp();
   }, []);
 

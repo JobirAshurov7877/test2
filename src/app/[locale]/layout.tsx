@@ -8,7 +8,6 @@ import { ReactNode } from "react";
 import { ReduxProvider } from "@/components/ReduxProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { Footer, Header } from "@/components";
-import ClientRootLayout from "@/components/ClientRootLayout";
 
 type Props = {
   children: ReactNode;
@@ -46,7 +45,7 @@ export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
   let messages = {};
   if (!routing?.locales?.includes(locale as any)) {
-    notFound(); // Redirect to 404 if locale is invalid
+    notFound();
   }
   try {
     setRequestLocale(locale);
@@ -60,8 +59,16 @@ export default async function RootLayout({ children, params }: Props) {
   }
 
   return (
-    <ClientRootLayout messages={messages} locale={locale}>
-      {children}
-    </ClientRootLayout>
+    <ReduxProvider>
+      <NextIntlClientProvider messages={messages} locale={locale}>
+        <html lang={locale}>
+          <body>
+            <Header language={locale} />
+            {children}
+            <Footer />
+          </body>
+        </html>
+      </NextIntlClientProvider>
+    </ReduxProvider>
   );
 }
