@@ -55,7 +55,8 @@ const PhoneMail = () => {
   const [isPhoneFocused, setIsPhoneFocused] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
   const [requestModal, setRequestModal] = useState(false);
-  const verifiedUserString = localStorage.getItem("userData");
+  const verifiedUserString =
+    typeof window !== "undefined" && localStorage.getItem("userData");
   const verifiedUser = verifiedUserString ? JSON.parse(verifiedUserString) : {};
   const [verificationCode, setVerificationCode] = useState<string>(
     verifiedUser.code
@@ -69,13 +70,16 @@ const PhoneMail = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const encodedKey = btoa("verificationTimer");
   const initialTimer = useMemo(() => {
-    const initialTimerEncoded = localStorage.getItem(encodedKey);
+    const initialTimerEncoded =
+      typeof window !== "undefined" && localStorage.getItem(encodedKey);
     return initialTimerEncoded ? parseInt(atob(initialTimerEncoded), 10) : 60;
   }, [encodedKey]);
   const [timer, setTimer] = useState(initialTimer);
   const [verificationCodeInterval, setVerificationCodeInterval] = useState(
     () => {
-      const interval = localStorage.getItem(encodedKey + "_interval");
+      const interval =
+        typeof window !== "undefined" &&
+        localStorage.getItem(encodedKey + "_interval");
       return interval ? JSON.parse(atob(interval)) : false;
     }
   );
@@ -128,7 +132,10 @@ const PhoneMail = () => {
     }),
     email: Yup.string().email(translations("Invalid email address")),
   });
-  const rest = JSON.parse(localStorage.getItem("userFormData") || "{}");
+  const rest = JSON.parse(
+    (typeof window !== "undefined" && localStorage.getItem("userFormData")) ||
+      "{}"
+  );
 
   const handleRegister = async () => {
     setLoading(true);
@@ -138,7 +145,8 @@ const PhoneMail = () => {
       lastName,
     });
     const updatedUserData = JSON.parse(
-      localStorage.getItem("userData") || "{}"
+      (typeof window !== "undefined" && localStorage.getItem("userData")) ||
+        "{}"
     );
     await new Promise((resolve) => setTimeout(resolve, 0));
     const orderResponse = await api.post("/api/auth-and-order", {
