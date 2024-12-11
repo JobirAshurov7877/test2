@@ -56,11 +56,6 @@ const SubServices: React.FC = () => {
     //   ? JSON.parse(decodeURIComponent(query.categories as string))
     //   : [];
   };
-  if (loading) {
-    document.body.style.overflowY = "hidden";
-  } else {
-    document.body.style.overflowY = "scroll";
-  }
 
   if (error) {
     return <div>Error: {error}</div>;

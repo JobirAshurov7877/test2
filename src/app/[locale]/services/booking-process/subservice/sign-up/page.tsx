@@ -94,14 +94,14 @@ const PhoneMail = () => {
     firstName: verifiedUser.firstName ? verifiedUser.firstName : "",
     lastName: verifiedUser.lastName ? verifiedUser.lastName : "",
     tel: {
-      recipient: verifiedUser.phone.recipient
-        ? verifiedUser.phone.recipient
+      recipient: verifiedUser?.phone?.recipient
+        ? verifiedUser.phone?.recipient
         : "",
-      countryCode: verifiedUser.phone.countryCode
-        ? verifiedUser.phone.countryCode
+      countryCode: verifiedUser?.phone?.countryCode
+        ? verifiedUser?.phone?.countryCode
         : correctCountryCode,
     },
-    email: verifiedUser.email ? verifiedUser.email : "",
+    email: verifiedUser?.email ? verifiedUser?.email : "",
   };
 
   const [firstName, setFirstName] = useState(initialValues.firstName);
@@ -307,12 +307,6 @@ const PhoneMail = () => {
     translations("Failed_to_subscribe"),
     false
   );
-
-  if (loading) {
-    document.body.style.overflowY = "hidden";
-  } else {
-    document.body.style.overflowY = "scroll";
-  }
 
   return (
     <Container>

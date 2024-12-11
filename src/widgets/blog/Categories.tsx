@@ -41,7 +41,7 @@ const Categories: React.FC<CategoriesProps> = ({ categories }) => {
     event.preventDefault();
     if (searchArticles.trim() !== "") {
       handleSearchButtonClick(); // Call your search function
-      const subServiceElement = document.getElementById(`all-articles`);
+      const subServiceElement = document?.getElementById(`all-articles`);
       if (subServiceElement) {
         subServiceElement.scrollIntoView({
           behavior: "smooth",

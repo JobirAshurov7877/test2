@@ -73,7 +73,7 @@ const ServicesHeader = () => {
   const handleClickToFilteredItem = (scrollTo: string) => {
     setShowFiltered(false);
     setSearchQuery("");
-    const element = document.querySelector(scrollTo);
+    const element = document?.querySelector(scrollTo);
     element?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
